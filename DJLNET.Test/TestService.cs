@@ -37,9 +37,20 @@ namespace DJLNET.Test
         [Fact]
         public void TestAdd()
         {
-            var b = _testService.Add(new Model.Models.Test { Name = "2016年12月23日00:44:57" });
+            var b = _testService.Add(new Model.Models.Test
+            {
+                Name = DateTime.Now.ToString()
+            });
             Assert.True(b);
             Console.WriteLine(b);
+        }
+
+        [Fact]
+        public async Task TestGetAsync()
+        {
+            var item = await _testService.FindAsync(8);
+            Assert.NotNull(item);
+            Console.WriteLine(item.Name);
         }
     }
 }

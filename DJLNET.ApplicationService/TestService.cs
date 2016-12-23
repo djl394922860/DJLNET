@@ -41,6 +41,11 @@ namespace DJLNET.ApplicationService
             return this._unitOfWork.Commit();
         }
 
+        public async Task<Test> FindAsync(int id)
+        {
+            return await this._testRepository.FindAsync(id);
+        }
+
         public Test Get(int id)
         {
             return this._testRepository.Get(id);

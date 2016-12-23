@@ -23,6 +23,5 @@ namespace DJLNET.EntityFramework
 
         Task<int> SaveChangesAsync();
 
-        Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

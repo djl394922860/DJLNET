@@ -11,6 +11,8 @@ namespace DJLNET.ApplicationService.Interfaces
     {
         Test Get(int id);
 
+        Task<Test> FindAsync(int id);
+
         bool Add(Test item);
         bool Update(Test item);
         bool Delete(Test item);

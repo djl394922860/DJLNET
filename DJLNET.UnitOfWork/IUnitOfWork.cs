@@ -12,6 +12,8 @@ namespace DJLNET.UnitOfWork
 
         int ExecuteSqlCommand(string sql, params object[] parameters);
 
+        Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters);
+
         bool Add<TEntity>(TEntity entity)
             where TEntity : class;
 
@@ -22,6 +24,8 @@ namespace DJLNET.UnitOfWork
             where TEntity : class;
 
         bool Commit();
+
+        Task<bool> CommitAsync();
 
         void Rollback();
     }

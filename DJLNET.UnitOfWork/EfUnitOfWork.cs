@@ -79,5 +79,20 @@ namespace DJLNET.UnitOfWork
             }
             return true;
         }
+
+        public async Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
+        {
+            return await this._context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.DoNotEnsureTransaction, sql, parameters);
+        }
+
+        public async Task<bool> CommitAsync()
+        {
+            if (this._dbTransaction != null)
+            {
+                this._dbTransaction.Commit();
+                return await Task.FromResult<bool>(true);
+            }
+            return await this._context.SaveChangesAsync() > 0;
+        }
     }
 }

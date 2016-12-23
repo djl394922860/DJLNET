@@ -12,6 +12,8 @@ namespace DJLNET.Repository.Interfaces
     {
         TEntity Get(int id);
 
+        Task<TEntity> FindAsync(int id);
+
         IQueryable<TEntity> GetAll();
     }
 }

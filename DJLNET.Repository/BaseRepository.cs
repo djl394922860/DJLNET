@@ -31,5 +31,10 @@ namespace DJLNET.Repository
         {
             return _entities;
         }
+
+        public async Task<TEntity> FindAsync(int id)
+        {
+            return await this._context.Set<TEntity>().FindAsync(id).ConfigureAwait(false);
+        }
     }
 }
