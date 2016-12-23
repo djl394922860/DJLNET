@@ -10,6 +10,9 @@ using System.Web.Http.Cors;
 
 namespace DJLNET.WebApi.Controllers
 {
+    /// <summary>
+    /// Home控制器
+    /// </summary>
     [EnableCors("*", "*", "*")]
     public class HomeController : ApiController
     {
@@ -20,12 +23,21 @@ namespace DJLNET.WebApi.Controllers
             this._testService = testService;
         }
 
+        /// <summary>
+        /// 获取所有Test
+        /// </summary>
+        /// <returns>IEnumerable</returns>
         [HttpGet]
         public IEnumerable<Test> GetAllTests()
         {
             return _testService.GetAll();
         }
 
+        /// <summary>
+        /// 添加Test
+        /// </summary>
+        /// <param name="name">string</param>
+        /// <returns>bool</returns>
         [HttpPost]
         public bool AddTest(string name)
         {

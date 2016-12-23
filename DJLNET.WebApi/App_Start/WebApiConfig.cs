@@ -19,6 +19,9 @@ namespace DJLNET.WebApi
             config.Formatters.JsonFormatter.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
 
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+
+            config.EnableCors();
+
             // Web API 路由
             config.MapHttpAttributeRoutes();
 
