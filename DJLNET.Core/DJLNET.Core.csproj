@@ -40,11 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\ICacheManager.cs" />
+    <Compile Include="Cache\NullCacheManager.cs" />
     <Compile Include="EmailHepler.cs" />
+    <Compile Include="Logger\ILogger.cs" />
+    <Compile Include="Logger\NullLogger.cs" />
     <Compile Include="MD5Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="TypeEx\AppDomainTypeFinder.cs" />
+    <Compile Include="TypeEx\ITypeFinder.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
