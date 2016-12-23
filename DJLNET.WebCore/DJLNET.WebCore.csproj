@@ -76,9 +76,16 @@
     <Compile Include="BaseController.cs" />
     <Compile Include="JsonNetResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebAppTypeFinder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DJLNET.Core\DJLNET.Core.csproj">
+      <Project>{96D3D88D-6B88-4C50-919D-1FEDE6E03735}</Project>
+      <Name>DJLNET.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
