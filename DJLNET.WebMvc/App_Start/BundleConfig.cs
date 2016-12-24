@@ -13,6 +13,8 @@ namespace DJLNET.WebMvc
             // 是有启用压缩
             BundleTable.EnableOptimizations = false;
 
+            bundles.Add(new StyleBundle("~/bundles/base/css")
+                .Include(""));
         }
     }
 }
