@@ -138,6 +138,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Ace\ace-ie.min.css" />
+    <Content Include="Content\Ace\ace-rtl.min.css" />
+    <Content Include="Content\Ace\ace.min.css" />
+    <Content Include="Content\Ace\font-awesome-ie7.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -162,6 +166,11 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\Ace\html5shiv.js" />
+    <Content Include="Scripts\Ace\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\Ace\jquery-2.0.3.min.js" />
+    <Content Include="Scripts\Ace\jquery.mobile.custom.min.js" />
+    <Content Include="Scripts\Ace\respond.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -2488,6 +2497,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2662,11 +2672,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Ace\" />
     <Folder Include="Content\AdminTLE\" />
     <Folder Include="Content\Metronic\" />
-    <Folder Include="Models\" />
-    <Folder Include="Scripts\Ace\" />
     <Folder Include="Scripts\AdminTLE\" />
     <Folder Include="Scripts\Metronic\" />
   </ItemGroup>

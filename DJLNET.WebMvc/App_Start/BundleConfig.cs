@@ -13,8 +13,17 @@ namespace DJLNET.WebMvc
             // 是有启用压缩
             BundleTable.EnableOptimizations = false;
 
-            bundles.Add(new StyleBundle("~/bundles/base/css")
-                .Include(""));
+            bundles.Add(new StyleBundle("~/bundles/css")
+                .Include("~/Content/bootstrap.css",
+                         "~/Content/font-awesome.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/acecss").Include(
+                "~/Content/Ace/ace.min.css", "~/Content/Ace/ace-rtl.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryvalidate").
+                Include("~/Scripts/jquery.validate.js"
+                , "~/Scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/jquery.unobtrusive-ajax.js"));
         }
     }
 }
