@@ -186,10 +186,15 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Shared\Metronic\_Layout.cshtml" />
+    <Content Include="Views\Shared\AdminTLE\_Layout.cshtml" />
+    <Content Include="Views\Shared\Ace\_Layout.cshtml" />
+    <Content Include="Views\Shared\Ace\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\AdminTLE\_LoginLayout.cshtml" />
+    <Content Include="Views\Shared\Metronic\_LoginLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -199,7 +204,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Ace\" />
+    <Folder Include="Content\AdminTLE\" />
+    <Folder Include="Content\Metronic\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\Ace\" />
+    <Folder Include="Scripts\AdminTLE\" />
+    <Folder Include="Scripts\Metronic\" />
+    <Folder Include="UITemplates\Ace\" />
+    <Folder Include="UITemplates\AdminTLE\" />
+    <Folder Include="UITemplates\Metronic\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DJLNET.ApplicationService.Interfaces\DJLNET.ApplicationService.Interfaces.csproj">
