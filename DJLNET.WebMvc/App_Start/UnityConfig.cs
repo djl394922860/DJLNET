@@ -8,6 +8,9 @@ using DJLNET.Repository;
 using Microsoft.Practices.Unity.Mvc;
 using DJLNET.UnitOfWork;
 using DJLNET.ApplicationService.Interfaces;
+using System.Reflection;
+using System.Linq;
+using AutoMapper;
 
 namespace DJLNET.WebMvc.App_Start
 {
@@ -55,6 +58,16 @@ namespace DJLNET.WebMvc.App_Start
 
             container.RegisterType<ITestService, DJLNET.ApplicationService.TestService>();
 
+            // automapper ×¢Èë
+            var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass && t.IsSubclassOf(typeof(Profile)));
+
+            var profileInstances = profiles.Select(x => Activator.CreateInstance(x)).Cast<Profile>();
+
+            var mapperConfig = new MapperConfiguration(config => profileInstances.ToList().ForEach(p => config.AddProfile(p)));
+
+            var mapper = mapperConfig.CreateMapper();
+
+            container.RegisterInstance<IMapper>(mapper);
         }
     }
 }
