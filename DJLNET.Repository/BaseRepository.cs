@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Repository
 {
-    public abstract class BaseRepository<TEntity> : IRepository<TEntity>
-        where TEntity : BaseEntity
+    public abstract class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
+        where TEntity : GenericEntity<TPrimaryKey>, new()
     {
         public readonly IDbContext _context;
 
@@ -22,9 +22,9 @@ namespace DJLNET.Repository
             this._entities = context.Set<TEntity>();
         }
 
-        public TEntity Get(int id)
+        public TEntity GetByKey(TPrimaryKey key)
         {
-            return _entities.FirstOrDefault(x => x.ID == id);
+            return _entities.FirstOrDefault(x => x.ID.Equals(key));
         }
 
         public IQueryable<TEntity> GetAll()
@@ -32,9 +32,9 @@ namespace DJLNET.Repository
             return _entities;
         }
 
-        public async Task<TEntity> FindAsync(int id)
+        public async Task<TEntity> FindAsync(params object[] keyValues)
         {
-            return await this._context.Set<TEntity>().FindAsync(id).ConfigureAwait(false);
+            return await this._context.Set<TEntity>().FindAsync(keyValues).ConfigureAwait(continueOnCapturedContext: false);
         }
     }
 }

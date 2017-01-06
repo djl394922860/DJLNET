@@ -24,7 +24,7 @@ namespace DJLNET.Test
         {
             _container = new UnityContainer();
             _container.RegisterType<IDbContext, DJLNETDBContext>();
-            _container.RegisterType(typeof(IRepository<>), typeof(BaseRepository<>));
+            _container.RegisterType(typeof(IRepository<,>), typeof(BaseRepository<,>));
             _container.RegisterType<ITestRepository, TestRepository>();
 
             _container.RegisterType<IUnitOfWork, EfUnitOfWork>();
@@ -48,9 +48,9 @@ namespace DJLNET.Test
         [Fact]
         public async Task TestGetAsync()
         {
-            var item = await _testService.FindAsync(8);
+            var item = await _testService.FindAsync(15);
             Assert.NotNull(item);
-            Console.WriteLine(item.Name);
+            System.Diagnostics.Debug.WriteLine(item.Name);
         }
     }
 }

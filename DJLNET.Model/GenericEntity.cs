@@ -10,7 +10,7 @@ namespace DJLNET.Model
     /// 实体泛型类
     /// </summary>
     /// <typeparam name="TPrimaryKey">实体数据库主键</typeparam>
-    public class GenericEntity<TPrimaryKey> where TPrimaryKey:struct
+    public class GenericEntity<TPrimaryKey>
     {
         /// <summary>
         /// 主键

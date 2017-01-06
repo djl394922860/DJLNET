@@ -46,9 +46,9 @@ namespace DJLNET.ApplicationService
             return await this._testRepository.FindAsync(id);
         }
 
-        public Test Get(int id)
+        public Test GetByKey(int id)
         {
-            return this._testRepository.Get(id);
+            return this._testRepository.GetByKey(id);
         }
 
         public IEnumerable<Test> GetAll()

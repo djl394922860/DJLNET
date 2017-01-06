@@ -9,7 +9,7 @@ using DJLNET.EntityFramework;
 
 namespace DJLNET.Repository
 {
-    public class TestRepository : BaseRepository<Test>, ITestRepository
+    public class TestRepository : BaseRepository<Test, int>, ITestRepository
     {
         public TestRepository(IDbContext context) : base(context)
         {

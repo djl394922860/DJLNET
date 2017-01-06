@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Repository.Interfaces
 {
-    public interface ITestRepository : IRepository<Test>
+    public interface ITestRepository : IRepository<Test, int>
     {
         Test GetByName(string name);
     }

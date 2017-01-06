@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Repository.Interfaces
 {
-    public interface IRepository<TEntity>
-        where TEntity : BaseEntity
+    public interface IRepository<TEntity, TPrimaryKey>
+        where TEntity : GenericEntity<TPrimaryKey>, new()
     {
-        TEntity Get(int id);
+        TEntity GetByKey(TPrimaryKey key);
 
-        Task<TEntity> FindAsync(int id);
+        Task<TEntity> FindAsync(params object[] keyValues);
 
         IQueryable<TEntity> GetAll();
     }

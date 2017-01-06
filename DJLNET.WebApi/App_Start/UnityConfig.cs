@@ -47,7 +47,7 @@ namespace DJLNET.WebApi.App_Start
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new HierarchicalLifetimeManager());
 
-            container.RegisterType(typeof(IRepository<>), typeof(BaseRepository<>));
+            container.RegisterType(typeof(IRepository<,>), typeof(BaseRepository<,>));
 
             container.RegisterType<ITestRepository, TestRepository>();
 

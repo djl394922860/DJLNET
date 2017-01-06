@@ -24,7 +24,7 @@ namespace DJLNET.UnitOfWork
             _dbTransaction = _context.Database.BeginTransaction();
         }
 
-        public bool Add<TEntity>(TEntity entity) where TEntity : class
+        public bool Add<TEntity>(TEntity entity) where TEntity : class, new()
         {
             this._context.Set<TEntity>().Add(entity);
             if (this._dbTransaction != null)
@@ -38,7 +38,16 @@ namespace DJLNET.UnitOfWork
         {
             if (this._dbTransaction != null)
             {
-                this._dbTransaction.Commit();
+                try
+                {
+                    this._dbTransaction.Commit();
+                }
+                catch (Exception)
+                {
+                    this._dbTransaction.Rollback();
+                    // 记录数据异常
+                    return false;
+                }
                 return true;
             }
             else
@@ -47,9 +56,9 @@ namespace DJLNET.UnitOfWork
             }
         }
 
-        public bool Delete<TEntity>(TEntity entity) where TEntity : class
+        public bool Delete<TEntity>(TEntity entity) where TEntity : class, new()
         {
-            this._context.Entry<TEntity>(entity).State = EntityState.Deleted;
+            this._context.Set<TEntity>().Remove(entity);
             if (this._dbTransaction != null)
             {
                 return this._context.SaveChanges() > 0;
@@ -59,18 +68,10 @@ namespace DJLNET.UnitOfWork
 
         public int ExecuteSqlCommand(string sql, params object[] parameters)
         {
-            return this._context.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, sql, parameters);
+            return this._context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction, sql, parameters);
         }
 
-        public void Rollback()
-        {
-            if (this._dbTransaction != null)
-            {
-                this._dbTransaction.Rollback();
-            }
-        }
-
-        public bool Update<TEntity>(TEntity entity) where TEntity : class
+        public bool Update<TEntity>(TEntity entity) where TEntity : class, new()
         {
             this._context.Entry<TEntity>(entity).State = EntityState.Modified;
             if (this._dbTransaction != null)
@@ -82,14 +83,22 @@ namespace DJLNET.UnitOfWork
 
         public async Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
         {
-            return await this._context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.DoNotEnsureTransaction, sql, parameters);
+            return await this._context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction, sql, parameters);
         }
 
         public async Task<bool> CommitAsync()
         {
             if (this._dbTransaction != null)
             {
-                this._dbTransaction.Commit();
+                try
+                {
+                    this._dbTransaction.Commit();
+                }
+                catch (Exception)
+                {
+                    this._dbTransaction.Rollback();
+                    return await Task.FromResult<bool>(false);
+                }
                 return await Task.FromResult<bool>(true);
             }
             return await this._context.SaveChangesAsync() > 0;

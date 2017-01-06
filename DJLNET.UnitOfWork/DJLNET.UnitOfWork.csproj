@@ -58,6 +58,10 @@
       <Project>{4B762A5E-7ADC-49EB-BCED-E089F9E2D484}</Project>
       <Name>DJLNET.EntityFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DJLNET.Model\DJLNET.Model.csproj">
+      <Project>{D9348CEA-54FB-48A5-8BB8-8C8B6B9122FF}</Project>
+      <Name>DJLNET.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

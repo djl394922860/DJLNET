@@ -9,7 +9,7 @@ namespace DJLNET.ApplicationService.Interfaces
 {
     public interface ITestService
     {
-        Test Get(int id);
+        Test GetByKey(int id);
 
         Task<Test> FindAsync(int id);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DJLNET.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,18 +16,16 @@ namespace DJLNET.UnitOfWork
         Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters);
 
         bool Add<TEntity>(TEntity entity)
-            where TEntity : class;
+            where TEntity : class, new();
 
         bool Update<TEntity>(TEntity entity)
-            where TEntity : class;
+            where TEntity : class, new();
 
         bool Delete<TEntity>(TEntity entity)
-            where TEntity : class;
+            where TEntity : class, new();
 
         bool Commit();
 
         Task<bool> CommitAsync();
-
-        void Rollback();
     }
 }

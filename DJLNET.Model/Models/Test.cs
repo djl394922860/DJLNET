@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Model.Models
 {
-    public class Test : BaseEntity
+    public class Test : GenericEntity<int>
     {
         public string Name { get; set; }
     }

@@ -47,7 +47,7 @@ namespace DJLNET.WebMvc.App_Start
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new PerRequestLifetimeManager());
 
-            container.RegisterType(typeof(IRepository<>), typeof(BaseRepository<>));
+            container.RegisterType(typeof(IRepository<,>), typeof(BaseRepository<,>));
 
             container.RegisterType<ITestRepository, TestRepository>();
 
