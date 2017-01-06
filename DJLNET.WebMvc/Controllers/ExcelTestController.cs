@@ -27,7 +27,7 @@ namespace DJLNET.WebMvc.Controllers
         {
             var tests = this._testService.GetAll();
             var models = this._mapper.Map<IEnumerable<TestViewModel>>(tests);
-            return new ExcelFileResult<TestViewModel>(models);
+            return Excel<TestViewModel>(models);
         }
     }
 }

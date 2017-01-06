@@ -1,4 +1,5 @@
 ﻿using DJLNET.WebCore;
+using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Web;
 
 namespace DJLNET.WebMvc.Models
 {
+    [ExcelSheet(Name = "Test", RowHeight = 28)]
     public class TestViewModel
     {
         [DisplayName("编号")]
@@ -19,6 +21,7 @@ namespace DJLNET.WebMvc.Models
 
         [DisplayName("价格")]
         [DisplayFormat(DataFormatString = "C")]
+        [ExcelColumn(HorizontalStyle = ExcelHorizontalAlignment.Right)]
         public decimal Money { get; set; } = 8.88M;
 
         [DisplayName("创建时间")]

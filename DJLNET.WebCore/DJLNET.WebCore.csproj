@@ -79,9 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseController.cs" />
+    <Compile Include="ExcelColumnAttribute.cs" />
     <Compile Include="ExcelController.cs" />
     <Compile Include="ExcelFileResult.cs" />
     <Compile Include="ExcelIgnoreAttribute.cs" />
+    <Compile Include="ExcelSheetAttribute.cs" />
     <Compile Include="JsonNetResult.cs" />
     <Compile Include="ModelStateValidFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
