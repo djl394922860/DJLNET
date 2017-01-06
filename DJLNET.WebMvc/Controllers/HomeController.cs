@@ -10,17 +10,13 @@ namespace DJLNET.WebMvc.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
-        [AllowAnonymous]
+        [HttpGet, AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        [ModelStateValidFilter]
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken, ModelStateValidFilter]
         public ActionResult Login(LoginViewModel model)
         {
             // login.cshtml Html.XXXX
