@@ -6,7 +6,7 @@ using System;
 using System.Xml.XPath;
 using System.Reflection;
 
-[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register", Order = 2)]
+[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register", Order = 1)]
 
 namespace DJLNET.WebApi
 {

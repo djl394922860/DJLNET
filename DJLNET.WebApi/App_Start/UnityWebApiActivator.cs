@@ -1,7 +1,7 @@
 using System.Web.Http;
 using Microsoft.Practices.Unity.WebApi;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DJLNET.WebApi.App_Start.UnityWebApiActivator), "Start", Order = 1)]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DJLNET.WebApi.App_Start.UnityWebApiActivator), "Start", Order = 0)]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(DJLNET.WebApi.App_Start.UnityWebApiActivator), "Shutdown")]
 
 namespace DJLNET.WebApi.App_Start

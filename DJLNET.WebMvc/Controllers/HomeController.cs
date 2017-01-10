@@ -1,4 +1,5 @@
-﻿using DJLNET.WebCore;
+﻿using DJLNET.ApplicationService.Interfaces;
+using DJLNET.WebCore;
 using DJLNET.WebMvc.Models;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,17 @@ namespace DJLNET.WebMvc.Controllers
 {
     public class HomeController : Controller
     {
+        private ITestService _testService;
+        public HomeController(ITestService testService)
+        {
+            this._testService = testService;
+        }
+
         [HttpGet, AllowAnonymous]
         public ActionResult Login()
         {
+            // 测试miniprofiler.ef6
+            this._testService.GetAll();
             return View();
         }
 

@@ -31,7 +31,6 @@
     <!--[if !IE]> -->
     <script src="@Url.Content("~/Scripts/Ace/jquery-2.0.3.min.js")"></script>
     <!-- <![endif]-->
-
     <!--[if lt IE]>
        <script src="@Url.Content("~/Scripts/Ace/jquery-1.10.2.min.js")"></script>
     <![endif]-->
@@ -45,6 +44,8 @@
     @RenderSection(name: "footer", required: false)
 
     @*MiniProfiler配置*@
+  
     @MiniProfiler.RenderIncludes()
+    
 </body>
 </html>

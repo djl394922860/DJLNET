@@ -2,7 +2,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity.Mvc;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DJLNET.WebMvc.App_Start.UnityWebActivator), "Start")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(DJLNET.WebMvc.App_Start.UnityWebActivator), "Start", Order = 1)]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(DJLNET.WebMvc.App_Start.UnityWebActivator), "Shutdown")]
 
 namespace DJLNET.WebMvc.App_Start
