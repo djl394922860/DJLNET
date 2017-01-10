@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackExchange.Profiling;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,6 +18,29 @@ namespace DJLNET.WebMvc
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var viewEngines = ViewEngines.Engines.ToList();
+            ViewEngines.Engines.Clear();
+
+            foreach (var item in viewEngines)
+            {
+                var wapper = new StackExchange.Profiling.Mvc.ProfilingViewEngine(item);
+                ViewEngines.Engines.Add(wapper);
+            }
+
+        }
+
+        protected void Application_BeginRequest()
+        {
+            if (Request.IsLocal)
+            {
+                StackExchange.Profiling.MiniProfiler.Start();
+            }
+        }
+
+        protected void Application_EndRequest()
+        {
+            MiniProfiler.Stop();
         }
     }
 }

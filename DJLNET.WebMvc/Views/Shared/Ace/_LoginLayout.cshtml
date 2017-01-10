@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-
+﻿@using StackExchange.Profiling;
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8" />
@@ -43,5 +43,8 @@
     @Scripts.Render("~/bundles/jqueryvalidate")
 
     @RenderSection(name: "footer", required: false)
+
+    @*MiniProfiler配置*@
+    @MiniProfiler.RenderIncludes()
 </body>
 </html>
