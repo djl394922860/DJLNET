@@ -12,7 +12,7 @@ namespace DJLNET.WebCore.WebApi
     public abstract class UserRequestBase : IRequest
     {
         /// <summary>
-        /// 客户端密钥
+        /// 客户端密钥,服务端申请
         /// </summary>
         public string ClientKey { get; set; }
 
