@@ -139,6 +139,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\ApiControllerBase.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -190,6 +191,10 @@
     <ProjectReference Include="..\DJLNET.UnitOfWork\DJLNET.UnitOfWork.csproj">
       <Project>{C25AD3F9-2E1B-43BA-9174-1E3ACEF40F6B}</Project>
       <Name>DJLNET.UnitOfWork</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DJLNET.WebCore\DJLNET.WebCore.csproj">
+      <Project>{75823E16-6AB5-44D2-B84B-4E6986EFA670}</Project>
+      <Name>DJLNET.WebCore</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
