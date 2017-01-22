@@ -88,13 +88,7 @@
     <Compile Include="ModelStateValidFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebApi\CustomDateConverter.cs" />
-    <Compile Include="WebApi\IRequest.cs" />
-    <Compile Include="WebApi\IResponse.cs" />
-    <Compile Include="WebApi\ListResponseBase.cs" />
-    <Compile Include="WebApi\PageRequestBase.cs" />
-    <Compile Include="WebApi\PageResponseBase.cs" />
-    <Compile Include="WebApi\ResultObject.cs" />
-    <Compile Include="WebApi\UserRequestBase.cs" />
+    <Compile Include="WebApi\ApiResult.cs" />
     <Compile Include="WebAppTypeFinder.cs" />
   </ItemGroup>
   <ItemGroup>

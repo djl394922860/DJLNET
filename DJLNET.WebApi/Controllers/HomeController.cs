@@ -13,7 +13,7 @@ namespace DJLNET.WebApi.Controllers
     /// <summary>
     /// Home控制器
     /// </summary>
-    [EnableCors("*", "*", "*")]
+    [EnableCors("*", "*", "*"), RoutePrefix("api")]
     public class HomeController : ApiController
     {
         private readonly ITestService _testService;
@@ -27,7 +27,7 @@ namespace DJLNET.WebApi.Controllers
         /// 获取所有Test
         /// </summary>
         /// <returns>IEnumerable</returns>
-        [HttpGet]
+        [HttpGet, Route("alltest")]
         public IEnumerable<Test> GetAllTests()
         {
             return _testService.GetAll();
@@ -38,7 +38,7 @@ namespace DJLNET.WebApi.Controllers
         /// </summary>
         /// <param name="name">string</param>
         /// <returns>bool</returns>
-        [HttpPost]
+        [HttpPost, Route("addtest")]
         public bool AddTest(string name)
         {
             return this._testService.Add(new Test { Name = name });

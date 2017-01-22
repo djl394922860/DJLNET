@@ -31,6 +31,8 @@ namespace DJLNET.Core
 
         public static T Resole<T>(string registerName) where T : class
         {
+            if (string.IsNullOrEmpty(registerName))
+                throw new ArgumentNullException(nameof(registerName));
             return CurrentContainer.Resolve<T>(registerName);
         }
 

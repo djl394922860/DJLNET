@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DJLNET.WebCore.WebApi
 {
-    public class ResultObject
+    public class ApiResult
     {
         /// <summary>
         /// 等于0表示成功        
@@ -19,11 +19,11 @@ namespace DJLNET.WebCore.WebApi
         public string Msg { get; set; }
     }
 
-    public class ResultObject<TResponse> : ResultObject where TResponse : IResponse
+    public class ApiResult<TData> : ApiResult
     {
-        public ResultObject() { }
-        public TResponse Data { get; set; }
-        public ResultObject(TResponse data)
+        public ApiResult() { }
+        public TData Data { get; set; }
+        public ApiResult(TData data)
         {
             Data = data;
         }
