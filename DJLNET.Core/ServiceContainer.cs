@@ -16,7 +16,7 @@ namespace DJLNET.Core
             Container = new UnityContainer();
         }
 
-        public static IUnityContainer CurrentContainer
+        public static IUnityContainer Current
         {
             get
             {
@@ -26,24 +26,24 @@ namespace DJLNET.Core
 
         public static T Resole<T>() where T : class
         {
-            return CurrentContainer.Resolve<T>();
+            return Current.Resolve<T>();
         }
 
         public static T Resole<T>(string registerName) where T : class
         {
             if (string.IsNullOrEmpty(registerName))
                 throw new ArgumentNullException(nameof(registerName));
-            return CurrentContainer.Resolve<T>(registerName);
+            return Current.Resolve<T>(registerName);
         }
 
         public static IEnumerable<T> ResoleAll<T>() where T : class
         {
-            return CurrentContainer.ResolveAll<T>();
+            return Current.ResolveAll<T>();
         }
 
         public static bool IsRegisted<T>() where T : class
         {
-            return CurrentContainer.IsRegistered<T>();
+            return Current.IsRegistered<T>();
         }
 
     }

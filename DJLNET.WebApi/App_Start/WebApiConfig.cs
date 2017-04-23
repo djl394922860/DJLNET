@@ -34,7 +34,7 @@ namespace DJLNET.WebApi
                 defaults: new
                 {
                     controller = "Home",
-                    action = "GetAllTests",
+                    action = "GetAllCities",
                     id = RouteParameter.Optional
                 }
             );

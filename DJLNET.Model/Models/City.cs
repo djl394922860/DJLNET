@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Model.Models
 {
-    public class Test : GenericEntity<int>
+    public class City : GenericEntity<int>
     {
         public string Name { get; set; }
+        public string JumpUrl { get; set; }
     }
 }

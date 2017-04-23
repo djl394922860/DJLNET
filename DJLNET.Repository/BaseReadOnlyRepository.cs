@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Repository
 {
-    public abstract class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
+    public abstract class BaseReadOnlyRepository<TEntity, TPrimaryKey> : IReadOnlyRepository<TEntity, TPrimaryKey>
         where TEntity : GenericEntity<TPrimaryKey>, new()
     {
         public readonly IDbContext _context;
 
         public readonly IQueryable<TEntity> _entities;
 
-        public BaseRepository(IDbContext context)
+        public BaseReadOnlyRepository(IDbContext context)
         {
             this._context = context;
             this._entities = context.Set<TEntity>();
@@ -27,7 +27,7 @@ namespace DJLNET.Repository
             return _entities.FirstOrDefault(x => x.ID.Equals(key));
         }
 
-        public IQueryable<TEntity> GetAll()
+        public IQueryable<TEntity> Table()
         {
             return _entities;
         }
@@ -35,6 +35,11 @@ namespace DJLNET.Repository
         public async Task<TEntity> FindAsync(params object[] keyValues)
         {
             return await this._context.Set<TEntity>().FindAsync(keyValues).ConfigureAwait(continueOnCapturedContext: false);
+        }
+
+        public TEntity Find(params object[] keyValues)
+        {
+            return this._context.Set<TEntity>().Find(keyValues);
         }
     }
 }

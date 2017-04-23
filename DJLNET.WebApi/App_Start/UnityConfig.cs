@@ -7,6 +7,7 @@ using DJLNET.Repository.Interfaces;
 using DJLNET.Repository;
 using DJLNET.UnitOfWork;
 using DJLNET.ApplicationService.Interfaces;
+using DJLNET.ApplicationService;
 
 namespace DJLNET.WebApi.App_Start
 {
@@ -18,7 +19,7 @@ namespace DJLNET.WebApi.App_Start
         #region Unity Container
         private static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
         {
-            var container = ServiceContainer.CurrentContainer;
+            var container = ServiceContainer.Current;
             RegisterTypes(container);
             return container;
         });
@@ -47,13 +48,17 @@ namespace DJLNET.WebApi.App_Start
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new HierarchicalLifetimeManager());
 
-            container.RegisterType(typeof(IRepository<,>), typeof(BaseRepository<,>));
+            container.RegisterType(typeof(IReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
 
-            container.RegisterType<ITestRepository, TestRepository>();
+            container.RegisterType<ICityRepository, CityRepository>();
+            container.RegisterType<IPlatformRepository, PlatformRepository>();
 
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
 
-            container.RegisterType<ITestService, ApplicationService.TestService>();
+
+
+            container.RegisterType<ICityService, CityService>();
+            container.RegisterType<IPlatformService, PlatormService>();
         }
     }
 }

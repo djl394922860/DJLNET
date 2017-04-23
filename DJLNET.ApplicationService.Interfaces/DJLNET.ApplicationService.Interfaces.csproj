@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITestService.cs" />
+    <Compile Include="IPlatformService.cs" />
+    <Compile Include="IReadOnlyService.cs" />
+    <Compile Include="ICityService.cs" />
+    <Compile Include="IWriteOnlyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,13 @@
+﻿using DJLNET.Model.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DJLNET.ApplicationService.Interfaces
+{
+    public interface ICityService : IReadOnlyService<City, int>, IWriteOnlyService<City, int>
+    {
+    }
+}

@@ -140,8 +140,6 @@
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\ApiControllerBase.cs" />
-    <Compile Include="Common\ApiPermissionAttribute.cs" />
-    <Compile Include="Common\CheckTokenAttribute.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -159,7 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DJLNET.ApplicationService.Interfaces\DJLNET.ApplicationService.Interfaces.csproj">

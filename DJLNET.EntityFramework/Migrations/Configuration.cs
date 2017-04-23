@@ -1,6 +1,5 @@
 namespace DJLNET.EntityFramework.Migrations
 {
-    using Model.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -27,14 +26,6 @@ namespace DJLNET.EntityFramework.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-
-            context.Set<Test>().AddOrUpdate(x => x.ID,
-                new Test { Name = "aaa" },
-                new Test { Name = "aaa" },
-                new Test { Name = "aaa" },
-                new Test { Name = "aaa" },
-                new Test { Name = "aaa" },
-                new Test { Name = "aaa" });
         }
     }
 }

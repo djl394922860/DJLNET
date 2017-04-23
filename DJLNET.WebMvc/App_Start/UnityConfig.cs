@@ -11,6 +11,7 @@ using DJLNET.ApplicationService.Interfaces;
 using System.Reflection;
 using System.Linq;
 using AutoMapper;
+using DJLNET.ApplicationService;
 
 namespace DJLNET.WebMvc.App_Start
 {
@@ -22,7 +23,7 @@ namespace DJLNET.WebMvc.App_Start
         #region Unity Container
         private static Lazy<IUnityContainer> container = new Lazy<IUnityContainer>(() =>
         {
-            var container = ServiceContainer.CurrentContainer;
+            var container = ServiceContainer.Current;
             RegisterTypes(container);
             return container;
         });
@@ -50,13 +51,15 @@ namespace DJLNET.WebMvc.App_Start
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new PerRequestLifetimeManager());
 
-            container.RegisterType(typeof(IRepository<,>), typeof(BaseRepository<,>));
+            container.RegisterType(typeof(IReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
 
-            container.RegisterType<ITestRepository, TestRepository>();
+            container.RegisterType<ICityRepository, CityRepository>();
+            container.RegisterType<IPlatformRepository, PlatformRepository>();
 
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
 
-            container.RegisterType<ITestService, DJLNET.ApplicationService.TestService>();
+            container.RegisterType<ICityService, CityService>();
+            container.RegisterType<IPlatformService, PlatormService>();
 
             // automapper ×¢Èë
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass && t.IsSubclassOf(typeof(Profile)));
@@ -67,7 +70,7 @@ namespace DJLNET.WebMvc.App_Start
 
             var mapper = mapperConfig.CreateMapper();
 
-            container.RegisterInstance<IMapper>(mapper);
+            container.RegisterInstance(mapper);
         }
     }
 }

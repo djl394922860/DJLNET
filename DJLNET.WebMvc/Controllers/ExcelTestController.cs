@@ -12,12 +12,12 @@ namespace DJLNET.WebMvc.Controllers
 {
     public class ExcelTestController : ExcelController
     {
-        private ITestService _testService;
+        private ICityService _cityService;
         private IMapper _mapper;
 
-        public ExcelTestController(ITestService testService, IMapper mapper)
+        public ExcelTestController(ICityService cityService, IMapper mapper)
         {
-            this._testService = testService;
+            this._cityService = cityService;
             this._mapper = mapper;
         }
 
@@ -25,9 +25,9 @@ namespace DJLNET.WebMvc.Controllers
         // GET: ExcelTest
         public ActionResult Index()
         {
-            var tests = this._testService.GetAll();
-            var models = this._mapper.Map<IEnumerable<TestViewModel>>(tests);
-            return Excel<TestViewModel>(models);
+            var cities = this._cityService.GetAll();
+            var models = this._mapper.Map<IEnumerable<PlatformViewModel>>(cities);
+            return Excel(models);
         }
     }
 }

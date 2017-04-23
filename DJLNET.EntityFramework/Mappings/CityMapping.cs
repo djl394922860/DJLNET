@@ -8,13 +8,16 @@ using System.Threading.Tasks;
 
 namespace DJLNET.EntityFramework.Mappings
 {
-    public class TestMap : EntityTypeConfiguration<Test>
+    public class CityMapping : EntityTypeConfiguration<City>
     {
-        public TestMap()
+        public CityMapping()
         {
-            this.ToTable(nameof(Test));
+            this.ToTable(nameof(City));
             this.HasKey(x => x.ID);
+
+            this.Property(x => x.JumpUrl).IsRequired().HasMaxLength(32);
             this.Property(x => x.Name).IsRequired().HasMaxLength(32);
+
         }
     }
 }

@@ -7,13 +7,13 @@ namespace DJLNET.EntityFramework.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitDJLNETDB : IMigrationMetadata
+    public sealed partial class InitDb : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDJLNETDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitDb));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612221518430_InitDJLNETDB"; }
+            get { return "201704231544169_InitDb"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,5 +1,6 @@
 ﻿using DJLNET.ApplicationService.Interfaces;
 using DJLNET.Model.Models;
+using DJLNET.WebApi.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,37 +12,35 @@ using System.Web.Http.Cors;
 namespace DJLNET.WebApi.Controllers
 {
     /// <summary>
-    /// Home控制器
+    /// 主控制器
     /// </summary>
-    [EnableCors("*", "*", "*"), RoutePrefix("api")]
-    public class HomeController : ApiController
+    public class HomeController : ApiControllerBase
     {
-        private readonly ITestService _testService;
+        private readonly ICityService _cityService;
+        private readonly IPlatformService _platformService;
 
-        public HomeController(ITestService testService)
+        public HomeController(ICityService cityService, IPlatformService platformService)
         {
-            this._testService = testService;
+            this._cityService = cityService;
+            this._platformService = platformService;
         }
 
         /// <summary>
-        /// 获取所有Test
+        /// 获取所有城市
         /// </summary>
         /// <returns>IEnumerable</returns>
-        [HttpGet, Route("alltest")]
-        public IEnumerable<Test> GetAllTests()
+        public IEnumerable<City> GetAllCities()
         {
-            return _testService.GetAll();
+            return _cityService.GetAll();
         }
 
         /// <summary>
-        /// 添加Test
+        /// 获取所有平台
         /// </summary>
-        /// <param name="name">string</param>
-        /// <returns>bool</returns>
-        [HttpPost, Route("addtest")]
-        public bool AddTest(string name)
+        /// <returns></returns>
+        public IEnumerable<Platform> GetAllPlatforms()
         {
-            return this._testService.Add(new Test { Name = name });
+            return _platformService.GetAll();
         }
     }
 }

@@ -11,8 +11,6 @@ namespace DJLNET.EntityFramework
 {
     public interface IDbContext
     {
-        Database Database { get; }
-
         DbSet<TEntity> Set<TEntity>()
             where TEntity : class;
 

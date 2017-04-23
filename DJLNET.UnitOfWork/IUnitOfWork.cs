@@ -9,23 +9,23 @@ namespace DJLNET.UnitOfWork
 {
     public interface IUnitOfWork
     {
-        void BeginTransaction();
-
-        int ExecuteSqlCommand(string sql, params object[] parameters);
-
-        Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters);
-
-        bool Add<TEntity>(TEntity entity)
+        void Add<TEntity>(TEntity entity)
             where TEntity : class, new();
 
-        bool Update<TEntity>(TEntity entity)
+        void AddRang<TEntity>(IEnumerable<TEntity> entities)
             where TEntity : class, new();
 
-        bool Delete<TEntity>(TEntity entity)
+        void Update<TEntity>(TEntity entity)
             where TEntity : class, new();
 
-        bool Commit();
+        void Delete<TEntity>(TEntity entity)
+            where TEntity : class, new();
 
-        Task<bool> CommitAsync();
+        void DeleteRang<TEntity>(IEnumerable<TEntity> entities)
+            where TEntity : class, new();
+
+        int SaveChanges();
+
+        Task<int> SaveChangesAync();
     }
 }

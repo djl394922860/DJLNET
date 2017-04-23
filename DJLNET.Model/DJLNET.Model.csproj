@@ -42,9 +42,8 @@
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
     <Compile Include="GenericEntity.cs" />
-    <Compile Include="Models\AppException.cs" />
-    <Compile Include="Models\Test.cs" />
-    <Compile Include="Models\WebApiCallLog.cs" />
+    <Compile Include="Models\City.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

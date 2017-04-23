@@ -12,96 +12,44 @@ namespace DJLNET.UnitOfWork
     {
         private readonly IDbContext _context;
 
-        private DbContextTransaction _dbTransaction;
-
         public EfUnitOfWork(IDbContext context)
         {
             this._context = context;
         }
 
-        public void BeginTransaction()
-        {
-            _dbTransaction = _context.Database.BeginTransaction();
-        }
-
-        public bool Add<TEntity>(TEntity entity) where TEntity : class, new()
+        public void Add<TEntity>(TEntity entity) where TEntity : class, new()
         {
             this._context.Set<TEntity>().Add(entity);
-            if (this._dbTransaction != null)
-            {
-                return this._context.SaveChanges() > 0;
-            }
-            return true;
         }
 
-        public bool Commit()
+        public int SaveChanges()
         {
-            if (this._dbTransaction != null)
-            {
-                try
-                {
-                    this._dbTransaction.Commit();
-                }
-                catch (Exception)
-                {
-                    this._dbTransaction.Rollback();
-                    // 记录数据异常
-                    return false;
-                }
-                return true;
-            }
-            else
-            {
-                return this._context.SaveChanges() > 0;
-            }
+            return this._context.SaveChanges();
         }
 
-        public bool Delete<TEntity>(TEntity entity) where TEntity : class, new()
+        public void Delete<TEntity>(TEntity entity) where TEntity : class, new()
         {
             this._context.Set<TEntity>().Remove(entity);
-            if (this._dbTransaction != null)
-            {
-                return this._context.SaveChanges() > 0;
-            }
-            return true;
         }
 
-        public int ExecuteSqlCommand(string sql, params object[] parameters)
-        {
-            return this._context.Database.ExecuteSqlCommand(TransactionalBehavior.EnsureTransaction, sql, parameters);
-        }
-
-        public bool Update<TEntity>(TEntity entity) where TEntity : class, new()
+        public void Update<TEntity>(TEntity entity) where TEntity : class, new()
         {
             this._context.Entry<TEntity>(entity).State = EntityState.Modified;
-            if (this._dbTransaction != null)
-            {
-                return this._context.SaveChanges() > 0;
-            }
-            return true;
         }
 
-        public async Task<int> ExecuteSqlCommandAsync(string sql, params object[] parameters)
+        public async Task<int> SaveChangesAync()
         {
-            return await this._context.Database.ExecuteSqlCommandAsync(TransactionalBehavior.EnsureTransaction, sql, parameters);
+            return await this._context.SaveChangesAsync();
         }
 
-        public async Task<bool> CommitAsync()
+        public void AddRang<TEntity>(IEnumerable<TEntity> entities) where TEntity : class, new()
         {
-            if (this._dbTransaction != null)
-            {
-                try
-                {
-                    this._dbTransaction.Commit();
-                }
-                catch (Exception)
-                {
-                    this._dbTransaction.Rollback();
-                    return await Task.FromResult<bool>(false);
-                }
-                return await Task.FromResult<bool>(true);
-            }
-            return await this._context.SaveChangesAsync() > 0;
+            this._context.Set<TEntity>().AddRange(entities);
+        }
+
+        public void DeleteRang<TEntity>(IEnumerable<TEntity> entities) where TEntity : class, new()
+        {
+            this._context.Set<TEntity>().RemoveRange(entities);
         }
     }
 }

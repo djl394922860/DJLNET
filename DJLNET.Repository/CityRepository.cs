@@ -9,15 +9,15 @@ using DJLNET.EntityFramework;
 
 namespace DJLNET.Repository
 {
-    public class TestRepository : BaseRepository<Test, int>, ITestRepository
+    public class CityRepository : BaseReadOnlyRepository<City, int>, ICityRepository
     {
-        public TestRepository(IDbContext context) : base(context)
+        public CityRepository(IDbContext context) : base(context)
         {
         }
 
-        public Test GetByName(string name)
+        public City GetByName(string name)
         {
-            return base._entities.FirstOrDefault(x => x.Name == name);
+            return this._entities.FirstOrDefault(x => x.Name == name);
         }
     }
 }

@@ -11,46 +11,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using DJLNET.Model.Models;
 
 namespace DJLNET.Test
 {
     public class TestService
     {
-        private readonly IUnityContainer _container;
+        private readonly IUnityContainer container;
 
-        private ITestService _testService;
+        private ICityService _cityService;
 
         public TestService()
         {
-            _container = new UnityContainer();
-            _container.RegisterType<IDbContext, DJLNETDBContext>();
-            _container.RegisterType(typeof(IRepository<,>), typeof(BaseRepository<,>));
-            _container.RegisterType<ITestRepository, TestRepository>();
+            container = new UnityContainer();
 
-            _container.RegisterType<IUnitOfWork, EfUnitOfWork>();
 
-            _container.RegisterType<ITestService, DJLNET.ApplicationService.TestService>();
+            container.RegisterType<IDbContext, DJLNETDBContext>();
 
-            _testService = _container.Resolve<ITestService>();
+            container.RegisterType(typeof(IReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
+
+            container.RegisterType<ICityRepository, CityRepository>();
+            container.RegisterType<IPlatformRepository, PlatformRepository>();
+
+            container.RegisterType<IUnitOfWork, EfUnitOfWork>();
+
+            container.RegisterType<ICityService, CityService>();
+            container.RegisterType<IPlatformService, PlatormService>();
+
+            _cityService = container.Resolve<ICityService>();
         }
 
         [Fact]
         public void TestAdd()
         {
-            var b = _testService.Add(new Model.Models.Test
-            {
-                Name = DateTime.Now.ToString()
-            });
-            Assert.True(b);
-            Console.WriteLine(b);
+          
         }
 
-        [Fact]
-        public async Task TestGetAsync()
-        {
-            var item = await _testService.FindAsync(15);
-            Assert.NotNull(item);
-            System.Diagnostics.Debug.WriteLine(item.Name);
-        }
     }
 }
