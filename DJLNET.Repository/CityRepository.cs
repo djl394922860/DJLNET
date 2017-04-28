@@ -1,11 +1,7 @@
-﻿using DJLNET.Model.Models;
-using DJLNET.Repository.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using DJLNET.Repository.Interfaces;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DJLNET.EntityFramework;
+using DJLNET.Model.Entities;
 
 namespace DJLNET.Repository
 {

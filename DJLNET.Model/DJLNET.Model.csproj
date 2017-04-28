@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
     <Compile Include="GenericEntity.cs" />
-    <Compile Include="Models\City.cs" />
+    <Compile Include="Entities\City.cs" />
     <Compile Include="Platform.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

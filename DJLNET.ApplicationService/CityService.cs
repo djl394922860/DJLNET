@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DJLNET.Model.Models;
 using DJLNET.Repository.Interfaces;
 using DJLNET.UnitOfWork;
 using System.Linq.Expressions;
+using DJLNET.Model.Entities;
 
 namespace DJLNET.ApplicationService
 {
