@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DJLNET.WebCore
+namespace DJLNET.WebCore.Mvc
 {
     [System.AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Enum, AllowMultiple = false, Inherited = false)]
     public class ExcelIgnoreAttribute : System.Attribute

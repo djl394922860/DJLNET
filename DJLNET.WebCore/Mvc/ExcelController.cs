@@ -1,10 +1,7 @@
-﻿using System;
+﻿using DJLNET.WebCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DJLNET.WebCore
+namespace DJLNET.WebCore.Mvc
 {
     public class ExcelController : BaseController
     {

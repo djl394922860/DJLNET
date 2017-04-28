@@ -11,7 +11,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Globalization;
 
-namespace DJLNET.WebCore
+namespace DJLNET.WebCore.Mvc
 {
     public class ExcelFileResult<TModel> : System.Web.Mvc.FileResult
         where TModel : class, new()

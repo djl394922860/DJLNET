@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DJLNET.WebCore
+namespace DJLNET.WebCore.Mvc
 {
     [System.AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class ExcelSheetAttribute : System.Attribute

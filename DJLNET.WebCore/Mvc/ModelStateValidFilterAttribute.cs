@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace DJLNET.WebCore
+namespace DJLNET.WebCore.Mvc
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public sealed class ModelStateValidFilterAttribute : ActionFilterAttribute

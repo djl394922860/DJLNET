@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace DJLNET.WebCore
+namespace DJLNET.WebCore.Mvc
 {
     public class JsonNetResult : JsonResult
     {

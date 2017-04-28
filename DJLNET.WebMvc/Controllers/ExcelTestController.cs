@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DJLNET.ApplicationService.Interfaces;
-using DJLNET.WebCore;
+using DJLNET.WebCore.Mvc;
 using DJLNET.WebMvc.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
