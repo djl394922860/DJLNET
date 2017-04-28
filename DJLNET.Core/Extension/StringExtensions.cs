@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace DJLNET.Core
+namespace DJLNET.Core.Extension
 {
     /// <summary>Provides methods to manipulate strings. </summary>
     public static class StringExtensions

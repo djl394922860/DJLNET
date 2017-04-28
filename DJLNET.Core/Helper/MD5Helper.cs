@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DJLNET.Core
+namespace DJLNET.Core.Helper
 {
     public static class MD5Helper
     {
