@@ -53,11 +53,12 @@ foreach($permission in $MyPermissions)
 		 $Command.Parameters.AddWithValue("@IsDeleted", $permission.IsDeleted) | Out-Null
          $Command.ExecuteNonQuery() | Out-Null
          
+		 "新增权限如下:";
          $permission
     }
 	else
 	{
-		 $sql ="UPDATE [Permission] SET Description=@Description,@UpdatedTime,@UpdatedBy WHERE Name=@Name AND Category=@Category"  
+		 $sql ="UPDATE [Permission] SET Description=@Description,UpdatedTime=@UpdatedTime,UpdatedBy=@UpdatedBy WHERE Name=@Name AND Category=@Category"  
          $Command = New-Object System.Data.SQLClient.SQLCommand
          $Command.Connection = $Connection
          $Command.CommandText = $sql
@@ -67,7 +68,8 @@ foreach($permission in $MyPermissions)
 		 $Command.Parameters.AddWithValue("@UpdatedTime", $permission.UpdatedTime) | Out-Null
 		 $Command.Parameters.AddWithValue("@UpdatedBy", $permission.UpdatedBy) | Out-Null
          $Command.ExecuteNonQuery() | Out-Null
-         
+
+		 "修改权限如下:";
          $permission
 	}
 }

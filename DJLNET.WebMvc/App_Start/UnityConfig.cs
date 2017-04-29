@@ -50,12 +50,19 @@ namespace DJLNET.WebMvc.App_Start
             // container.RegisterType<IProductRepository, ProductRepository>();
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new PerRequestLifetimeManager());
+
+            container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
+            container.RegisterType<IPermissionRepository, PermissionRepository>();
+            container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>();
+
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
+
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IRoleService, RoleService>();
-
+            container.RegisterType<IPermissionService, PermissionService>();
+            container.RegisterType<IEntityPermissionService, EntityPermissionService>();
             // automapper ×¢Èë
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass && t.IsSubclassOf(typeof(Profile)));
 

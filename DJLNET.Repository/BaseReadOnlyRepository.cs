@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Repository
 {
-    public abstract class BaseReadOnlyRepository<TEntity, TPrimaryKey> : IBaseReadOnlyRepository<TEntity, TPrimaryKey>
+    public class BaseReadOnlyRepository<TEntity, TPrimaryKey> : IBaseReadOnlyRepository<TEntity, TPrimaryKey>
         where TEntity : GenericEntity<TPrimaryKey>, new()
     {
         public readonly IDbContext _context;

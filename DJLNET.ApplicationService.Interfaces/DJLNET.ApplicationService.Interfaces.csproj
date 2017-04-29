@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="IRoleService.cs" />
     <Compile Include="IBaseReadOnlyService.cs" />
+    <Compile Include="IEntityPermissionService.cs" />
+    <Compile Include="IPermissionService.cs" />
     <Compile Include="IUserService.cs" />
     <Compile Include="IBaseWriteOnlyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

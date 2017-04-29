@@ -18,7 +18,8 @@ namespace DJLNET.Test
         public TestService()
         {
             container = new UnityContainer();
-            container.RegisterType<IDbContext, DJLNETDBContext>();           
+            container.RegisterType<IDbContext, DJLNETDBContext>();
+            container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
@@ -30,7 +31,7 @@ namespace DJLNET.Test
         [Fact]
         public void TestAdd()
         {
-          
+
         }
 
     }

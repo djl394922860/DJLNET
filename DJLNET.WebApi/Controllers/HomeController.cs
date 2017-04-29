@@ -12,11 +12,13 @@ namespace DJLNET.WebApi.Controllers
     {
         private readonly IUserService _userService;
         private readonly IRoleService _roleService;
+        private readonly IPermissionService _permissionService;
 
-        public HomeController(IUserService userService, IRoleService roleService)
+        public HomeController(IUserService userService, IRoleService roleService, IPermissionService permissionService)
         {
             this._userService = userService;
             this._roleService = roleService;
+            this._permissionService = permissionService;
         }
 
         /// <summary>
@@ -35,6 +37,15 @@ namespace DJLNET.WebApi.Controllers
         public IEnumerable<Role> GetAllPlatforms()
         {
             return _roleService.GetAll();
+        }
+
+        /// <summary>
+        /// 获取所有角色
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Permission> GetAllPermissions()
+        {
+            return _permissionService.GetAll();
         }
     }
 }
