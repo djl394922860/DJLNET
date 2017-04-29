@@ -6,22 +6,22 @@ namespace DJLNET.WebMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private ICityService _cityService;
-        public HomeController(ICityService cityService)
+        private IUserService _userService;
+        public HomeController(IUserService cityService)
         {
-            this._cityService = cityService;
+            this._userService = cityService;
         }
 
         [HttpGet, AllowAnonymous]
         public ActionResult Login()
         {
             // 测试miniprofiler.ef6
-            this._cityService.GetAll();
+            this._userService.GetAll();
             return View();
         }
 
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model)
+        public ActionResult Login(LoginModel model)
         {
             return Content("ok");
         }

@@ -12,7 +12,7 @@ namespace DJLNET.Repository.Interfaces
     /// </summary>
     /// <typeparam name="TEntity">实体</typeparam>
     /// <typeparam name="TPrimaryKey">实体主键</typeparam>
-    public interface IReadOnlyRepository<TEntity, TPrimaryKey>
+    public interface IBaseReadOnlyRepository<TEntity, TPrimaryKey>
         where TEntity : GenericEntity<TPrimaryKey>, new()
     {
         TEntity GetByKey(TPrimaryKey key);

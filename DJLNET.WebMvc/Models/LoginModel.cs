@@ -6,13 +6,13 @@ using System.Web;
 
 namespace DJLNET.WebMvc.Models
 {
-    public class LoginViewModel
+    public class LoginModel
     {
         [Required]
         [StringLength(maximumLength: 18, MinimumLength = 1)]
         [RegularExpression(@"^[\u4E00-\u9FA5A-Za-z0-9]+$")]
         [DataType(DataType.Text)]
-        public string Username { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [StringLength(maximumLength: 18, MinimumLength = 6)]

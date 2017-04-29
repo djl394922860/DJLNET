@@ -1,6 +1,5 @@
 ﻿using DJLNET.ApplicationService.Interfaces;
 using DJLNET.Model.Entities;
-using DJLNET.Model.Models;
 using DJLNET.WebApi.Common;
 using System.Collections.Generic;
 
@@ -11,31 +10,31 @@ namespace DJLNET.WebApi.Controllers
     /// </summary>
     public class HomeController : ApiControllerBase
     {
-        private readonly ICityService _cityService;
-        private readonly IPlatformService _platformService;
+        private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
 
-        public HomeController(ICityService cityService, IPlatformService platformService)
+        public HomeController(IUserService userService, IRoleService roleService)
         {
-            this._cityService = cityService;
-            this._platformService = platformService;
+            this._userService = userService;
+            this._roleService = roleService;
         }
 
         /// <summary>
-        /// 获取所有城市
+        /// 获取所有用户
         /// </summary>
         /// <returns>IEnumerable</returns>
-        public IEnumerable<City> GetAllCities()
+        public IEnumerable<User> GetAllCities()
         {
-            return _cityService.GetAll();
+            return _userService.GetAll();
         }
 
         /// <summary>
-        /// 获取所有平台
+        /// 获取所有角色
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Platform> GetAllPlatforms()
+        public IEnumerable<Role> GetAllPlatforms()
         {
-            return _platformService.GetAll();
+            return _roleService.GetAll();
         }
     }
 }

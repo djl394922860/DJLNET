@@ -5,13 +5,7 @@ using DJLNET.Repository;
 using DJLNET.Repository.Interfaces;
 using DJLNET.UnitOfWork;
 using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
-using DJLNET.Model.Models;
 
 namespace DJLNET.Test
 {
@@ -19,26 +13,18 @@ namespace DJLNET.Test
     {
         private readonly IUnityContainer container;
 
-        private ICityService _cityService;
+        private IUserService _userService;
 
         public TestService()
         {
             container = new UnityContainer();
-
-
-            container.RegisterType<IDbContext, DJLNETDBContext>();
-
-            container.RegisterType(typeof(IReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
-
-            container.RegisterType<ICityRepository, CityRepository>();
-            container.RegisterType<IPlatformRepository, PlatformRepository>();
-
+            container.RegisterType<IDbContext, DJLNETDBContext>();           
+            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IRoleRepository, RoleRepository>();
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
-
-            container.RegisterType<ICityService, CityService>();
-            container.RegisterType<IPlatformService, PlatormService>();
-
-            _cityService = container.Resolve<ICityService>();
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IRoleService, RoleService>();
+            _userService = container.Resolve<IUserService>();
         }
 
         [Fact]

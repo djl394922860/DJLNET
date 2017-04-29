@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using DJLNET.Model.Models;
+using DJLNET.Model.Entities;
 using DJLNET.WebMvc.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace DJLNET.WebMvc.AutoMapper
 {
@@ -12,7 +8,7 @@ namespace DJLNET.WebMvc.AutoMapper
     {
         public BasicProfile()
         {
-            this.CreateMap<Platform, PlatformViewModel>();
+            this.CreateMap<User, UserViewModel>();
         }
     }
 }

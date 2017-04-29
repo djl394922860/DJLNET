@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DJLNET.ApplicationService.Interfaces
 {
-    public interface IReadOnlyService<TEntity, TPrimaryKey> where TEntity : GenericEntity<TPrimaryKey>, new()
+    public interface IBaseReadOnlyService<TEntity, TPrimaryKey> where TEntity : GenericEntity<TPrimaryKey>, new()
     {
         TEntity Get(TPrimaryKey key);
 

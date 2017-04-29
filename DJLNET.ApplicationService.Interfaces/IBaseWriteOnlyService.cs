@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DJLNET.ApplicationService.Interfaces
 {
-    public interface IWriteOnlyService<TEntity, TPrimaryKey> where TEntity : GenericEntity<TPrimaryKey>, new()
+    public interface IBaseWriteOnlyService<TEntity, TPrimaryKey> where TEntity : GenericEntity<TPrimaryKey>, new()
     {
         void Add(TEntity entity);
 
