@@ -87,6 +87,8 @@
     <Compile Include="Mvc\JsonNetResult.cs" />
     <Compile Include="Mvc\ModelStateValidFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\DefaultPermissionrovider.cs" />
+    <Compile Include="Security\IPermissionProvider.cs" />
     <Compile Include="WebApi\CustomDateConverter.cs" />
     <Compile Include="WebApi\ApiResult.cs" />
     <Compile Include="WebAppTypeFinder.cs" />
@@ -98,6 +100,10 @@
     <ProjectReference Include="..\DJLNET.Core\DJLNET.Core.csproj">
       <Project>{96D3D88D-6B88-4C50-919D-1FEDE6E03735}</Project>
       <Name>DJLNET.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DJLNET.Model\DJLNET.Model.csproj">
+      <Project>{D9348CEA-54FB-48A5-8BB8-8C8B6B9122FF}</Project>
+      <Name>DJLNET.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
