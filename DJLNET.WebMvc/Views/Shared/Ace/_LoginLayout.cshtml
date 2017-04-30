@@ -44,8 +44,14 @@
     @RenderSection(name: "footer", required: false)
 
     @*MiniProfiler配置*@
-  
-    @MiniProfiler.RenderIncludes()
-    
+
+    @{
+        bool enableMiniProfile = bool.Parse(System.Configuration.ConfigurationManager.AppSettings["MiniProfilerEnabled"]);
+        if (enableMiniProfile)
+        {
+            MiniProfiler.RenderIncludes();
+        }
+    }
+
 </body>
 </html>

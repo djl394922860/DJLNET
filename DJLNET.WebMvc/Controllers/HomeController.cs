@@ -17,8 +17,6 @@ namespace DJLNET.WebMvc.Controllers
         [HttpGet, AllowAnonymous]
         public ActionResult Login()
         {
-            // 测试miniprofiler.ef6
-            this._permissionService.GetAll();
             return View();
         }
 
