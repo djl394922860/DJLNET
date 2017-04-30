@@ -37,7 +37,7 @@ namespace DJLNET.WebMvc.Controllers
             return RedirectToAction($"{nameof(Index)}");
         }
 
-        [LoginAuthentication]
+        [LoginAuthentication, AllowAnonymous]
         public ActionResult Index()
         {
             return View();

@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
+using System.Web;
 using System.Web.Optimization;
 
 namespace DJLNET.WebMvc
@@ -18,7 +19,8 @@ namespace DJLNET.WebMvc
                          "~/Content/font-awesome.css"));
 
             bundles.Add(new StyleBundle("~/bundles/acecss").Include(
-                "~/Content/Ace/ace.min.css", "~/Content/Ace/ace-rtl.min.css"));
+                "~/Content/Ace/ace.min.css",
+                "~/Content/Ace/ace-rtl.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryvalidate").
                 Include("~/Scripts/jquery.validate.js"
@@ -33,11 +35,31 @@ namespace DJLNET.WebMvc
                 "~/Scripts/Ace/jquery.slimscroll.min.js",
                 "~/Scripts/Ace/jquery.easy-pie-chart.min.js",
                 "~/Scripts/Ace/jquery.sparkline.min.js",
-                "~/Scripts/Ace/ace-elements.min.js",
-                "~/Scripts/Ace/ace.min.js",
                 "~/Scripts/Ace/jquery.flot.min.js",
                 "~/Scripts/Ace/jquery.flot.pie.min.js",
-                "~/Scripts/Ace/jquery.flot.resize.min.js"));
+                "~/Scripts/Ace/jquery.flot.resize.min.js",
+                "~/Scripts/Ace/ace-elements.min.js",
+                "~/Scripts/Ace/ace.min.js"
+               ).ForceOrdered());
+        }
+
+
+    }
+
+    internal class AsIsBundleOrderer : IBundleOrderer
+    {
+        public virtual IEnumerable<BundleFile> OrderFiles(BundleContext context, IEnumerable<BundleFile> files)
+        {
+            return files;
+        }
+    }
+
+    internal static class BundleExtensions
+    {
+        public static Bundle ForceOrdered(this Bundle sb)
+        {
+            sb.Orderer = new AsIsBundleOrderer();
+            return sb;
         }
     }
 }

@@ -14,6 +14,10 @@
           <link rel="stylesheet" href="@Url.Content("~/Content/Ace/font-awesome-ie7.min.css")" />
     <![endif]-->
 
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+
     @Styles.Render("~/bundles/acecss")
     <link rel="stylesheet" href="~/Content/Ace/ace-skins.min.css" />
 
@@ -31,7 +35,6 @@
     @RenderSection(name: "header", required: false)
 </head>
 <body>
-
     <div class="navbar navbar-default" id="navbar">
         <script type="text/javascript">
             try { ace.settings.check('navbar', 'fixed') } catch (e) { }
@@ -298,8 +301,6 @@
             </div><!-- /.navbar-header -->
         </div><!-- /.container -->
     </div>
-
-
 
     <div class="main-container" id="main-container">
         <script type="text/javascript">
@@ -721,8 +722,6 @@
     <script type="text/javascript">
         if ("ontouchend" in document) document.write("<script src='~/Scripts/Ace/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
-
-    @Scripts.Render("~/bundles/acejs")
 
     @Scripts.Render("~/bundles/jqueryvalidate")
 
