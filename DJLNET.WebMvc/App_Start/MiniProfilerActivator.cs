@@ -43,13 +43,17 @@ namespace DJLNET.WebMvc.App_Start
 
         public void Init(HttpApplication context)
         {
-            context.BeginRequest += Context_BeginRequest;
-            context.EndRequest += Context_EndRequest;
+            if (enable)
+            {
+                context.BeginRequest += Context_BeginRequest;
+                context.EndRequest += Context_EndRequest;
+            }
         }
 
         private void Context_EndRequest(object sender, EventArgs e)
         {
-            MiniProfiler.Stop();
+            if (enable)
+                MiniProfiler.Stop();
         }
 
         private void Context_BeginRequest(object sender, EventArgs e)

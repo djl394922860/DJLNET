@@ -1,10 +1,10 @@
-﻿
+﻿@model DJLNET.WebMvc.Models.LoginModel
 @{
     this.Layout = "~/Views/Shared/Ace/_LoginLayout.cshtml";
 }
 
 <div class="main-container">
-    <div class="main-content">
+    <div class="main-content" style="margin-top:10%;">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
                 <div class="login-container">
@@ -29,19 +29,22 @@
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="text" name="Name" class="form-control" placeholder="用户名" />
+                                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", placeholder = "用户名" })
+                                                    @Html.ValidationMessage($"{nameof(Model.Name)}", new { @class = "text-danger" })
                                                     <i class="icon-user"></i>
                                                 </span>
                                             </label>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="password" name="Password" class="form-control" placeholder="登陆密码" />
+                                                    @Html.PasswordFor(x => x.Password,
+                                                                      new { @class = "form-control", placeholder = "登陆密码" })
+                                                    @Html.ValidationMessage($"{nameof(Model.Password)}",new { @class= "text-danger" })
                                                     <i class="icon-lock"></i>
                                                 </span>
                                             </label>
                                             <div class="clearfix">
                                                 <label class="inline">
-                                                    <input type="checkbox" class="ace" />
+                                                    <input id="rememberMe" type="checkbox" class="ace" />
                                                     <span class="lbl"> 记住我</span>
                                                 </label>
 
@@ -51,6 +54,7 @@
                                                 </button>
                                             </div>
                                         </fieldset>
+                                        <input type="hidden" name="RememberMe" id="hidden" value="false" />
                                     </form>
                                 </div><!-- /widget-main -->
                             </div><!-- /widget-body -->
@@ -61,3 +65,18 @@
         </div><!-- /.row -->
     </div>
 </div>
+
+@section footer{
+    <script type="text/javascript">
+        $(function () {
+            $('#rememberMe').on('change', function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#hidden').val('true');
+                } else {
+                    $('#hidden').val('false');
+                }
+            });
+        });
+    </script>
+}

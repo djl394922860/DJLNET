@@ -19,11 +19,13 @@ namespace DJLNET.WebMvc.Controllers
         {
             return View();
         }
-
+   
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
-            return Content("ok");
+            if (!ModelState.IsValid)
+                return View(model);
+            return Content(Newtonsoft.Json.JsonConvert.SerializeObject(model, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }
