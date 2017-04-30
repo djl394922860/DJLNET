@@ -1,5 +1,6 @@
 ﻿using DJLNET.ApplicationService.Interfaces;
 using DJLNET.Core.Helper;
+using DJLNET.WebCore.Mvc;
 using DJLNET.WebMvc.Models;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -36,6 +37,7 @@ namespace DJLNET.WebMvc.Controllers
             return RedirectToAction($"{nameof(Index)}");
         }
 
+        [LoginAuthentication]
         public ActionResult Index()
         {
             return View();
