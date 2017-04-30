@@ -194,6 +194,7 @@
     <Content Include="Scripts\Ace\ace-elements.min.js" />
     <Content Include="Scripts\Ace\ace-extra.min.js" />
     <Content Include="Scripts\Ace\ace.min.js" />
+    <Content Include="Scripts\Ace\bootstrap.min.js" />
     <Content Include="Scripts\Ace\html5shiv.js" />
     <Content Include="Scripts\Ace\jquery-1.10.2.min.js" />
     <Content Include="Scripts\Ace\jquery-2.0.3.min.js" />
@@ -207,7 +208,6 @@
     <Content Include="Scripts\Ace\jquery.sparkline.min.js" />
     <Content Include="Scripts\Ace\jquery.ui.touch-punch.min.js" />
     <Content Include="Scripts\Ace\respond.min.js" />
-    <Content Include="Scripts\Ace\typeahead-bs2.min - 复制.js" />
     <Content Include="Scripts\Ace\typeahead-bs2.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -2706,6 +2706,7 @@
     <Content Include="UITemplates\Metronic\theme\assets\global\plugins\slider-revolution-slider\rs-plugin\font\revicons90c6.ttf" />
     <Content Include="UITemplates\Metronic\theme\assets\global\plugins\slider-revolution-slider\rs-plugin\font\revicons90c6.woff" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Ace\_Layout111.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
