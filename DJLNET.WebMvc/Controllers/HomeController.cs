@@ -33,7 +33,7 @@ namespace DJLNET.WebMvc.Controllers
                 ModelState.AddModelError(string.Empty, "账号或者密码错误");
                 return View(model);
             }
-            FormsAuthentication.SetAuthCookie(model.Name, true, FormsAuthentication.FormsCookiePath);
+            FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe, FormsAuthentication.FormsCookiePath);
             return RedirectToAction($"{nameof(Index)}");
         }
 
