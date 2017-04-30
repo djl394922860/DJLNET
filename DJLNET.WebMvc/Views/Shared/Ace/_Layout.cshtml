@@ -9,8 +9,7 @@
     <meta name="description" content="后台管理系统,控制台,Ace模板" />
     @*引用基本css*@
     
-    <link rel="stylesheet" href="~/Content/Ace/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Content/Ace/ace.min.css" />
+    @Styles.Render("~/bundles/css")
 
     <!--[if IE 7]>
           <link rel="stylesheet" href="@Url.Content("~/Content/Ace/font-awesome-ie7.min.css")" />
@@ -21,7 +20,6 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
     @Styles.Render("~/bundles/acecss")
-    <link rel="stylesheet" href="~/Content/Ace/ace-skins.min.css" />
 
     <!--[if lte IE 8]>
       <link rel="stylesheet" href="@Url.Content("~/Content/Ace/ace-ie.min.css")" />
@@ -725,9 +723,10 @@
         if ("ontouchend" in document) document.write("<script src='~/Scripts/Ace/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
 
-    @Scripts.Render("~/bundles/jqueryvalidate")
 
     @Scripts.Render("~/bundles/acejs")
+
+ 
 
     <script type="text/javascript">
         jQuery(function ($) {
@@ -909,6 +908,8 @@
             });
         });
     </script>
+
+    @Scripts.Render("~/bundles/jqueryvalidate")
 
     @RenderSection(name: "footer", required: false)
 

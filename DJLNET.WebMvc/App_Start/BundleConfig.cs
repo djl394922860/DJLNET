@@ -14,19 +14,23 @@ namespace DJLNET.WebMvc
             // 是有启用压缩
             BundleTable.EnableOptimizations = false;
 
+            // 基础样式表
             bundles.Add(new StyleBundle("~/bundles/css")
                 .Include("~/Content/bootstrap.css",
                          "~/Content/font-awesome.css"));
-
+            // ace相关样式表
             bundles.Add(new StyleBundle("~/bundles/acecss").Include(
                 "~/Content/Ace/ace.min.css",
-                "~/Content/Ace/ace-rtl.min.css"));
+                "~/Content/Ace/ace-rtl.min.css",
+                "~/Content/Ace/ace-skins.min.css"));
 
+            // mvc-jquery相关插件
             bundles.Add(new ScriptBundle("~/bundles/jqueryvalidate").
                 Include("~/Scripts/jquery.validate.js"
                 , "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js"));
 
+            // ace js 集合库
             bundles.Add(new ScriptBundle("~/bundles/acejs").Include(
                 "~/Scripts/bootstrap.min.js",
                 "~/Scripts/Ace/typeahead-bs2.min.js",
