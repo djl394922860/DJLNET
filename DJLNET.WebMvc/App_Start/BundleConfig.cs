@@ -14,36 +14,36 @@ namespace DJLNET.WebMvc
             // 是有启用压缩
             BundleTable.EnableOptimizations = false;
 
-            // 基础样式表
-            bundles.Add(new StyleBundle("~/bundles/css")
-                .Include("~/Content/bootstrap.css",
-                         "~/Content/font-awesome.css"));
-            // ace相关样式表
-            bundles.Add(new StyleBundle("~/bundles/acecss").Include(
-                "~/Content/Ace/ace.min.css",
-                "~/Content/Ace/ace-rtl.min.css",
-                "~/Content/Ace/ace-skins.min.css"));
-
             // mvc-jquery相关插件
             bundles.Add(new ScriptBundle("~/bundles/jqueryvalidate").
                 Include("~/Scripts/jquery.validate.js"
                 , "~/Scripts/jquery.validate.unobtrusive.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js"));
 
+            // ace基础样式表
+            bundles.Add(new StyleBundle("~/bundles/css")
+                .Include("~/Content/Ace/assets/css/bootstrap.min.css",
+                         "~/Content/Ace/assets/css/font-awesome.min.css"));
+            // ace相关样式表
+            bundles.Add(new StyleBundle("~/bundles/acecss").Include(
+                "~/Content/Ace/assets/css/ace.min.css",
+                "~/Content/Ace/assets/css/ace-rtl.min.css",
+                "~/Content/Ace/assets/css/ace-skins.min.css"));
+
             // ace js 集合库
             bundles.Add(new ScriptBundle("~/bundles/acejs").Include(
-                "~/Scripts/bootstrap.min.js",
-                "~/Scripts/Ace/typeahead-bs2.min.js",
-                "~/Scripts/Ace/jquery-ui-1.10.3.custom.min.js",
-                "~/Scripts/Ace/jquery.ui.touch-punch.min.js",
-                "~/Scripts/Ace/jquery.slimscroll.min.js",
-                "~/Scripts/Ace/jquery.easy-pie-chart.min.js",
-                "~/Scripts/Ace/jquery.sparkline.min.js",
-                "~/Scripts/Ace/jquery.flot.min.js",
-                "~/Scripts/Ace/jquery.flot.pie.min.js",
-                "~/Scripts/Ace/jquery.flot.resize.min.js",
-                "~/Scripts/Ace/ace-elements.min.js",
-                "~/Scripts/Ace/ace.min.js"
+                "~/Content/Ace/assets/js/bootstrap.min.js",
+                "~/Content/Ace/assets/js/typeahead-bs2.min.js",
+                "~/Content/Ace/assets/js/jquery-ui-1.10.3.custom.min.js",
+                "~/Content/Ace/assets/js/jquery.ui.touch-punch.min.js",
+                "~/Content/Ace/assets/js/jquery.slimscroll.min.js",
+                "~/Content/Ace/assets/js/jquery.easy-pie-chart.min.js",
+                "~/Content/Ace/assets/js/jquery.sparkline.min.js",
+                "~/Content/Ace/assets/js/flot/jquery.flot.min.js",
+                "~/Content/Ace/assets/js/flot/jquery.flot.pie.min.js",
+                "~/Content/Ace/assets/js/flot/jquery.flot.resize.min.js",
+                "~/Content/Ace/assets/js/ace-elements.min.js",
+                "~/Content/Ace/assets/js/ace.min.js"
                ).ForceOrdered());
         }
 

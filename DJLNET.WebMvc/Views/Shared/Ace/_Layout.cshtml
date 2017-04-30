@@ -7,29 +7,29 @@
     <title>后台管理系统-控制台</title>
     <meta name="keywords" content="后台管理系统,控制台,Ace模板" />
     <meta name="description" content="后台管理系统,控制台,Ace模板" />
-    @*引用基本css*@
     
+    @*引用基本css*@
     @Styles.Render("~/bundles/css")
 
     <!--[if IE 7]>
-          <link rel="stylesheet" href="@Url.Content("~/Content/Ace/font-awesome-ie7.min.css")" />
+          <link rel="stylesheet" href="@Url.Content("~/Content/Ace/assets/css/font-awesome-ie7.min.css")" />
     <![endif]-->
 
     <!-- fonts -->
-
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
+    <!--加载ace样式-->
     @Styles.Render("~/bundles/acecss")
 
     <!--[if lte IE 8]>
-      <link rel="stylesheet" href="@Url.Content("~/Content/Ace/ace-ie.min.css")" />
+      <link rel="stylesheet" href="@Url.Content("~/Content/Ace/assets/css/ace-ie.min.css")" />
     <![endif]-->
 
-    <script src="~/Scripts/Ace/ace-extra.min.js"></script>
+    <script src="~/Content/Ace/assets/js/ace-extra.min.js"></script>
 
     <!--[if lt IE 9]>
-        <script src="@Url.Content("~/Scripts/Ace/html5shiv.js")"></script>
-        <script src="@Url.Content("~/Scripts/Ace/respond.min.js")"></script>
+        <script src="@Url.Content("~/Content/Ace/assets/js/html5shiv.js")"></script>
+        <script src="@Url.Content("~/Content/Ace/assets/js/respond.min.js")"></script>
     <![endif]-->
 
     @RenderSection(name: "header", required: false)
@@ -203,7 +203,7 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+                                    <img src="~/Content/Ace/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
                                     <span class="msg-body">
                                         <span class="msg-title">
                                             <span class="blue">Alex:</span>
@@ -220,7 +220,7 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+                                    <img src="~/Content/Ace/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
                                     <span class="msg-body">
                                         <span class="msg-title">
                                             <span class="blue">Susan:</span>
@@ -237,7 +237,7 @@
 
                             <li>
                                 <a href="#">
-                                    <img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+                                    <img src="~/Content/Ace/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
                                     <span class="msg-body">
                                         <span class="msg-title">
                                             <span class="blue">Bob:</span>
@@ -263,7 +263,7 @@
 
                     <li class="light-blue">
                         <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" />
+                            <img class="nav-user-photo" src="~/Content/Ace/assets/avatars/user.jpg" alt="Jason's Photo" />
                             <span class="user-info">
                                 <small>欢迎光临,</small>
                                 Jason
@@ -710,23 +710,28 @@
             <i class="icon-double-angle-up icon-only bigger-110"></i>
         </a>
     </div><!-- /.main-container -->
-    @*引入基本js*@
 
+    @*引入基本js*@
     <!--[if !IE]> -->
-    <script src="@Url.Content("~/Scripts/Ace/jquery-2.0.3.min.js")"></script>
+    <script src="@Url.Content("~/Content/Ace/assets/js/jquery-2.0.3.min.js")"></script>
     <!-- <![endif]-->
+
     <!--[if lt IE]>
-       <script src="@Url.Content("~/Scripts/Ace/jquery-1.10.2.min.js")"></script>
+       <script src="@Url.Content("~/Content/Ace/assets/js/jquery-1.10.2.min.js")"></script>
     <![endif]-->
 
     <script type="text/javascript">
-        if ("ontouchend" in document) document.write("<script src='~/Scripts/Ace/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+        if ("ontouchend" in document) document.write("<script src='~/Content/Ace/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
-
 
     @Scripts.Render("~/bundles/acejs")
 
- 
+    @Scripts.Render("~/bundles/jqueryvalidate")
+
+    @RenderSection(name: "footer", required: false)
+
+    @*MiniProfiler配置*@
+    @MiniProfiler.RenderIncludes();
 
     <script type="text/javascript">
         jQuery(function ($) {
@@ -908,13 +913,6 @@
             });
         });
     </script>
-
-    @Scripts.Render("~/bundles/jqueryvalidate")
-
-    @RenderSection(name: "footer", required: false)
-
-    @*MiniProfiler配置*@
-    @MiniProfiler.RenderIncludes();
 
 </body>
 </html>

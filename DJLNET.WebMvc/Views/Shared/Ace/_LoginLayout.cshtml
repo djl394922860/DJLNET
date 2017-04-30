@@ -9,17 +9,17 @@
     @Styles.Render("~/bundles/css")
 
     <!--[if IE 7]>
-          <link rel="stylesheet" href="@Url.Content("~/Content/Ace/font-awesome-ie7.min.css")" />
+          <link rel="stylesheet" href="@Url.Content("~/Content/Ace/assets/css/font-awesome-ie7.min.css")" />
     <![endif]-->
 
     @Styles.Render("~/bundles/acecss")
 
     <!--[if lte IE 8]>
-      <link rel="stylesheet" href="@Url.Content("~/Content/Ace/ace-ie.min.css")" />
+      <link rel="stylesheet" href="@Url.Content("~/Content/Ace/assets/css/ace-ie.min.css")" />
     <![endif]-->
     <!--[if lt IE 9]>
-        <script src="@Url.Content("~/Scripts/Ace/html5shiv.js")"></script>
-        <script src="@Url.Content("~/Scripts/Ace/respond.min.js")"></script>
+        <script src="@Url.Content("~/Content/Ace/assets/js/html5shiv.js")"></script>
+        <script src="@Url.Content("~/Content/Ace/assets/js/respond.min.js")"></script>
     <![endif]-->
 
     @RenderSection(name: "header", required: false)
@@ -29,14 +29,14 @@
     @*引入基本js*@
 
     <!--[if !IE]> -->
-    <script src="@Url.Content("~/Scripts/Ace/jquery-2.0.3.min.js")"></script>
+    <script src="@Url.Content("~/Content/Ace/assets/js/jquery-2.0.3.min.js")"></script>
     <!-- <![endif]-->
     <!--[if lt IE]>
-       <script src="@Url.Content("~/Scripts/Ace/jquery-1.10.2.min.js")"></script>
+       <script src="@Url.Content("~/Content/Ace/assets/js/jquery-1.10.2.min.js")"></script>
     <![endif]-->
 
     <script type="text/javascript">
-        if ("ontouchend" in document) document.write("<script src='~/Scripts/Ace/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+        if ("ontouchend" in document) document.write("<script src='~/Content/Ace/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
 
     @Scripts.Render("~/bundles/jqueryvalidate")
