@@ -158,6 +158,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\query_user.sql" />
     <Content Include="Content\Ace\ace-ie.min.css" />
     <Content Include="Content\Ace\ace-rtl.min.css" />
     <Content Include="Content\Ace\ace.min.css" />
@@ -2688,6 +2689,7 @@
     <Content Include="UITemplates\Metronic\theme\assets\global\plugins\slider-revolution-slider\rs-plugin\font\revicons90c6.eot" />
     <Content Include="UITemplates\Metronic\theme\assets\global\plugins\slider-revolution-slider\rs-plugin\font\revicons90c6.ttf" />
     <Content Include="UITemplates\Metronic\theme\assets\global\plugins\slider-revolution-slider\rs-plugin\font\revicons90c6.woff" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

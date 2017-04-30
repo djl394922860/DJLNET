@@ -6,6 +6,7 @@ using DJLNET.Repository.Interfaces;
 using DJLNET.UnitOfWork;
 using Microsoft.Practices.Unity;
 using Xunit;
+using DJLNET.Core.Helper;
 
 namespace DJLNET.Test
 {
@@ -29,9 +30,9 @@ namespace DJLNET.Test
         }
 
         [Fact]
-        public void TestAdd()
+        public void TestAddUser()
         {
-
+            _userService.Add(new Model.Entities.User() { Name = "djlnet", Password = MD5Helper.GetMD5("123456") });
         }
 
     }

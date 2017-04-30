@@ -1,6 +1,8 @@
 ﻿using DJLNET.ApplicationService.Interfaces;
+using DJLNET.Core.Helper;
 using DJLNET.WebMvc.Models;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace DJLNET.WebMvc.Controllers
 {
@@ -19,13 +21,24 @@ namespace DJLNET.WebMvc.Controllers
         {
             return View();
         }
-   
+
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
-            return Content(Newtonsoft.Json.JsonConvert.SerializeObject(model, Newtonsoft.Json.Formatting.Indented));
+            if (!this._userService.Login(model.Name, MD5Helper.GetMD5(model.Password)))
+            {
+                ModelState.AddModelError(string.Empty, "账号或者密码错误");
+                return View(model);
+            }
+            FormsAuthentication.SetAuthCookie(model.Name, true, FormsAuthentication.FormsCookiePath);
+            return RedirectToAction($"{nameof(Index)}");
+        }
+
+        public ActionResult Index()
+        {
+            return View();
         }
     }
 }

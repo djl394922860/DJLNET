@@ -20,5 +20,9 @@ namespace DJLNET.ApplicationService
             this._unitOfWork = unitOfWork;
         }
 
+        public bool Login(string name, string pwd)
+        {
+            return _userRepository.Table().FirstOrDefault(x => x.Name == name && x.Password == pwd) == null ? false : true;
+        }
     }
 }

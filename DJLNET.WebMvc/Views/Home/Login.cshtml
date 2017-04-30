@@ -38,10 +38,11 @@
                                                 <span class="block input-icon input-icon-right">
                                                     @Html.PasswordFor(x => x.Password,
                                                                       new { @class = "form-control", placeholder = "登陆密码" })
-                                                    @Html.ValidationMessage($"{nameof(Model.Password)}",new { @class= "text-danger" })
+                                                    @Html.ValidationMessage($"{nameof(Model.Password)}", new { @class = "text-danger" })
                                                     <i class="icon-lock"></i>
                                                 </span>
                                             </label>
+                                            @Html.ValidationSummary(true, string.Empty, new { @class = "text-danger" })
                                             <div class="clearfix">
                                                 <label class="inline">
                                                     <input id="rememberMe" type="checkbox" class="ace" />
