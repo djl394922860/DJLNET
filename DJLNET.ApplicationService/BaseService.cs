@@ -24,6 +24,18 @@ namespace DJLNET.ApplicationService
             this._baseReadOnlyRepository = baseReadOnlyRepository;
         }
 
+        #region AutoCommit
+
+        public void AutoCommit(Action operate)
+        {
+            if (operate == null)
+                throw new ArgumentNullException(nameof(operate));
+            operate();
+            this.Commit();
+        }
+
+        #endregion
+
         #region Write
         public void Add(TEntity entity)
         {
@@ -70,7 +82,6 @@ namespace DJLNET.ApplicationService
         {
             return _baseReadOnlyRepository.Table().ToList() ?? new List<TEntity>();
         }
-
         #endregion
     }
 }

@@ -32,8 +32,10 @@ namespace DJLNET.Test
         [Fact]
         public void TestAddUser()
         {
-            _userService.Add(new Model.Entities.User() { Name = "djlnet", Password = MD5Helper.GetMD5("123456") });
-            _userService.Commit();
+            _userService.AutoCommit(() =>
+            {
+                _userService.Add(new Model.Entities.User() { Name = "djlnet1", Password = MD5Helper.GetMD5("123456") });
+            });
         }
 
     }
