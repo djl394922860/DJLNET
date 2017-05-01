@@ -7,7 +7,7 @@ using System.Web.Security;
 
 namespace DJLNET.WebMvc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : DJLNET.WebCore.Mvc.BaseController
     {
         private IUserService _userService;
         private IPermissionService _permissionService;
@@ -37,10 +37,19 @@ namespace DJLNET.WebMvc.Controllers
             return RedirectToAction($"{nameof(Index)}");
         }
 
-        [LoginAuthentication, AllowAnonymous]
+        [LoginAuthentication]
         public ActionResult Index()
         {
             return View();
+        }
+
+        [LoginAuthentication, HttpGet]
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            Session.Clear();
+            FormsAuthentication.SignOut();
+            return RedirectToAction(nameof(Login));
         }
     }
 }
