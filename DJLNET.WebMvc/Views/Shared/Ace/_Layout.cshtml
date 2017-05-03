@@ -7,14 +7,13 @@
     <title>后台管理系统-控制台</title>
     <meta name="keywords" content="后台管理系统,控制台,Ace模板" />
     <meta name="description" content="后台管理系统,控制台,Ace模板" />
-    
+
     @*引用基本css*@
     @Styles.Render("~/bundles/css")
 
     <!--[if IE 7]>
           <link rel="stylesheet" href="@Url.Content("~/Content/Ace/assets/css/font-awesome-ie7.min.css")" />
     <![endif]-->
-
     <!-- fonts -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
 
@@ -35,167 +34,8 @@
     @RenderSection(name: "header", required: false)
 </head>
 <body>
-    <div class="navbar navbar-default" id="navbar">
-        <script type="text/javascript">
-            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
-        </script>
 
-        <div class="navbar-container" id="navbar-container">
-            <div class="navbar-header pull-left">
-                <a href="#" class="navbar-brand">
-                    <small>
-                        <i class="icon-home"></i>
-                        ACE后台管理系统
-                    </small>
-                </a><!-- /.brand -->
-            </div><!-- /.navbar-header -->
-
-            <div class="navbar-header pull-right" role="navigation">
-                <ul class="nav ace-nav">
-                    <li class="grey">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-tasks"></i>
-                            <span class="badge badge-grey">1</span>
-                        </a>
-
-                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header">
-                                <i class="icon-ok"></i>
-                                还有1个任务完成
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="clearfix">
-                                        <span class="pull-left">软件更新</span>
-                                        <span class="pull-right">65%</span>
-                                    </div>
-
-                                    <div class="progress progress-mini ">
-                                        <div style="width:65%" class="progress-bar "></div>
-                                    </div>
-                                </a>
-                            </li>          
-
-                            <li>
-                                <a href="#">
-                                    查看所有任务
-                                    <i class="icon-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="purple">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-bell-alt icon-animated-bell"></i>
-                            <span class="badge badge-important">1</span>
-                        </a>
-
-                        <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header">
-                                <i class="icon-warning-sign"></i>
-                                1条通知
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="clearfix">
-                                        <span class="pull-left">
-                                            <i class="btn btn-xs no-hover btn-pink icon-comment"></i>
-                                            新闻评论
-                                        </span>
-                                        <span class="pull-right badge badge-info">+12</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    查看所有通知
-                                    <i class="icon-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="green">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <i class="icon-envelope icon-animated-vertical"></i>
-                            <span class="badge badge-success">1</span>
-                        </a>
-
-                        <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-                            <li class="dropdown-header">
-                                <i class="icon-envelope-alt"></i>
-                                1条消息
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <img src="~/Content/Ace/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
-                                    <span class="msg-body">
-                                        <span class="msg-title">
-                                            <span class="blue">Alex:</span>
-                                            不知道写啥 ...
-                                        </span>
-
-                                        <span class="msg-time">
-                                            <i class="icon-time"></i>
-                                            <span>1分钟以前</span>
-                                        </span>
-                                    </span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    查看所有消息
-                                    <i class="icon-arrow-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="light-blue">
-                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
-                            <img class="nav-user-photo" src="~/Content/Ace/assets/avatars/user.jpg" alt="Jason's Photo" />
-                            <span class="user-info">
-                                <small>欢迎光临,</small>
-                                杜江龙
-                            </span>
-
-                            <i class="icon-caret-down"></i>
-                        </a>
-
-                        <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-                            <li>
-                                <a href="#">
-                                    <i class="icon-cog"></i>
-                                    设置
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <i class="icon-user"></i>
-                                    个人资料
-                                </a>
-                            </li>
-
-                            <li class="divider"></li>
-
-                            <li>
-                                <a href="@Url.Action("Logout","Home")">
-                                    <i class="icon-off"></i>
-                                    退出
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul><!-- /.ace-nav -->
-            </div><!-- /.navbar-header -->
-        </div><!-- /.container -->
-    </div>
+    @{  Html.RenderPartial("~/Views/Shared/Ace/_Navbar.cshtml"); }
 
     <div class="main-container" id="main-container">
         <script type="text/javascript">
@@ -207,83 +47,12 @@
                 <span class="menu-text"></span>
             </a>
 
-            <div class="sidebar" id="sidebar">
-                <script type="text/javascript">
-                    try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
-                </script>
-
-                <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-                    <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                        <button class="btn btn-success">
-                            <i class="icon-signal"></i>
-                        </button>
-
-                        <button class="btn btn-info">
-                            <i class="icon-pencil"></i>
-                        </button>
-
-                        <button class="btn btn-warning">
-                            <i class="icon-group"></i>
-                        </button>
-
-                        <button class="btn btn-danger">
-                            <i class="icon-cogs"></i>
-                        </button>
-                    </div>
-
-                    <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                        <span class="btn btn-success"></span>
-
-                        <span class="btn btn-info"></span>
-
-                        <span class="btn btn-warning"></span>
-
-                        <span class="btn btn-danger"></span>
-                    </div>
-                </div><!-- #sidebar-shortcuts -->
-
-                <ul class="nav nav-list">
-                    <li class="active open">
-                        <a href="#" class="dropdown-toggle">
-                            <i class="icon-home"></i>
-                            <span class="menu-text"> 系统管理 </span>
-
-                            <b class="arrow icon-angle-down"></b>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="@Url.Action("Index","User")">
-                                    <i class="icon-double-angle-right"></i>
-                                    <i class="icon-user"></i>
-                                    用户管理
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="@Url.Action("Index","Role")">
-                                    <i class="icon-double-angle-right"></i>
-                                    <i class="icon-group"></i>
-                                    角色管理
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul><!-- /.nav-list -->
-
-                <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
-                </div>
-
-                <script type="text/javascript">
-                    try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
-                </script>
-            </div>
-
+            @{ Html.RenderPartial("~/Views/Shared/Ace/_Menubar.cshtml"); }
 
             <div class="main-content">
                 <div class="breadcrumbs" id="breadcrumbs">
                     <script type="text/javascript">
-            try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
+                        try { ace.settings.check('breadcrumbs', 'fixed') } catch (e) { }
                     </script>
 
                     <ul class="breadcrumb">
@@ -362,12 +131,10 @@
             <i class="icon-double-angle-up icon-only bigger-110"></i>
         </a>
     </div><!-- /.main-container -->
-
     @*引入基本js*@
     <!--[if !IE]> -->
     <script src="@Url.Content("~/Content/Ace/assets/js/jquery-2.0.3.min.js")"></script>
     <!-- <![endif]-->
-
     <!--[if lt IE]>
        <script src="@Url.Content("~/Content/Ace/assets/js/jquery-1.10.2.min.js")"></script>
     <![endif]-->
@@ -381,38 +148,9 @@
     @Scripts.Render("~/bundles/jqueryvalidate")
 
     @*MiniProfiler配置*@
-    @MiniProfiler.RenderIncludes();
+    @MiniProfiler.RenderIncludes()
 
-    <script type="text/javascript">
-        jQuery(function ($) {
-            $('.easy-pie-chart.percentage').each(function () {
-                var $box = $(this).closest('.infobox');
-                var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgba(255,255,255,0.95)');
-                var trackColor = barColor == 'rgba(255,255,255,0.95)' ? 'rgba(255,255,255,0.25)' : '#E2E2E2';
-                var size = parseInt($(this).data('size')) || 50;
-                $(this).easyPieChart({
-                    barColor: barColor,
-                    trackColor: trackColor,
-                    scaleColor: false,
-                    lineCap: 'butt',
-                    lineWidth: parseInt(size / 10),
-                    animate: /msie\s*(8|7|6)/.test(navigator.userAgent.toLowerCase()) ? false : 1000,
-                    size: size
-                });
-            })
-
-            $('.sparkline').each(function () {
-                var $box = $(this).closest('.infobox');
-                var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
-                $(this).sparkline('html', { tagValuesAttribute: 'data-values', type: 'bar', barColor: barColor, chartRangeMin: $(this).data('min') || 0 });
-            });
-
-            $('.dialogs,.comments').slimScroll({
-                height: '300px'
-            });
-           
-        });
-    </script>
+    <script src="~/Content/Ace/aceinit.js"></script>
 
     @RenderSection(name: "footer", required: false)
 

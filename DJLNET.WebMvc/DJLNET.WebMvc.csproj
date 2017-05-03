@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\query_user.sql" />
+    <Content Include="Content\Ace\aceinit.js" />
     <Content Include="Content\Ace\assets\avatars\avatar.png" />
     <Content Include="Content\Ace\assets\avatars\avatar1.png" />
     <Content Include="Content\Ace\assets\avatars\avatar2.png" />
@@ -2782,6 +2783,8 @@
     <Content Include="UITemplates\Metronic\theme\assets\global\plugins\slider-revolution-slider\rs-plugin\font\revicons90c6.woff" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Shared\Ace\_Navbar.cshtml" />
+    <Content Include="Views\Shared\Ace\_Menubar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

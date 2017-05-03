@@ -10,7 +10,6 @@ namespace DJLNET.WebMvc.Controllers
     [LoginAuthentication]
     public class RoleController : BaseController
     {
-        // GET: Role
         public ActionResult Index()
         {
             return View();
