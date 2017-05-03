@@ -25,7 +25,7 @@ namespace DJLNET.WebApi.Controllers
         /// 获取所有用户
         /// </summary>
         /// <returns>IEnumerable</returns>
-        public IEnumerable<User> GetAllCities()
+        public IEnumerable<User> GetAllUsers()
         {
             return _userService.GetAll();
         }
@@ -34,13 +34,13 @@ namespace DJLNET.WebApi.Controllers
         /// 获取所有角色
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Role> GetAllPlatforms()
+        public IEnumerable<Role> GetAllRoles()
         {
             return _roleService.GetAll();
         }
 
         /// <summary>
-        /// 获取所有角色
+        /// 获取所有权限
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Permission> GetAllPermissions()

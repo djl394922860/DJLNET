@@ -24,18 +24,6 @@ namespace DJLNET.ApplicationService
             this._baseReadOnlyRepository = baseReadOnlyRepository;
         }
 
-        #region AutoCommit
-
-        public void AutoCommit(Action operate)
-        {
-            if (operate == null)
-                throw new ArgumentNullException(nameof(operate));
-            operate();
-            this.Commit();
-        }
-
-        #endregion
-
         #region Write
         public void Add(TEntity entity)
         {
@@ -47,9 +35,14 @@ namespace DJLNET.ApplicationService
             _unitOfWork.AddRang(entities);
         }
 
-        public void Commit()
+        public int Commit()
         {
-            _unitOfWork.SaveChanges();
+            return _unitOfWork.SaveChanges();
+        }
+
+        public async Task<int> CommitAync()
+        {
+            return await _unitOfWork.SaveChangesAync();
         }
 
         public void Delete(TEntity entity)
@@ -81,6 +74,33 @@ namespace DJLNET.ApplicationService
         public IEnumerable<TEntity> GetAll()
         {
             return _baseReadOnlyRepository.Table().ToList() ?? new List<TEntity>();
+        }
+
+
+
+        public async Task<TEntity> GetAsync(TPrimaryKey key)
+        {
+            return await _baseReadOnlyRepository.GetByKeyAsync(key);
+        }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        {
+            return await Task.Run(() => _baseReadOnlyRepository.Table().ToList() ?? new List<TEntity>());
+        }
+
+        public async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await Task.Run(() => _baseReadOnlyRepository.Table().Where(predicate).ToList() ?? new List<TEntity>());
+        }
+
+        public IEnumerable<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        {
+            return _baseReadOnlyRepository.PagingQuery(condition, pageNum, pageSize, orderby, isDesc).ToList() ?? new List<TEntity>();
+        }
+
+        public async Task<IEnumerable<TEntity>> PagingQueryAsync<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        {
+            return await Task.Run(() => _baseReadOnlyRepository.PagingQuery(condition, pageNum, pageSize, orderby, isDesc).ToList() ?? new List<TEntity>());
         }
         #endregion
     }

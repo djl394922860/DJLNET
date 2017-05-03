@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace DJLNET.Repository
 {
@@ -40,6 +41,31 @@ namespace DJLNET.Repository
         public TEntity Find(params object[] keyValues)
         {
             return this._context.Set<TEntity>().Find(keyValues);
+        }
+
+        public async Task<TEntity> GetByKeyAsync(TPrimaryKey key)
+        {
+            return await Task.Run(() => this._entities.FirstOrDefault(x => x.ID.Equals(key)));
+        }
+
+        public IQueryable<TEntity> TableNoTrack()
+        {
+            return this._context.Set<TEntity>().AsNoTracking();
+        }
+
+        public IQueryable<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        {
+            var query = this._entities.Where(condition);
+            if (isDesc)
+            {
+                query = query.OrderByDescending(orderby);
+            }
+            else
+            {
+                query = query.OrderBy(orderby);
+            }
+            query = query.Skip((pageNum - 1) * pageSize).Take(pageSize);
+            return query;
         }
     }
 }

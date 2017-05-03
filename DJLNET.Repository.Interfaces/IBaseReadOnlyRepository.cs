@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,10 +18,16 @@ namespace DJLNET.Repository.Interfaces
     {
         TEntity GetByKey(TPrimaryKey key);
 
+        Task<TEntity> GetByKeyAsync(TPrimaryKey key);
+
         TEntity Find(params object[] keyValues);
 
         Task<TEntity> FindAsync(params object[] keyValues);
 
         IQueryable<TEntity> Table();
+
+        IQueryable<TEntity> TableNoTrack();
+
+        IQueryable<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct;
     }
 }

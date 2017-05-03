@@ -12,8 +12,17 @@ namespace DJLNET.ApplicationService.Interfaces
     {
         TEntity Get(TPrimaryKey key);
 
+        Task<TEntity> GetAsync(TPrimaryKey key);
+
         IEnumerable<TEntity> GetAll();
 
+        Task<IEnumerable<TEntity>> GetAllAsync();
+
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate);
+
+        IEnumerable<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct;
+
+        Task<IEnumerable<TEntity>> PagingQueryAsync<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct;
     }
 }

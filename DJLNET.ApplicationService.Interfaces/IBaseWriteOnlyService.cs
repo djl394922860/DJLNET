@@ -19,8 +19,8 @@ namespace DJLNET.ApplicationService.Interfaces
 
         void DeleteRang(IEnumerable<TEntity> entities);
 
-        void Commit();
+        int Commit();
 
-        void AutoCommit(Action operate);
+        Task<int> CommitAync();
     }
 }
