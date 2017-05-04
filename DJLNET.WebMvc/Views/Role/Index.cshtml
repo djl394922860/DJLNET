@@ -5,6 +5,7 @@
 @section header{
     <link href="http://cdn.bootcss.com/datatables/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="~/CustomCss/Role/index.css" rel="stylesheet" />
+    <link href="~/CustomCss/select.dataTables.min.css" rel="stylesheet" />
 }
 
 <div class="page-header">
@@ -29,7 +30,7 @@
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="搜索">
                 </div>
-                <button type="submit" class="btn btn-success">搜索</button>
+                <button type="button" class="btn btn-success">搜索</button>
             </form>
         </div>
     </div>
@@ -37,6 +38,7 @@
             <table id="role_table" class="table table-hover table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Name</th>
                         <th>Position</th>
                         <th>Office</th>
@@ -47,6 +49,7 @@
                 </thead>
                 <tbody>
                     <tr>
+                        <td></td>
                         <td>Tiger Nixon</td>
                         <td>System Architect</td>
                         <td>Edinburgh</td>
@@ -55,6 +58,7 @@
                         <td>$320,800</td>
                     </tr>
                     <tr>
+                        <td></td>
                         <td>Garrett Winters</td>
                         <td>Accountant</td>
                         <td>Tokyo</td>
@@ -69,6 +73,7 @@
 @section footer{
     <script src="http://cdn.bootcss.com/datatables/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="http://cdn.bootcss.com/datatables/1.10.15/js/dataTables.bootstrap.js"></script>
+    <script src="~/CustomCss/dataTables.select.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $.extend($.fn.dataTable.defaults, {
@@ -79,7 +84,17 @@
                 "language": {
                     "url": "/CustomCss/chinese.json"
                 },
-                "lengthMenu": [10, 25, 50, 100]
+                "lengthMenu": [10, 25, 50, 100],
+                columnDefs: [{
+                    orderable: false,
+                    className: 'select-checkbox',
+                    targets: 0
+                }],
+                select: {
+                    style: 'multi',
+                    selector: 'td:first-child'
+                },
+                order: [[1, 'asc']]
             });
         });
     </script>

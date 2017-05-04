@@ -263,7 +263,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="CustomCss\dataTables.select.min.js" />
     <Content Include="CustomCss\Role\index.css" />
+    <Content Include="CustomCss\select.dataTables.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
