@@ -1,7 +1,7 @@
 # DJLNET
 Web应用开发框架整合
 
-1、基于EntityFramework强耦合在框架内部，通过code first 自动生成以及迁移数据库，个人认为切换ORM实属搞笑，本身EF是支持跨数据库的 
+1、基于EntityFramework强耦合在框架内部，通过code first 自动生成以及迁移数据库,本身EF是支持跨数据库的 
 
 2、利用DbContext的延迟加载以及请求生命周期的效果，相当于把生命周期延迟等同于请求管道的生命周期，实现请求内一个数据库实力上下文，
    达到全局事务效果，具体参考 PreRequestLifeManager
