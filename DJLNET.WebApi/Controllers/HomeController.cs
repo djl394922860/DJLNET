@@ -1,13 +1,7 @@
 ﻿using DJLNET.ApplicationService.Interfaces;
-using DJLNET.Model.Models;
+using DJLNET.Model.Entities;
 using DJLNET.WebApi.Common;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Cors;
 
 namespace DJLNET.WebApi.Controllers
 {
@@ -16,31 +10,42 @@ namespace DJLNET.WebApi.Controllers
     /// </summary>
     public class HomeController : ApiControllerBase
     {
-        private readonly ICityService _cityService;
-        private readonly IPlatformService _platformService;
+        private readonly IUserService _userService;
+        private readonly IRoleService _roleService;
+        private readonly IPermissionService _permissionService;
 
-        public HomeController(ICityService cityService, IPlatformService platformService)
+        public HomeController(IUserService userService, IRoleService roleService, IPermissionService permissionService)
         {
-            this._cityService = cityService;
-            this._platformService = platformService;
+            this._userService = userService;
+            this._roleService = roleService;
+            this._permissionService = permissionService;
         }
 
         /// <summary>
-        /// 获取所有城市
+        /// 获取所有用户
         /// </summary>
         /// <returns>IEnumerable</returns>
-        public IEnumerable<City> GetAllCities()
+        public IEnumerable<User> GetAllUsers()
         {
-            return _cityService.GetAll();
+            return _userService.GetAll();
         }
 
         /// <summary>
-        /// 获取所有平台
+        /// 获取所有角色
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Platform> GetAllPlatforms()
+        public IEnumerable<Role> GetAllRoles()
         {
-            return _platformService.GetAll();
+            return _roleService.GetAll();
+        }
+
+        /// <summary>
+        /// 获取所有权限
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Permission> GetAllPermissions()
+        {
+            return _permissionService.GetAll();
         }
     }
 }

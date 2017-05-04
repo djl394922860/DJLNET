@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using DJLNET.Core.Paging;
 
 namespace DJLNET.Repository
 {
-    public abstract class BaseReadOnlyRepository<TEntity, TPrimaryKey> : IReadOnlyRepository<TEntity, TPrimaryKey>
+    public class BaseReadOnlyRepository<TEntity, TPrimaryKey> : IBaseReadOnlyRepository<TEntity, TPrimaryKey>
         where TEntity : GenericEntity<TPrimaryKey>, new()
     {
         public readonly IDbContext _context;
@@ -40,6 +42,21 @@ namespace DJLNET.Repository
         public TEntity Find(params object[] keyValues)
         {
             return this._context.Set<TEntity>().Find(keyValues);
+        }
+
+        public async Task<TEntity> GetByKeyAsync(TPrimaryKey key)
+        {
+            return await Task.Run(() => this._entities.FirstOrDefault(x => x.ID.Equals(key)));
+        }
+
+        public IQueryable<TEntity> TableNoTrack()
+        {
+            return this._context.Set<TEntity>().AsNoTracking();
+        }
+
+        public IPagedList<TEntity> PagingQuery<TKey>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TKey>> orderby, bool isDesc) where TKey : struct
+        {
+            return new PagedList<TEntity, TKey>(this._entities, condition, orderby, pageNum, pageSize, isDesc);
         }
     }
 }

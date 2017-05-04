@@ -29,12 +29,12 @@ namespace DJLNET.WebApi
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
+                name: "Default",
+                routeTemplate: "{controller}/{action}/{id}",
                 defaults: new
                 {
                     controller = "Home",
-                    action = "GetAllCities",
+                    action = "Index",
                     id = RouteParameter.Optional
                 }
             );

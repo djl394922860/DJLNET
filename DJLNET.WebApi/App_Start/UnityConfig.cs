@@ -48,17 +48,18 @@ namespace DJLNET.WebApi.App_Start
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new HierarchicalLifetimeManager());
 
-            container.RegisterType(typeof(IReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
-
-            container.RegisterType<ICityRepository, CityRepository>();
-            container.RegisterType<IPlatformRepository, PlatformRepository>();
+            container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
+            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IRoleRepository, RoleRepository>();
+            container.RegisterType<IPermissionRepository, PermissionRepository>();
+            container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>();
 
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
 
-
-
-            container.RegisterType<ICityService, CityService>();
-            container.RegisterType<IPlatformService, PlatormService>();
+            container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IRoleService, RoleService>();
+            container.RegisterType<IPermissionService, PermissionService>();
+            container.RegisterType<IEntityPermissionService, EntityPermissionService>();
         }
     }
 }

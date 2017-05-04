@@ -14,7 +14,7 @@ namespace DJLNET.EntityFramework
 
         static DJLNETDBContext()
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<DJLNETDBContext>());
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DJLNETDBContext>());
         }
 
         public DJLNETDBContext() : base($"name={_conn}")
@@ -24,6 +24,8 @@ namespace DJLNET.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // 移除表名复数
+            modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);
         }

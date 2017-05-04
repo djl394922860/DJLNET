@@ -1,32 +1,29 @@
 ﻿using AutoMapper;
 using DJLNET.ApplicationService.Interfaces;
-using DJLNET.WebCore;
+using DJLNET.WebCore.Mvc;
 using DJLNET.WebMvc.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace DJLNET.WebMvc.Controllers
 {
     public class ExcelTestController : ExcelController
     {
-        private ICityService _cityService;
+        private IUserService _userService;
         private IMapper _mapper;
 
-        public ExcelTestController(ICityService cityService, IMapper mapper)
+        public ExcelTestController(IUserService userService, IMapper mapper)
         {
-            this._cityService = cityService;
+            this._userService = userService;
             this._mapper = mapper;
         }
 
 
-        // GET: ExcelTest
+        [NonAction]
         public ActionResult Index()
         {
-            var cities = this._cityService.GetAll();
-            var models = this._mapper.Map<IEnumerable<PlatformViewModel>>(cities);
+            var cities = this._userService.GetAll();
+            var models = this._mapper.Map<IEnumerable<UserViewModel>>(cities);
             return Excel(models);
         }
     }

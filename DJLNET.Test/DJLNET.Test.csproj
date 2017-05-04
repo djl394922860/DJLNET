@@ -103,6 +103,10 @@
       <Project>{ebf07bc7-4467-4401-84e1-0312e3ecab7f}</Project>
       <Name>DJLNET.ApplicationService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DJLNET.Core\DJLNET.Core.csproj">
+      <Project>{96D3D88D-6B88-4C50-919D-1FEDE6E03735}</Project>
+      <Name>DJLNET.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DJLNET.EntityFramework\DJLNET.EntityFramework.csproj">
       <Project>{4B762A5E-7ADC-49EB-BCED-E089F9E2D484}</Project>
       <Name>DJLNET.EntityFramework</Name>

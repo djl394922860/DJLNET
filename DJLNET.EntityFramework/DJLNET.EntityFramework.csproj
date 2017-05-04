@@ -51,12 +51,10 @@
   <ItemGroup>
     <Compile Include="DJLNETDBContext.cs" />
     <Compile Include="IDbContext.cs" />
-    <Compile Include="Mappings\CityMapping.cs" />
-    <Compile Include="Mappings\PlatformMapping.cs" />
-    <Compile Include="Migrations\201704231544169_InitDb.cs" />
-    <Compile Include="Migrations\201704231544169_InitDb.Designer.cs">
-      <DependentUpon>201704231544169_InitDb.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Mappings\PermissionMapping.cs" />
+    <Compile Include="Mappings\RoleMapping.cs" />
+    <Compile Include="Mappings\EntityPermissionMapping.cs" />
+    <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -71,11 +69,6 @@
       <Project>{D9348CEA-54FB-48A5-8BB8-8C8B6B9122FF}</Project>
       <Name>DJLNET.Model</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704231544169_InitDb.resx">
-      <DependentUpon>201704231544169_InitDb.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
