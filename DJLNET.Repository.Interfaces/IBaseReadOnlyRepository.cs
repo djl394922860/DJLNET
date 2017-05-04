@@ -1,4 +1,5 @@
-﻿using DJLNET.Model;
+﻿using DJLNET.Core.Paging;
+using DJLNET.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,6 @@ namespace DJLNET.Repository.Interfaces
 
         IQueryable<TEntity> TableNoTrack();
 
-        IQueryable<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct;
+        IPagedList<TEntity> PagingQuery<TKey>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TKey>> orderby, bool isDesc) where TKey : struct;
     }
 }

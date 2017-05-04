@@ -19,7 +19,7 @@ namespace DJLNET.WebMvc.Controllers
         }
 
 
-        // GET: ExcelTest
+        [NonAction]
         public ActionResult Index()
         {
             var cities = this._userService.GetAll();

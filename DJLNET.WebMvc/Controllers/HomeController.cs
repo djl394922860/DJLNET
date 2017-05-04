@@ -34,7 +34,7 @@ namespace DJLNET.WebMvc.Controllers
                 return View(model);
             }
             FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe, FormsAuthentication.FormsCookiePath);
-            return RedirectToAction($"{nameof(Index)}");
+            return RedirectToAction(nameof(Index));
         }
 
         [LoginAuthentication]

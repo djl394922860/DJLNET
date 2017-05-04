@@ -62,6 +62,8 @@
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\NullLogger.cs" />
     <Compile Include="Helper\MD5Helper.cs" />
+    <Compile Include="Paging\IPagedList.cs" />
+    <Compile Include="Paging\PagedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceContainer.cs" />
     <Compile Include="Extension\StringExtensions.cs" />

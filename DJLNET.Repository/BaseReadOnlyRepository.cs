@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
+using DJLNET.Core.Paging;
 
 namespace DJLNET.Repository
 {
@@ -53,19 +54,9 @@ namespace DJLNET.Repository
             return this._context.Set<TEntity>().AsNoTracking();
         }
 
-        public IQueryable<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        public IPagedList<TEntity> PagingQuery<TKey>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TKey>> orderby, bool isDesc) where TKey : struct
         {
-            var query = this._entities.Where(condition);
-            if (isDesc)
-            {
-                query = query.OrderByDescending(orderby);
-            }
-            else
-            {
-                query = query.OrderBy(orderby);
-            }
-            query = query.Skip((pageNum - 1) * pageSize).Take(pageSize);
-            return query;
+            return new PagedList<TEntity, TKey>(this._entities, condition, orderby, pageNum, pageSize, isDesc);
         }
     }
 }

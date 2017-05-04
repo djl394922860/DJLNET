@@ -147,12 +147,14 @@
 
     @Scripts.Render("~/bundles/jqueryvalidate")
 
-    @*MiniProfiler配置*@
-    @MiniProfiler.RenderIncludes()
-
     <script src="~/Content/Ace/aceinit.js"></script>
 
     @RenderSection(name: "footer", required: false)
+
+    @*MiniProfiler配置*@
+    @MiniProfiler.RenderIncludes()
+
+
 
 </body>
 </html>

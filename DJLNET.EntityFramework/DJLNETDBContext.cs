@@ -24,6 +24,7 @@ namespace DJLNET.EntityFramework
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // 移除表名复数
             modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
             base.OnModelCreating(modelBuilder);

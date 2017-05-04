@@ -49,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DJLNET.Core\DJLNET.Core.csproj">
+      <Project>{96D3D88D-6B88-4C50-919D-1FEDE6E03735}</Project>
+      <Name>DJLNET.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DJLNET.Model\DJLNET.Model.csproj">
       <Project>{D9348CEA-54FB-48A5-8BB8-8C8B6B9122FF}</Project>
       <Name>DJLNET.Model</Name>

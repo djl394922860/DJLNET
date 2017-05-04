@@ -41,9 +41,10 @@
 
     @Scripts.Render("~/bundles/jqueryvalidate")
 
+    @RenderSection(name: "footer", required: false)
+
     @*MiniProfiler配置*@
     @MiniProfiler.RenderIncludes();
 
-    @RenderSection(name: "footer", required: false)
 </body>
 </html>

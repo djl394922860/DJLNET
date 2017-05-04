@@ -1,0 +1,38 @@
+﻿.breadcrumb {
+    margin-bottom: 10px;
+}
+
+.page-header {
+    margin: 0px 0 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid green;
+}
+
+.page-body .dataTables_wrapper .row:first-child {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: ghostwhite;
+}
+
+.page-body .dataTables_wrapper .row:last-child {
+    padding-top: 10px;
+    padding-bottom: 0;
+    background-color: ghostwhite;
+}
+
+.page-body div.dataTables_wrapper div.dataTables_info {
+    padding-top: 0;
+}
+
+.page-body .dataTable th.sorting_asc:after {
+    top: 10px;
+}
+
+.page-body .dataTable th.sorting_desc:after {
+    top: 10px;
+}
+
+.page-body {
+    font-size: 15px;
+    font-family: Consolas;
+}

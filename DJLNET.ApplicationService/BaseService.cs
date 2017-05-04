@@ -8,6 +8,7 @@ using DJLNET.ApplicationService.Interfaces;
 using DJLNET.Model;
 using DJLNET.UnitOfWork;
 using DJLNET.Repository.Interfaces;
+using DJLNET.Core.Paging;
 
 namespace DJLNET.ApplicationService
 {
@@ -93,14 +94,14 @@ namespace DJLNET.ApplicationService
             return await Task.Run(() => _baseReadOnlyRepository.Table().Where(predicate).ToList() ?? new List<TEntity>());
         }
 
-        public IEnumerable<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        public IPagedList<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
         {
-            return _baseReadOnlyRepository.PagingQuery(condition, pageNum, pageSize, orderby, isDesc).ToList() ?? new List<TEntity>();
+            return _baseReadOnlyRepository.PagingQuery(condition, pageNum, pageSize, orderby, isDesc);
         }
 
-        public async Task<IEnumerable<TEntity>> PagingQueryAsync<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        public async Task<IPagedList<TEntity>> PagingQueryAsync<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
         {
-            return await Task.Run(() => _baseReadOnlyRepository.PagingQuery(condition, pageNum, pageSize, orderby, isDesc).ToList() ?? new List<TEntity>());
+            return await Task.Run(() => _baseReadOnlyRepository.PagingQuery(condition, pageNum, pageSize, orderby, isDesc));
         }
         #endregion
     }
