@@ -29,35 +29,30 @@ namespace DJLNET.ApplicationService
         public void Add(TEntity entity)
         {
             _unitOfWork.Add(entity);
+            _unitOfWork.SaveChanges();
         }
 
         public void AddRang(IEnumerable<TEntity> entities)
         {
             _unitOfWork.AddRang(entities);
-        }
-
-        public int Commit()
-        {
-            return _unitOfWork.SaveChanges();
-        }
-
-        public async Task<int> CommitAync()
-        {
-            return await _unitOfWork.SaveChangesAync();
+            _unitOfWork.SaveChanges();
         }
 
         public void Delete(TEntity entity)
         {
             _unitOfWork.Delete(entity);
+            _unitOfWork.SaveChanges();
         }
 
         public void DeleteRang(IEnumerable<TEntity> entities)
         {
             _unitOfWork.DeleteRang(entities);
+            _unitOfWork.SaveChanges();
         }
         public void Update(TEntity entity)
         {
             _unitOfWork.Update(entity);
+            _unitOfWork.SaveChanges();
         }
         #endregion
 
