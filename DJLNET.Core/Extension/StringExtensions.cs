@@ -48,5 +48,13 @@ namespace DJLNET.Core.Extension
         {
             return input.TrimStart(trimString).TrimEnd(trimString);
         }
+
+
+        public static string FirstCharToUpper(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                throw new ArgumentException(nameof(input));
+            return input.First().ToString().ToUpper() + input.Substring(1);
+        }
     }
 }

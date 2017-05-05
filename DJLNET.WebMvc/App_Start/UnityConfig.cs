@@ -51,18 +51,18 @@ namespace DJLNET.WebMvc.App_Start
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new PerRequestLifetimeManager());
 
-            container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
-            container.RegisterType<IUserRepository, UserRepository>();
-            container.RegisterType<IRoleRepository, RoleRepository>();
-            container.RegisterType<IPermissionRepository, PermissionRepository>();
-            container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>();
+            container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>), new PerRequestLifetimeManager());
+            container.RegisterType<IUserRepository, UserRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IRoleRepository, RoleRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IPermissionRepository, PermissionRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>(new PerRequestLifetimeManager());
 
-            container.RegisterType<IUnitOfWork, EfUnitOfWork>();
+            container.RegisterType<IUnitOfWork, EfUnitOfWork>(new PerRequestLifetimeManager());
 
-            container.RegisterType<IUserService, UserService>();
-            container.RegisterType<IRoleService, RoleService>();
-            container.RegisterType<IPermissionService, PermissionService>();
-            container.RegisterType<IEntityPermissionService, EntityPermissionService>();
+            container.RegisterType<IUserService, UserService>(new PerRequestLifetimeManager());
+            container.RegisterType<IRoleService, RoleService>(new PerRequestLifetimeManager());
+            container.RegisterType<IPermissionService, PermissionService>(new PerRequestLifetimeManager());
+            container.RegisterType<IEntityPermissionService, EntityPermissionService>(new PerRequestLifetimeManager());
             // automapper ×¢Èë
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass && t.IsSubclassOf(typeof(Profile)));
 

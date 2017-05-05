@@ -24,6 +24,10 @@ namespace DJLNET.ApplicationService.Interfaces
 
         IPagedList<TEntity> PagingQuery<TKey>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TKey>> orderby, bool isDesc) where TKey : struct;
 
+        IPagedList<TEntity> PagingQuery(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, string orderbyName, bool isDesc);
+
+        Task<IPagedList<TEntity>> PagingQueryAsync(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, string orderbyName, bool isDesc);
+
         Task<IPagedList<TEntity>> PagingQueryAsync<TKey>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TKey>> orderby, bool isDesc) where TKey : struct;
     }
 }

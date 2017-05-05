@@ -3,9 +3,7 @@
 }
 
 @section header{
-    <link href="http://cdn.bootcss.com/datatables/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
-    <link href="~/CustomCss/Role/index.css" rel="stylesheet" />
-    <link href="~/CustomCss/select.dataTables.min.css" rel="stylesheet" />
+
 }
 
 <div class="page-header">
@@ -18,85 +16,136 @@
     </h1>
 </div>
 
-<div class="page-body row">
-    <div class="nav navbar-default">
-        <div class="navbar-left navbar-btn">
-            <button type="button" class="btn btn-primary">添加</button>
-            <button type="button" class="btn btn-primary">修改</button>
-            <button type="button" class="btn btn-danger">删除</button>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="col-xs-3">
+            <div class="btn-group-sm">
+                <input type="button" class="btn btn-primary btn-sm" value="添加" />
+            </div>
         </div>
-        <div class="navbar-right">
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="搜索">
-                </div>
-                <button type="button" class="btn btn-success">搜索</button>
-            </form>
+        <div class="col-xs-offset-6">
+            <input id="name" type="search" class="search-box" placeholder="角色名字..." />
+            <input id="search" type="button" class="btn btn-sm btn-warning" value="搜索" />
         </div>
-    </div>
-    <div class="col-md-12">
-            <table id="role_table" class="table table-hover table-bordered" cellspacing="0" width="100%">
+
+        <div class="table-responsive">
+            <table id="role-table" data-name="role-table" class="table table-bordered table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th data-orderable="false" data-visible="true" class="center">
+                            <label>
+                                <input type="checkbox" class="ace" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th data-name="Id" data-searchable="false" data-data="Id" data-visible="false" data-orderable="false">Id</th>
+                        <th data-name="name" data-searchable="false" data-data="name">角色名</th>
+                        <th data-name="isActive" data-searchable="false" data-data="isActive" class="hidden-480">激活</th>
+                        <th data-name="updatedTime" data-searchable="false" data-data="updatedTime">
+                            <i class="icon-time bigger-110 hidden-480"></i>
+                            更新时间
+                        </th>
+                        <th data-name="updatedBy" data-searchable="false" data-data="updatedBy">
+                            <i class="icon-edit bigger-110 hidden-480"></i>
+                            更新人
+                        </th>
+                        <th data-name="createdTime" data-searchable="false" data-data="createdTime">
+                            <i class="icon-time bigger-110 hidden-480"></i>
+                            创建时间
+                        </th>
+                        <th data-name="createdBy" data-searchable="false" data-data="createdBy">
+                            <i class="icon-info bigger-110 hidden-480"></i>
+                            创建人
+                        </th>
+                        <th data-orderable="false" class="center">操作</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>2011/04/25</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>2011/07/25</td>
-                        <td>$170,750</td>
-                    </tr>
             </table>
         </div>
+    </div>
 </div>
 
 @section footer{
     <script src="http://cdn.bootcss.com/datatables/1.10.15/js/jquery.dataTables.min.js"></script>
-    <script src="http://cdn.bootcss.com/datatables/1.10.15/js/dataTables.bootstrap.js"></script>
-    <script src="~/CustomCss/dataTables.select.min.js"></script>
+    <script src="~/Content/Ace/assets/js/jquery.dataTables.bootstrap.js"></script>
     <script type="text/javascript">
-        $(function () {
+        jQuery(function ($) {
             $.extend($.fn.dataTable.defaults, {
-                searching: false
+                "processing": true,//加载中
+                "serverSide": true,//服务器模式（★★★★★重要，本文主要介绍服务器模式）
+                "searching": false,//datatables自带的搜索
+                "pagingType": "full_numbers",//分页模式
+                "ajax": {
+                    "type": "POST",//（★★★★★重要）
+                    "contentType": "application/json; charset=utf-8"
+                },
+                "language": {
+                    "processing": "加载中...",
+                    "lengthMenu": "每页显示 _MENU_ 条数据",
+                    "zeroRecords": "没有匹配结果",
+                    "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                    "infoPostFix": "",
+                    "search": "搜索:",
+                    "url": "",
+                    "emptyTable": "没有匹配结果",
+                    "loadingRecords": "载入中...",
+                    "thousands": ",",
+                    "paginate": {
+                        "first": "首页",
+                        "previous": "上一页",
+                        "next": "下一页",
+                        "last": "末页"
+                    },
+                    "aria": {
+                        "sortAscending": ": 以升序排列此列",
+                        "sortDescending": ": 以降序排列此列"
+                    }
+                }
             });
 
-            $('#role_table').dataTable({
-                "language": {
-                    "url": "/CustomCss/chinese.json"
+            var roleTable = $('#role-table').DataTable({
+                "ajax": {
+                    "url": "@Url.Action("GetPagingData")",
+                    "data": function (data) {
+                        data.Name = $("#name").val();//此处是添加额外的请求参数
+                        return JSON.stringify(data);
+                    }
                 },
-                "lengthMenu": [10, 25, 50, 100],
-                columnDefs: [{
-                    orderable: false,
-                    className: 'select-checkbox',
-                    targets: 0
+                "columnDefs": [{
+                    "targets": 1,
+                    render: function (data, type, full, meta) {
+                        return '<lable><input type="checkbox" class="ace" /><span class="lbl"></span></label>';
+                    }
+                },
+                {
+                    "targets": -1,
+                    render: function (data, type, full, meta) {
+                        return
+                        '<a class="btn btn-sm btn-info" href="javascript:;">查看<i class="fa fa-cogs"></i></a>' +
+                        '<a class="btn btn-sm btn-info" href="javascript:;">修改<i class="fa fa-trash"></i></a>' +
+                        '<a class="btn btn-sm btn-info" href="javascript:;">删除<i class="fa fa-trash"></i></a>' +
+                        '<a class="btn btn-sm btn-info" href="javascript:;">授权<i class="fa fa-trash"></i></a>';
+                    }
                 }],
-                select: {
-                    style: 'multi',
-                    selector: 'td:first-child'
-                },
-                order: [[1, 'asc']]
+                "order": [[4, "desc"]]
             });
-        });
+
+            $("#search").click(function () {
+                roleTable.api().ajax.reload();
+            });
+
+            $('table th input:checkbox').on('click', function () {
+                var that = this;
+                $(this).closest('table').find('tr > td:first-child input:checkbox')
+                .each(function () {
+                    this.checked = that.checked;
+                    $(this).closest('tr').toggleClass('selected');
+                });
+            });
+
+        })
     </script>
 
 }

@@ -48,18 +48,18 @@ namespace DJLNET.WebApi.App_Start
 
             container.RegisterType<IDbContext, DJLNETDBContext>(new HierarchicalLifetimeManager());
 
-            container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
-            container.RegisterType<IUserRepository, UserRepository>();
-            container.RegisterType<IRoleRepository, RoleRepository>();
-            container.RegisterType<IPermissionRepository, PermissionRepository>();
-            container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>();
+            container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>), new HierarchicalLifetimeManager());
+            container.RegisterType<IUserRepository, UserRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IRoleRepository, RoleRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IPermissionRepository, PermissionRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>(new HierarchicalLifetimeManager());
 
-            container.RegisterType<IUnitOfWork, EfUnitOfWork>();
+            container.RegisterType<IUnitOfWork, EfUnitOfWork>(new HierarchicalLifetimeManager());
 
-            container.RegisterType<IUserService, UserService>();
-            container.RegisterType<IRoleService, RoleService>();
-            container.RegisterType<IPermissionService, PermissionService>();
-            container.RegisterType<IEntityPermissionService, EntityPermissionService>();
+            container.RegisterType<IUserService, UserService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IRoleService, RoleService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IPermissionService, PermissionService>(new HierarchicalLifetimeManager());
+            container.RegisterType<IEntityPermissionService, EntityPermissionService>(new HierarchicalLifetimeManager());
         }
     }
 }

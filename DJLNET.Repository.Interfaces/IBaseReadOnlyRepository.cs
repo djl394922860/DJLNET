@@ -28,7 +28,5 @@ namespace DJLNET.Repository.Interfaces
         IQueryable<TEntity> Table();
 
         IQueryable<TEntity> TableNoTrack();
-
-        IPagedList<TEntity> PagingQuery<TKey>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TKey>> orderby, bool isDesc) where TKey : struct;
     }
 }

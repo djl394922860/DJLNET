@@ -10,6 +10,6 @@ namespace DJLNET.Core.Paging
     {
         int Total { get; }
 
-        IQueryable<T> Rows { get; }
+        IReadOnlyList<T> Rows { get; }
     }
 }

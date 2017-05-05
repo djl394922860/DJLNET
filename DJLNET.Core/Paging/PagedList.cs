@@ -9,8 +9,8 @@ namespace DJLNET.Core.Paging
 {
     public class PagedList<T, TKey> : IPagedList<T> where T : class, new() where TKey : struct
     {
-        private IQueryable<T> origin;
-        private IQueryable<T> query;
+        private int _total;
+        private IReadOnlyList<T> _list;
 
         public PagedList(IQueryable<T> source, Expression<Func<T, bool>> condition, Expression<Func<T, TKey>> orderby, int pageNumber, int pageSize, bool isDesc)
         {
@@ -24,28 +24,23 @@ namespace DJLNET.Core.Paging
                 throw new ArgumentNullException(nameof(orderby));
             if (condition != null)
             {
-                this.origin = source.Where(condition);
-                this.query = source.Where(condition);
+                source = source.Where(condition);
             }
-            else
-            {
-                this.origin = source;
-                this.query = source;
-            }
+            _total = source.Count();
             if (isDesc)
             {
-                this.query = query.OrderByDescending(orderby);
+                source = source.OrderByDescending(orderby);
             }
             else
             {
-                this.query = query.OrderBy(orderby);
+                source = source.OrderBy(orderby);
             }
-            this.query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+            this._list = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
         }
 
-        public IQueryable<T> Rows => this.query;
+        public IReadOnlyList<T> Rows => this._list ?? new List<T>(0);
 
 
-        public int Total => this.origin.Count();
+        public int Total => this._total;
     }
 }
