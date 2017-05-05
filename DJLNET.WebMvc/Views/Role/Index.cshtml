@@ -32,7 +32,7 @@
             <table id="role-table" data-name="role-table" class="table table-bordered table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th data-orderable="false" class="center">
+                        <th data-searchable="false" data-orderable="false" class="center">
                             <label>
                                 <input type="checkbox" class="ace" />
                                 <span class="lbl"></span>
@@ -57,7 +57,7 @@
                             <i class="icon-info bigger-110 hidden-480"></i>
                             创建人
                         </th>
-                        <th data-orderable="false" class="center">操作</th>
+                        <th data-orderable="false" data-searchable="false" class="center">操作</th>
                     </tr>
                 </thead>
             </table>
@@ -74,7 +74,7 @@
                 "processing": true,//加载中
                 "serverSide": true,//服务器模式（★★★★★重要，本文主要介绍服务器模式）
                 "searching": false,//datatables自带的搜索
-                "pagingType": "full_numbers",//分页模式
+                //"pagingType": "full_numbers",//分页模式
                 "ajax": {
                     "type": "POST",//（★★★★★重要）
                     "contentType": "application/json; charset=utf-8"
@@ -122,10 +122,10 @@
                 {
                     "targets": -1,
                     render: function (data, type, full, meta) {
-                        return '<a class="btn btn-sm btn-info" href="javascript:;">查看<i class="fa fa-cogs"></i></a>  ' +
-                               '<a class="btn btn-sm btn-warning" href="javascript:;">编辑<i class="fa fa-cogs"></i></a>  '+
-                               '<a class="btn btn-sm btn-danger" href="javascript:;">删除<i class="fa fa-cogs"></i></a>  '+
-                               '<a class="btn btn-sm btn-success" href="javascript:;">授权<i class="fa fa-cogs"></i></a>  ';
+                        return '<a class="btn btn-sm btn-info" href="javascript:;">查看<i class="fa fa-cogs"></i></a> ' +
+                               '<a class="btn btn-sm btn-warning" href="javascript:;">编辑<i class="fa fa-cogs"></i></a> '+
+                               '<a class="btn btn-sm btn-danger" href="javascript:;">删除<i class="fa fa-cogs"></i></a> '+
+                               '<a class="btn btn-sm btn-success" href="javascript:;">授权<i class="fa fa-cogs"></i></a>';
                     }
                 }],
                 "order": [[4, "desc"]]

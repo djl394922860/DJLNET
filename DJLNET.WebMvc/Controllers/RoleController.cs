@@ -32,8 +32,7 @@ namespace DJLNET.WebMvc.Controllers
             Expression<Func<Role, bool>> condition = null;
             if (!string.IsNullOrWhiteSpace(query.Name))
                 condition = x => x.Name.Contains(query.Name);
-            int pageNum = query.Start / query.Length;
-            if (pageNum == 0) pageNum = 1;
+            int pageNum = (query.Start / query.Length) + 1;
             IPagedList<Role> data = _service.PagingQuery(condition, pageNum, query.Length, query.OrderBy, query.OrderDir == DataTablesOrderDir.Desc);
 
             var count = data.Total;
