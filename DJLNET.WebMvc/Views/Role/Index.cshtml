@@ -32,13 +32,13 @@
             <table id="role-table" data-name="role-table" class="table table-bordered table-hover table-responsive">
                 <thead>
                     <tr>
-                        <th data-orderable="false" data-visible="true" class="center">
+                        <th data-orderable="false" class="center">
                             <label>
                                 <input type="checkbox" class="ace" />
                                 <span class="lbl"></span>
                             </label>
                         </th>
-                        <th data-name="Id" data-searchable="false" data-data="Id" data-visible="false" data-orderable="false">Id</th>
+                        <th data-name="id" data-searchable="false" data-data="id" data-visible="false" data-orderable="false">Id</th>
                         <th data-name="name" data-searchable="false" data-data="name">角色名</th>
                         <th data-name="isActive" data-searchable="false" data-data="isActive" class="hidden-480">激活</th>
                         <th data-name="updatedTime" data-searchable="false" data-data="updatedTime">
@@ -114,19 +114,18 @@
                     }
                 },
                 "columnDefs": [{
-                    "targets": 1,
+                    "targets": 0,
                     render: function (data, type, full, meta) {
-                        return '<lable><input type="checkbox" class="ace" /><span class="lbl"></span></label>';
+                        return '<div class="center"><lable><input type="checkbox" class="ace" /><span class="lbl"></span></label></div>';
                     }
                 },
                 {
                     "targets": -1,
                     render: function (data, type, full, meta) {
-                        return
-                        '<a class="btn btn-sm btn-info" href="javascript:;">查看<i class="fa fa-cogs"></i></a>' +
-                        '<a class="btn btn-sm btn-info" href="javascript:;">修改<i class="fa fa-trash"></i></a>' +
-                        '<a class="btn btn-sm btn-info" href="javascript:;">删除<i class="fa fa-trash"></i></a>' +
-                        '<a class="btn btn-sm btn-info" href="javascript:;">授权<i class="fa fa-trash"></i></a>';
+                        return '<a class="btn btn-sm btn-info" href="javascript:;">查看<i class="fa fa-cogs"></i></a>  ' +
+                               '<a class="btn btn-sm btn-warning" href="javascript:;">编辑<i class="fa fa-cogs"></i></a>  '+
+                               '<a class="btn btn-sm btn-danger" href="javascript:;">删除<i class="fa fa-cogs"></i></a>  '+
+                               '<a class="btn btn-sm btn-success" href="javascript:;">授权<i class="fa fa-cogs"></i></a>  ';
                     }
                 }],
                 "order": [[4, "desc"]]
