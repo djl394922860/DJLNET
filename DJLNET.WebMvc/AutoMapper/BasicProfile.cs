@@ -9,6 +9,7 @@ namespace DJLNET.WebMvc.AutoMapper
         public BasicProfile()
         {
             this.CreateMap<User, UserViewModel>();
+            this.CreateMap<Role, RoleViewModel>();
         }
     }
 }

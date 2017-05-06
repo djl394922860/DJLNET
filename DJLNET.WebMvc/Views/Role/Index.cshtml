@@ -15,21 +15,24 @@
         </small>
     </h1>
 </div>
-
-<div class="row">
+<div class="row red">
+    <div class="col-md-10">
+        <div class="btn-group-sm">
+            <input type="button" class="btn btn-warning btn-sm" value="添加" />
+        </div>
+    </div>
+    <div class="col-md-2">
+        <input id="name" type="search" class="search-box" placeholder="角色名字..." />
+        <input id="search" type="button" class="btn btn-sm btn-warning" value="搜索" />
+    </div>
+</div>
+<div class="page-body page-boxed row">
     <div class="col-xs-12">
-        <div class="col-xs-10">
-            <div class="btn-group-sm">
-                <input type="button" class="btn btn-primary btn-sm" value="添加" />
-            </div>
+        <div class="table-header" style="width:100%;">
+            角色清单列表
         </div>
-        <div class="col-xs-2">
-            <input id="name" type="search" class="search-box" placeholder="角色名字..." />
-            <input id="search" type="button" class="btn btn-sm btn-warning" value="搜索" />
-        </div>
-
         <div class="table-responsive">
-            <table id="role-table" data-name="role-table" class="table table-bordered table-hover table-responsive">
+            <table style="width:100%;" id="role-table" data-name="role-table" class="table table-bordered table-hover table-responsive">
                 <thead>
                     <tr>
                         <th data-searchable="false" data-orderable="false" class="center">
@@ -63,6 +66,110 @@
             </table>
         </div>
     </div>
+</div>
+
+<div id="modal-table" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="role manager">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header no-padding">
+                <div class="table-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <span class="white">&times;</span>
+                    </button>
+                    当前角色权限清单
+                </div>
+            </div>
+
+            <div class="modal-body no-padding">
+                <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                    <thead>
+                        <tr>
+                            <th>分类名称</th>
+                            <th>权限配置</th>
+                            <th style="text-align:center;">全选</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>
+                                用户管理
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">查看</span>
+                                    </label>
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">添加</span>
+                                    </label>
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">修改</span>
+                                    </label>
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">删除</span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="center">
+                                <label class="green">
+                                    <input type="checkbox" class="check-all ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                相册管理
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">查看</span>
+                                    </label>
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">添加</span>
+                                    </label>
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">修改</span>
+                                    </label>
+                                    <label class="green">
+                                        <input type="checkbox" class="ace" />
+                                        <span class="lbl">删除</span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="center">
+                                <label class="green">
+                                    <input type="checkbox" class="check-all ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer no-margin-top">
+                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                    <i class="icon-remove"></i>
+                    取消
+                </button>
+                <button class="btn btn-sm btn-success pull-right" data-dismiss="modal">
+                    <i class="icon-edit"></i>
+                    保存
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 
 @section footer{
@@ -122,10 +229,10 @@
                 {
                     "targets": -1,
                     render: function (data, type, full, meta) {
-                        return '<a class="btn btn-sm btn-info" href="javascript:;">查看<i class="fa fa-cogs"></i></a> ' +
-                               '<a class="btn btn-sm btn-warning" href="javascript:;">编辑<i class="fa fa-cogs"></i></a> ' +
-                               '<a class="btn btn-sm btn-danger" href="javascript:;">删除<i class="fa fa-cogs"></i></a> ' +
-                               '<a class="btn btn-sm btn-success" href="javascript:;">授权<i class="fa fa-cogs"></i></a>';
+                        return '<a class="btn btn-sm btn-info" style="margin-right:10px;" href="javascript:;">查看<i class="fa fa-cogs"></i></a> ' +
+                               '<a class="btn btn-sm btn-warning" style="margin-right:10px;" href="javascript:;">编辑<i class="fa fa-cogs"></i></a> ' +
+                               '<a class="btn btn-sm btn-danger" style="margin-right:10px;" href="javascript:;">删除<i class="fa fa-cogs"></i></a> ' +
+                               '<a class="btn btn-sm btn-success" href="#modal-table" role="button" data-toggle="modal">授权<i class="fa fa-cogs"></i></a>';
                     }
                 },
                 {
@@ -138,7 +245,7 @@
                         }
                     }
                 }],
-                "order": [[4, "desc"]],
+                "order": [[2, "asc"]],
                 autoFill: true
             });
 
@@ -161,6 +268,36 @@
                 });
             });
 
+            $('#modal-table').on('show.bs.modal', function () {
+                // ajax role permissions
+                alert('open dialog');
+            });
+
+            $('#modal-table .check-all').on('change', function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $this.closest('tr').find('input:checkbox').each(function () {
+                        $(this).prop('checked', true);
+                    });
+                } else {
+                    $this.closest('tr').find('input:checkbox').each(function () {
+                        $(this).prop('checked', false);
+                    });
+                }
+            });
+
+            $('#modal-table .btn-group input:checkbox').on('change', function () {
+                var that = $(this);
+                var checkAll = true;
+                that.closest('td').find('input:checkbox').each(function () {
+                    if (!$(this).is(':checked')) {
+                        checkAll = false;
+                        return;
+                    }
+                });
+                if (checkAll)
+                    that.closest('tr').find('td:last').find('input:checkbox').prop('checked', true);
+            });
         })
     </script>
 

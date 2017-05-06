@@ -2621,6 +2621,7 @@
     <Compile Include="Models\DataTablesResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RoleQuery.cs" />
+    <Compile Include="Models\RoleViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
