@@ -25,21 +25,16 @@ namespace DJLNET.Repository
             this._entities = context.Set<TEntity>();
         }
 
-        public virtual TEntity GetByKey(TPrimaryKey key)
+        private static Dictionary<string, Expression<Func<TEntity, bool>>> _cacheExpression;
+
+        private Expression<Func<TEntity, bool>> GetPrimaryExpressionCache(TPrimaryKey key)
         {
-            Expression<Func<TEntity, bool>> asd = w => w.ID.Equals(key);
-
-            // x=>x.ID==key
-
+            var typeName = typeof(TEntity).FullName;
+            if (_cacheExpression.ContainsKey(typeName))
+                return _cacheExpression[typeName];
             var param = Expression.Parameter(typeof(TEntity), "x");
 
             var prop = Expression.Property(param, nameof(GenericEntity<TPrimaryKey>.ID));
-
-            var methods = typeof(TPrimaryKey).GetMethods();
-            foreach (var item in methods)
-            {
-                System.Diagnostics.Debug.WriteLine(item.Name);
-            }
 
             var method = typeof(TPrimaryKey).GetMethods().Last(x => x.Name == "Equals");
 
@@ -47,11 +42,15 @@ namespace DJLNET.Repository
 
             var body = Expression.Call(prop, method, constant);
 
-            var fk = Expression.Lambda<Func<TEntity, bool>>(body, param);
+            var exp = Expression.Lambda<Func<TEntity, bool>>(body, param);
+            _cacheExpression.Add(typeName, exp);
+            return exp;
+        }
 
-            return _entities.FirstOrDefault(fk);
-
-            //return _entities.FirstOrDefault(x => x.ID.Equals((TPrimaryKey)key));
+        public virtual TEntity GetByKey(TPrimaryKey key)
+        {
+            var exp = GetPrimaryExpressionCache(key);
+            return _entities.FirstOrDefault(exp);
         }
 
         public virtual IQueryable<TEntity> Table()
@@ -71,7 +70,7 @@ namespace DJLNET.Repository
 
         public virtual async Task<TEntity> GetByKeyAsync(TPrimaryKey key)
         {
-            return await Task.Run(() => this._entities.FirstOrDefault(x => x.ID.Equals(key)));
+            return await Task.Run(() => this._entities.FirstOrDefault(GetPrimaryExpressionCache(key)));
         }
 
         public virtual IQueryable<TEntity> TableNoTrack()

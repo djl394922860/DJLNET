@@ -59,7 +59,7 @@ namespace DJLNET.ApplicationService
         #region Read
         public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return _baseReadOnlyRepository.Table().Where(predicate).ToList() ?? new List<TEntity>();
+            return _baseReadOnlyRepository.TableNoTrack().Where(predicate).ToList() ?? new List<TEntity>();
         }
 
         public virtual TEntity Get(TPrimaryKey key)
@@ -69,7 +69,7 @@ namespace DJLNET.ApplicationService
 
         public virtual IEnumerable<TEntity> GetAll()
         {
-            return _baseReadOnlyRepository.Table().ToList() ?? new List<TEntity>();
+            return _baseReadOnlyRepository.TableNoTrack().ToList() ?? new List<TEntity>();
         }
 
         public virtual async Task<TEntity> GetAsync(TPrimaryKey key)
@@ -79,12 +79,12 @@ namespace DJLNET.ApplicationService
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await Task.Run(() => _baseReadOnlyRepository.Table().ToList() ?? new List<TEntity>());
+            return await Task.Run(() => _baseReadOnlyRepository.TableNoTrack().ToList() ?? new List<TEntity>());
         }
 
         public virtual async Task<IEnumerable<TEntity>> FindAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.Run(() => _baseReadOnlyRepository.Table().Where(predicate).ToList() ?? new List<TEntity>());
+            return await Task.Run(() => _baseReadOnlyRepository.TableNoTrack().Where(predicate).ToList() ?? new List<TEntity>());
         }
 
         public virtual IPagedList<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
