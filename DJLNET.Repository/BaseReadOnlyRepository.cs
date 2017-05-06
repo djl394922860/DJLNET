@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using DJLNET.Core.Paging;
+using DJLNET.Core.Extension;
 
 namespace DJLNET.Repository
 {
@@ -26,7 +27,31 @@ namespace DJLNET.Repository
 
         public virtual TEntity GetByKey(TPrimaryKey key)
         {
-            return _entities.FirstOrDefault(x => x.ID.Equals(key));
+            Expression<Func<TEntity, bool>> asd = w => w.ID.Equals(key);
+
+            // x=>x.ID==key
+
+            var param = Expression.Parameter(typeof(TEntity), "x");
+
+            var prop = Expression.Property(param, nameof(GenericEntity<TPrimaryKey>.ID));
+
+            var methods = typeof(TPrimaryKey).GetMethods();
+            foreach (var item in methods)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Name);
+            }
+
+            var method = typeof(TPrimaryKey).GetMethods().Last(x => x.Name == "Equals");
+
+            var constant = Expression.Constant(key, typeof(TPrimaryKey));
+
+            var body = Expression.Call(prop, method, constant);
+
+            var fk = Expression.Lambda<Func<TEntity, bool>>(body, param);
+
+            return _entities.FirstOrDefault(fk);
+
+            //return _entities.FirstOrDefault(x => x.ID.Equals((TPrimaryKey)key));
         }
 
         public virtual IQueryable<TEntity> Table()

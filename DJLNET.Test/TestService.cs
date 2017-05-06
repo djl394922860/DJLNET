@@ -40,6 +40,12 @@ namespace DJLNET.Test
             _userService.Add(new Model.Entities.User() { Name = "djlnet11", Password = MD5Helper.GetMD5("123456") });
         }
 
+        [Fact]
+        public void TestGetRole()
+        {
+            var role = container.Resolve<IRoleService>().Get(1);
+            System.Console.WriteLine(role.Name);
+        }
 
         [Fact]
         public void TestAddRangRoles()
