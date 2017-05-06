@@ -63,6 +63,7 @@
     <Compile Include="Extension\ExpressionExtensions.cs" />
     <Compile Include="Extension\ObjectExtensions.cs" />
     <Compile Include="Extension\QueryableExtensions.cs" />
+    <Compile Include="Extension\SwithCaseExtensions.cs" />
     <Compile Include="Helper\EmailHepler.cs" />
     <Compile Include="Logger\ILogger.cs" />
     <Compile Include="Logger\NullLogger.cs" />

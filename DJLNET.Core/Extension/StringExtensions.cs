@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -146,6 +147,42 @@ namespace DJLNET.Core.Extension
         {
             if (s.IsNullOrEmpty()) return s;
             return s[0].ToString().ToUpper() + s.Substring(1);
+        }
+
+        public static string If(this string s, Predicate<string> predicate, Func<string, string> func)
+        {
+            return predicate(s) ? func(s) : s;
+        }
+
+        public static void CreateDirectory(this string path)
+        {
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+        }
+        public static void WriteText(this string path, string contents)
+        {
+            File.WriteAllText(path, contents);
+        }
+        public static void DeleteFile(this string path)
+        {
+            if (File.Exists(path)) File.Delete(path);
+        }
+
+        public static string ExecuteDOS(this string cmd)
+        {
+            Process process = new Process();
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            process.StandardInput.WriteLine(cmd);
+            process.StandardInput.WriteLine("exit");
+            var error = process.StandardError.ReadToEnd();
+            if (!error.IsNullOrEmpty()) return error;
+            return process.StandardOutput.ReadToEnd();
         }
     }
 }
