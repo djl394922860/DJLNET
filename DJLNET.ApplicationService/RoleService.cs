@@ -26,6 +26,8 @@ namespace DJLNET.ApplicationService
         {
             var role = _roleRepository.GetByKey(roleId);
             role.Permissions.Clear();
+            role.UpdatedTime = DateTime.Now;
+            role.UpdatedBy = "djlnet";
             _permissionRepository.Table().Where(x => permissionIds.Contains(x.ID)).ToList().ForEach(x =>
             {
                 role.Permissions.Add(x);

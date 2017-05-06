@@ -13,6 +13,7 @@ using System.Web;
 using System.Web.Mvc;
 using DJLNET.Core.Extension;
 using AutoMapper;
+using System.Net;
 
 namespace DJLNET.WebMvc.Controllers
 {
@@ -73,7 +74,7 @@ namespace DJLNET.WebMvc.Controllers
         public ActionResult SetRolePermissions(int roleId, IEnumerable<int> permissionIds)
         {
             _service.SetPermissions(roleId, permissionIds ?? new List<int>());
-            return Content("ok");
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }

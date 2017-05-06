@@ -3,7 +3,8 @@
 }
 
 @section header{
-
+    <link href="~/DJLContent/sweetalert.css" rel="stylesheet" />
+    <link href="~/DJLContent/toastr.min.css" rel="stylesheet" />
 }
 
 <div class="page-header">
@@ -98,13 +99,13 @@
                 </div>
 
                 <div class="modal-footer no-margin-top">
-                    <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-                        <i class="icon-remove"></i>
-                        取消
-                    </button>
-                    <button id="role_save" type="button" class="btn btn-sm btn-success pull-right" data-dismiss="modal">
+                    <button id="role_save" type="button" class="btn btn-sm btn-success pull-right">
                         <i class="icon-edit"></i>
                         保存
+                    </button>
+                    <button class="btn btn-sm btn-danger pull-right" data-dismiss="modal">
+                        <i class="icon-remove"></i>
+                        取消
                     </button>
                 </div>
         </div><!-- /.modal-content -->
@@ -114,8 +115,27 @@
 @section footer{
     <script src="http://cdn.bootcss.com/datatables/1.10.15/js/jquery.dataTables.min.js"></script>
     <script src="~/Content/Ace/assets/js/jquery.dataTables.bootstrap.js"></script>
+    <script src="~/DJLContent/toastr.min.js"></script>
+    <script src="~/DJLContent/sweetalert.min.js"></script>
     <script type="text/javascript">
         jQuery(function ($) {
+            //参数设置，若用默认值可以省略以下面代
+            toastr.options = {
+                "closeButton": true, //是否显示关闭按钮
+                "debug": false, //是否使用debug模式
+                "progressBar": true,
+                "onclick": null,
+                "positionClass": "toast-bottom-center",//弹出窗的位置
+                "showDuration": "300",//显示的动画时间
+                "hideDuration": "500",//消失的动画时间
+                "timeOut": "2000", //展现时间
+                "extendedTimeOut": "500",//加长展示时间
+                "showEasing": "swing",//显示时的动画缓冲方式
+                "hideEasing": "linear",//消失时的动画缓冲方式
+                "showMethod": "fadeIn",//显示时的动画方式
+                "hideMethod": "fadeOut" //消失时的动画方式
+            };
+
             $.extend($.fn.dataTable.defaults, {
                 "processing": true,//加载中
                 "serverSide": true,//服务器模式（★★★★★重要，本文主要介绍服务器模式）
@@ -162,9 +182,28 @@
                         data.permissionIds.push($(this).val());
                     }
                 });
-                $.post('@Url.Action("SetRolePermissions","Role")', data, function (data) {
-                    alert(data);
-                });
+                if (data.permissionIds.length == 0) {
+                    swal({
+                        title: "警告",
+                        text: "您确定要清空该角色权限吗？",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        closeOnConfirm: false
+                    }, function () {
+                        $.post('@Url.Action("SetRolePermissions","Role")', data, function () {
+                            $('#modal-table').modal('hide');
+                            swal("设置成功！", "您已经重置该角色权限", "success");
+                        });
+                    });
+                } else {
+                    $.post('@Url.Action("SetRolePermissions","Role")', data, function () {
+                        //swal("设置成功！", "您已经修改该角色权限", "success");
+                        $('#modal-table').modal('hide');
+                        toastr.success('您已经修改该角色权限', '消息');
+                    });
+                }
             });
 
             var roleTable = $('#role-table').DataTable({

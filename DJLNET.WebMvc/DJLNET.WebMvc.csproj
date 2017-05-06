@@ -2600,6 +2600,10 @@
     <Content Include="UITemplates\Metronic\_start\plugins\bootstrap\css\bootstrap.min.css" />
     <Content Include="UITemplates\Metronic\_start\plugins\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="UITemplates\Metronic\_start\style.css" />
+    <Content Include="DJLContent\sweetalert.css" />
+    <Content Include="DJLContent\sweetalert.min.js" />
+    <Content Include="DJLContent\toastr.min.css" />
+    <Content Include="DJLContent\toastr.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
