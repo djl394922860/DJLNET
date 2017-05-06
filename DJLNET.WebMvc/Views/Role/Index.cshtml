@@ -170,7 +170,7 @@
                         return '<a class="btn btn-sm btn-info" style="margin-right:10px;" href="javascript:;">查看<i class="fa fa-cogs"></i></a> ' +
                                '<a class="btn btn-sm btn-warning" style="margin-right:10px;" href="javascript:;">编辑<i class="fa fa-cogs"></i></a> ' +
                                '<a class="btn btn-sm btn-danger" style="margin-right:10px;" href="javascript:;">删除<i class="fa fa-cogs"></i></a> ' +
-                               '<a class="btn btn-sm btn-success" href="#modal-table" role="button" data-toggle="modal">授权<i class="fa fa-cogs"></i></a>';
+                               '<a class="auth btn btn-sm btn-success" data-id="' + full.id + '" href="#modal-table" role="button" data-toggle="modal">授权<i class="fa fa-cogs"></i></a>';
                     }
                 },
                 {
@@ -206,9 +206,11 @@
                 });
             });
 
-            $('#modal-table').on('show.bs.modal', function () {
-                // ajax role permissions
-                $.post('@Url.Action("GetRolePermissions","Role")', { roleId: 1 }, function (html) {
+            $('#modal-table').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                var roleId = button.data('id') // Extract info from data-* attributes
+                // ajax load role permissions html
+                $.post('@Url.Action("GetRolePermissions","Role")', { roleId: roleId }, function (html) {
                     $('#role-permission').empty();
                     $('#role-permission').html(html);
                 });
