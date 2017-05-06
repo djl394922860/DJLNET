@@ -25,7 +25,7 @@ namespace DJLNET.Repository
             this._entities = context.Set<TEntity>();
         }
 
-        private static Dictionary<string, Expression<Func<TEntity, bool>>> _cacheExpression;
+        private static Dictionary<string, Expression<Func<TEntity, bool>>> _cacheExpression = new Dictionary<string, Expression<Func<TEntity, bool>>>();
 
         private Expression<Func<TEntity, bool>> GetPrimaryExpressionCache(TPrimaryKey key)
         {
