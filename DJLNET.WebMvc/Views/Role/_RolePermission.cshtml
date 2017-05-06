@@ -1,0 +1,39 @@
+﻿
+@model List<SelectListItem>
+
+@{
+    foreach (var group in Model.GroupBy(x=>x.Group))
+    {
+        <tr>
+            <td>
+                @group.Key.Name
+            </td>
+            <td>
+                <div class="btn-group">
+                    @foreach (var item in group)
+                    {
+                        <label class="green">
+                            <input type="checkbox" @(item.Selected ? Html.Raw("checked") : null) class="ace" value="@item.Value" />
+                            <span class="lbl">@item.Text</span>
+                        </label>
+                    }
+                </div>
+            </td>
+            <td class="center">
+                <label class="green">
+                    @{
+                        if (group.All(x => x.Selected))
+                        {
+                            <input type="checkbox" class="check-all ace" />
+                        }
+                        else
+                        {
+                            <input checked type="checkbox" class="check-all ace" />
+                        }
+                    }
+                    <span class="lbl"></span>
+                </label>
+            </td>
+        </tr>
+    }
+}

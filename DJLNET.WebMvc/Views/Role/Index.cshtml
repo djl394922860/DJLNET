@@ -90,70 +90,8 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>
-                                用户管理
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">查看</span>
-                                    </label>
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">添加</span>
-                                    </label>
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">修改</span>
-                                    </label>
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">删除</span>
-                                    </label>
-                                </div>
-                            </td>
-                            <td class="center">
-                                <label class="green">
-                                    <input type="checkbox" class="check-all ace" />
-                                    <span class="lbl"></span>
-                                </label>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                相册管理
-                            </td>
-                            <td>
-                                <div class="btn-group">
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">查看</span>
-                                    </label>
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">添加</span>
-                                    </label>
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">修改</span>
-                                    </label>
-                                    <label class="green">
-                                        <input type="checkbox" class="ace" />
-                                        <span class="lbl">删除</span>
-                                    </label>
-                                </div>
-                            </td>
-                            <td class="center">
-                                <label class="green">
-                                    <input type="checkbox" class="check-all ace" />
-                                    <span class="lbl"></span>
-                                </label>
-                            </td>
-                        </tr>
+                    <tbody id="role-permission">
+                        <!--动态页面-->
                     </tbody>
                 </table>
             </div>
@@ -270,7 +208,10 @@
 
             $('#modal-table').on('show.bs.modal', function () {
                 // ajax role permissions
-                alert('open dialog');
+                $.post('@Url.Action("GetRolePermissions","Role")', { roleId: 1 }, function (html) {
+                    $('#role-permission').empty();
+                    $('#role-permission').html(html);
+                });
             });
 
             $('#modal-table .check-all').on('change', function () {

@@ -20,11 +20,13 @@ namespace DJLNET.WebMvc.Controllers
     public class RoleController : BaseController
     {
         private readonly IRoleService _service;
+        private readonly IPermissionService _permissionService;
         private IMapper _mapper;
-        public RoleController(IRoleService service, IMapper mapper)
+        public RoleController(IRoleService service, IPermissionService permissionService, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
+            _permissionService = permissionService;
         }
 
         public ActionResult Index()
@@ -44,6 +46,27 @@ namespace DJLNET.WebMvc.Controllers
                 data.Total,
                 _mapper.Map<IReadOnlyList<Role>, IReadOnlyList<RoleViewModel>>(data.Rows)
             );
+        }
+
+        [HttpPost]
+        [ActionName("GetRolePermissions")]
+        public PartialViewResult RolePermission(int roleId)
+        {
+            var role = _service.Get(roleId);
+            var groups = _permissionService.GetAll().GroupBy(x => x.Category);
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var group in groups)
+            {
+                SelectListGroup temp = new SelectListGroup() { Name = group.Key };
+                list.AddRange(group.Select(x => new SelectListItem()
+                {
+                    Group = temp,
+                    Text = x.Description,
+                    Value = x.ID.ToString(),
+                    Selected = role.Permissions.Any(z => z.ID == x.ID)
+                }));
+            }
+            return PartialView("/Views/Role/_RolePermission.cshtml", list);
         }
     }
 }

@@ -19,8 +19,8 @@ namespace DJLNET.EntityFramework
 
         public DJLNETDBContext() : base($"name={_conn}")
         {
-            this.Configuration.LazyLoadingEnabled = false;
-            this.Configuration.ProxyCreationEnabled = false;
+            //this.Configuration.LazyLoadingEnabled = false;
+            //this.Configuration.ProxyCreationEnabled = false;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
