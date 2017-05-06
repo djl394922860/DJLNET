@@ -58,6 +58,10 @@
   <ItemGroup>
     <Compile Include="Cache\ICacheManager.cs" />
     <Compile Include="Cache\NullCacheManager.cs" />
+    <Compile Include="Extension\DictionaryExtensions.cs" />
+    <Compile Include="Extension\EnumerableExtensions.cs" />
+    <Compile Include="Extension\ExpressionExtensions.cs" />
+    <Compile Include="Extension\ObjectExtensions.cs" />
     <Compile Include="Extension\QueryableExtensions.cs" />
     <Compile Include="Helper\EmailHepler.cs" />
     <Compile Include="Logger\ILogger.cs" />

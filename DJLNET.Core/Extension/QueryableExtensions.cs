@@ -17,6 +17,16 @@ namespace DJLNET.Core.Extension
         {
             return QueryableHelper<T>.OrderBy(queryable, propertyName, desc);
         }
+
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> source, Expression<Func<T, bool>> predicate, bool condition)
+        {
+            return condition ? source.Where(predicate) : source;
+        }
+        public static IQueryable<T> WhereIf<T>(this IQueryable<T> source, Expression<Func<T, int, bool>> predicate, bool condition)
+        {
+            return condition ? source.Where(predicate) : source;
+        }
+
         static class QueryableHelper<T>
         {
             private static Dictionary<string, LambdaExpression> cache = new Dictionary<string, LambdaExpression>();
