@@ -13,7 +13,7 @@
                     @foreach (var item in group)
                     {
                         <label class="green">
-                            <input type="checkbox" @(item.Selected ? Html.Raw("checked") : null) class="ace" value="@item.Value" />
+                            <input type="checkbox" name="permissionIds" @(item.Selected ? Html.Raw("checked") : null) class="ace" value="@item.Value" />
                             <span class="lbl">@item.Text</span>
                         </label>
                     }
@@ -24,11 +24,11 @@
                     @{
                         if (group.All(x => x.Selected))
                         {
-                            <input type="checkbox" class="check-all ace" />
+                            <input type="checkbox" checked class="check-all ace" />
                         }
                         else
                         {
-                            <input checked type="checkbox" class="check-all ace" />
+                            <input type="checkbox" class="check-all ace" />
                         }
                     }
                     <span class="lbl"></span>
@@ -37,3 +37,35 @@
         </tr>
     }
 }
+<script type="text/javascript">
+    $(function () {
+        $('#modal-table .check-all').on('change', function () {
+            var $this = $(this);
+            if ($this.is(':checked')) {
+                $this.closest('tr').find('input:checkbox').each(function () {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $this.closest('tr').find('input:checkbox').each(function () {
+                    $(this).prop('checked', false);
+                });
+            }
+        });
+
+        $('#modal-table .btn-group input:checkbox').on('change', function () {
+            var that = $(this);
+            var checkAll = true;
+            that.closest('td').find('input:checkbox').each(function () {
+                if (!$(this).is(':checked')) {
+                    checkAll = false;
+                    return;
+                }
+            });
+            var checkboxAll = that.closest('tr').find('td:last').find('input:checkbox');
+            if (checkAll)
+                checkboxAll.prop('checked', true);
+            else
+                checkboxAll.prop('checked', false);
+        });
+    });
+</script>

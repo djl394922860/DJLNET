@@ -68,5 +68,12 @@ namespace DJLNET.WebMvc.Controllers
             }
             return PartialView("/Views/Role/_RolePermission.cshtml", list);
         }
+
+        [HttpPost]
+        public ActionResult SetRolePermissions(int roleId, IEnumerable<int> permissionIds)
+        {
+            _service.SetPermissions(roleId, permissionIds ?? new List<int>());
+            return Content("ok");
+        }
     }
 }

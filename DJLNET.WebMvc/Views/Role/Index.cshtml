@@ -71,41 +71,42 @@
 <div id="modal-table" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="role manager">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header no-padding">
-                <div class="table-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        <span class="white">&times;</span>
-                    </button>
-                    当前角色权限清单
+                <input type="hidden" id="hiddenRoleId" name="roleId" value="-1" />
+                <div class="modal-header no-padding">
+                    <div class="table-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            <span class="white">&times;</span>
+                        </button>
+                        当前角色权限清单
+                    </div>
                 </div>
-            </div>
 
-            <div class="modal-body no-padding">
-                <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
-                    <thead>
-                        <tr>
-                            <th>分类名称</th>
-                            <th>权限配置</th>
-                            <th style="text-align:center;">全选</th>
-                        </tr>
-                    </thead>
+                <div class="modal-body no-padding">
+                    <table class="table table-striped table-bordered table-hover no-margin-bottom no-border-top">
+                        <thead>
+                            <tr>
+                                <th>分类名称</th>
+                                <th>权限配置</th>
+                                <th style="text-align:center;">全选</th>
+                            </tr>
+                        </thead>
 
-                    <tbody id="role-permission">
-                        <!--动态页面-->
-                    </tbody>
-                </table>
-            </div>
+                        <tbody id="role-permission">
+                            <!--动态页面-->
+                        </tbody>
+                    </table>
+                </div>
 
-            <div class="modal-footer no-margin-top">
-                <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
-                    <i class="icon-remove"></i>
-                    取消
-                </button>
-                <button class="btn btn-sm btn-success pull-right" data-dismiss="modal">
-                    <i class="icon-edit"></i>
-                    保存
-                </button>
-            </div>
+                <div class="modal-footer no-margin-top">
+                    <button class="btn btn-sm btn-danger pull-left" data-dismiss="modal">
+                        <i class="icon-remove"></i>
+                        取消
+                    </button>
+                    <button id="role_save" type="button" class="btn btn-sm btn-success pull-right" data-dismiss="modal">
+                        <i class="icon-edit"></i>
+                        保存
+                    </button>
+                </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div>
@@ -148,6 +149,22 @@
                         "sortDescending": ": 以降序排列此列"
                     }
                 }
+            });
+
+            $('#role_save').click(function () {
+                var roleId = parseInt($('#hiddenRoleId').val());
+                var data = {
+                    roleId: roleId,
+                    permissionIds: []
+                }
+                $('#modal-table input[name="permissionIds"]').each(function () {
+                    if ($(this).is(':checked')) {
+                        data.permissionIds.push($(this).val());
+                    }
+                });
+                $.post('@Url.Action("SetRolePermissions","Role")', data, function (data) {
+                    alert(data);
+                });
             });
 
             var roleTable = $('#role-table').DataTable({
@@ -209,37 +226,12 @@
             $('#modal-table').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var roleId = button.data('id') // Extract info from data-* attributes
+                $('#hiddenRoleId').val(roleId);
                 // ajax load role permissions html
-                $.post('@Url.Action("GetRolePermissions","Role")', { roleId: roleId }, function (html) {
+                $.post('@Url.Action("GetRolePermissions", "Role")', { roleId: roleId }, function (html) {
                     $('#role-permission').empty();
                     $('#role-permission').html(html);
                 });
-            });
-
-            $('#modal-table .check-all').on('change', function () {
-                var $this = $(this);
-                if ($this.is(':checked')) {
-                    $this.closest('tr').find('input:checkbox').each(function () {
-                        $(this).prop('checked', true);
-                    });
-                } else {
-                    $this.closest('tr').find('input:checkbox').each(function () {
-                        $(this).prop('checked', false);
-                    });
-                }
-            });
-
-            $('#modal-table .btn-group input:checkbox').on('change', function () {
-                var that = $(this);
-                var checkAll = true;
-                that.closest('td').find('input:checkbox').each(function () {
-                    if (!$(this).is(':checked')) {
-                        checkAll = false;
-                        return;
-                    }
-                });
-                if (checkAll)
-                    that.closest('tr').find('td:last').find('input:checkbox').prop('checked', true);
             });
         })
     </script>

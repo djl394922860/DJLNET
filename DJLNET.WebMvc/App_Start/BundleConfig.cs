@@ -18,7 +18,7 @@ namespace DJLNET.WebMvc
             bundles.Add(new ScriptBundle("~/bundles/jqueryvalidate").
                 Include("~/Scripts/jquery.validate.js"
                 , "~/Scripts/jquery.validate.unobtrusive.js",
-                "~/Scripts/jquery.unobtrusive-ajax.js"));
+                "~/Scripts/jquery.unobtrusive-ajax.js").ForceOrdered());
 
             // ace基础样式表
             bundles.Add(new StyleBundle("~/bundles/css")

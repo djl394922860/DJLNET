@@ -39,9 +39,9 @@
         if ("ontouchend" in document) document.write("<script src='~/Content/Ace/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
     </script>
 
-    @Scripts.Render("~/bundles/jqueryvalidate")
-
     @RenderSection(name: "footer", required: false)
+
+    @Scripts.Render("~/bundles/jqueryvalidate")
 
     @*MiniProfiler配置*@
     @MiniProfiler.RenderIncludes();

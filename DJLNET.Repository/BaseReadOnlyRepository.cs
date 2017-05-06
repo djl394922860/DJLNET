@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using DJLNET.Core.Paging;
 using DJLNET.Core.Extension;
+using System.Reflection;
 
 namespace DJLNET.Repository
 {
@@ -25,25 +26,51 @@ namespace DJLNET.Repository
             this._entities = context.Set<TEntity>();
         }
 
-        private static Dictionary<string, Expression<Func<TEntity, bool>>> _cacheExpression = new Dictionary<string, Expression<Func<TEntity, bool>>>();
+        private class InnerDicKey
+        {
+            public string TypeFullName { get; set; }
+            public string IdValue { get; set; }
+        }
+
+        private static Dictionary<InnerDicKey, Expression<Func<TEntity, bool>>> _cacheExpression = new Dictionary<InnerDicKey, Expression<Func<TEntity, bool>>>(new InnerDicKeyCompare());
+
+        private class InnerDicKeyCompare : IEqualityComparer<InnerDicKey>
+        {
+            public bool Equals(InnerDicKey x, InnerDicKey y)
+            {
+                if (x == null || y == null)
+                    return false;
+                if (x.TypeFullName == y.TypeFullName && x.IdValue == y.IdValue)
+                    return true;
+                return false;
+            }
+
+            public int GetHashCode(InnerDicKey obj)
+            {
+                return obj.TypeFullName.GetHashCode() + obj.IdValue.GetHashCode();
+            }
+        }
 
         private Expression<Func<TEntity, bool>> GetPrimaryExpressionCache(TPrimaryKey key)
         {
             var typeName = typeof(TEntity).FullName;
-            if (_cacheExpression.ContainsKey(typeName))
-                return _cacheExpression[typeName];
+            var idValue = key.ToString();
+            var temp = new InnerDicKey { TypeFullName = typeName, IdValue = idValue };
+            if (_cacheExpression.ContainsKey(temp))
+                return _cacheExpression[temp];
             var param = Expression.Parameter(typeof(TEntity), "x");
 
             var prop = Expression.Property(param, nameof(GenericEntity<TPrimaryKey>.ID));
 
-            var method = typeof(TPrimaryKey).GetMethods().Last(x => x.Name == "Equals");
+            var method = typeof(TPrimaryKey).GetMethods().First(x => x.Name == "Equals" && x.IsFinal == true && x.IsStatic == false
+            && x.Attributes == (MethodAttributes.NewSlot | MethodAttributes.Final | MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual));
 
             var constant = Expression.Constant(key, typeof(TPrimaryKey));
 
             var body = Expression.Call(prop, method, constant);
 
             var exp = Expression.Lambda<Func<TEntity, bool>>(body, param);
-            _cacheExpression.Add(typeName, exp);
+            _cacheExpression.Add(temp, exp);
             return exp;
         }
 

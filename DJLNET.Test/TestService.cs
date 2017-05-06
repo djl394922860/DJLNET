@@ -9,6 +9,9 @@ using Xunit;
 using DJLNET.Core.Helper;
 using System.Collections.Generic;
 using DJLNET.Model.Entities;
+using System;
+using System.Linq;
+using System.Reflection;
 
 namespace DJLNET.Test
 {
@@ -27,9 +30,13 @@ namespace DJLNET.Test
             container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
+            container.RegisterType<IPermissionRepository, PermissionRepository>();
+            container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>();
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IRoleService, RoleService>();
+            container.RegisterType<IPermissionService, PermissionService>();
+            container.RegisterType<IEntityPermissionService, EntityPermissionService>();
             _userService = container.Resolve<IUserService>();
             _roleService = container.Resolve<IRoleService>();
         }
@@ -37,26 +44,46 @@ namespace DJLNET.Test
         [Fact]
         public void TestAddUser()
         {
-            _userService.Add(new Model.Entities.User() { Name = "djlnet11", Password = MD5Helper.GetMD5("123456") });
+            _userService.Add(new User() { Name = "djlnet11", Password = MD5Helper.GetMD5("123456") });
         }
 
         [Fact]
         public void TestGetRole()
         {
-            var role = container.Resolve<IRoleService>().Get(1);
-            System.Console.WriteLine(role.Name);
+            var role1 = container.Resolve<IRoleService>().Get(201);
+
+            var role11 = container.Resolve<IRoleService>().Get(201);
+            Console.WriteLine();
         }
 
         [Fact]
         public void TestAddRangRoles()
         {
             var list = new List<Role>();
-            for (int i = 0; i < 100; i++)
+            for (int i = 1; i <= 100; i++)
             {
                 list.Add(new Role { Name = i + "_role", IsActive = true });
             }
 
             _roleService.AddRang(list);
+        }
+
+        [Fact]
+        public void TestClearRoles()
+        {
+            var fk = _roleService.GetAll();
+            _roleService.DeleteRang(fk);
+        }
+
+        [Fact]
+        public void TestGetMethod()
+        {
+            var methods1 = typeof(int).GetMethods().Where(x => x.Name == "Equals" && x.IsFinal == true && x.IsStatic == false);
+
+            var methods = typeof(string).GetMethods().First(x => x.Name == "Equals" && x.IsFinal == true && x.IsStatic == false
+            && x.Attributes == (MethodAttributes.NewSlot | MethodAttributes.Final | MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual));
+
+            Console.WriteLine();
         }
     }
 }
