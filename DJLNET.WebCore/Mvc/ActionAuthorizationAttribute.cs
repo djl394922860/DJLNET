@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DJLNET.Core;
+using DJLNET.WebCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,11 +13,14 @@ namespace DJLNET.WebCore.Security
     [AttributeUsage(validOn: AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class ActionAuthorizationAttribute : AuthorizeAttribute
     {
+        private readonly IAuthorizeProvider auth;
+
         public string[] PermissionNames { get; private set; }
 
         public ActionAuthorizationAttribute(params string[] permissionNames)
         {
             this.PermissionNames = permissionNames ?? new string[] { };
+            auth = ServiceContainer.Resole<IAuthorizeProvider>();
         }
 
         public override void OnAuthorization(AuthorizationContext filterContext)
@@ -35,13 +40,16 @@ namespace DJLNET.WebCore.Security
 
             var action = filterContext.ActionDescriptor.ActionName;
             var controller = filterContext.ActionDescriptor.ControllerDescriptor.ControllerName;
-
             var checkPermissionNames = this.PermissionNames.ToList();
             checkPermissionNames.Add(controller + action);
             checkPermissionNames = checkPermissionNames.Distinct(EqualityComparer<string>.Default).ToList();
 
-            // TODO: 授权认证
+            if (checkPermissionNames.Any(x => auth.Authorize(x)))
+            {
+                return;
+            }
 
+            this.HandleUnauthorizedRequest(filterContext);
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)

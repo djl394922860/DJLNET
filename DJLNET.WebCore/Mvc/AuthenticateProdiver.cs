@@ -8,19 +8,20 @@ using System.Web;
 using System.Web.Security;
 using DJLNET.Core.Extension;
 using DJLNET.ApplicationService.Interfaces;
+using DJLNET.Core;
 
 namespace DJLNET.WebCore.Mvc
 {
-    public class AuthorizeProdiver : IAuthorizeProvider
+    public class AuthenticateProdiver : IAuthenticateProvider
     {
         private readonly IUserService _service;
 
-        public AuthorizeProdiver(IUserService service)
+        public AuthenticateProdiver(IUserService userService)
         {
-            this._service = service;
+            this._service = userService;
         }
 
-        public User GetAuthorizeUser()
+        public User GetAuthenticateUser()
         {
             var httpCnotext = HttpContext.Current;
             if (httpCnotext == null || httpCnotext.Request == null || httpCnotext.Request.IsAuthenticated || httpCnotext.User == null)

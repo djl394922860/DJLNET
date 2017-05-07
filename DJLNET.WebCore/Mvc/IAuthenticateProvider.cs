@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace DJLNET.WebCore.Mvc
 {
-    public interface IAuthorizeProvider
+    public interface IAuthenticateProvider
     {
-        bool Authorize(string permissionName);
-        bool Authorize(string permissionName,User user);
+        void Login(User user, bool remember);
+
+        void LoginOut();
+
+        User GetAuthenticateUser();
     }
 }

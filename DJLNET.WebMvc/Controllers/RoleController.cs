@@ -36,9 +36,13 @@ namespace DJLNET.WebMvc.Controllers
 
         public JsonResult GetPagingData(RoleQuery query)
         {
-            Expression<Func<Role, bool>> condition = null;
+            Expression<Func<Role, bool>> condition = x => !x.IsDeleted;
             if (!string.IsNullOrWhiteSpace(query.Name))
-                condition = x => x.Name.Contains(query.Name);
+            {
+                Expression<Func<Role, bool>> exp = f => f.Name.Contains(query.Name);
+
+                condition = condition.AndAlso(exp).ToLambda<Func<Role, bool>>();
+            }
             IPagedList<Role> data = _service.PagingQuery(condition, (query.Start / query.Length) + 1, query.Length, query.OrderBy, query.OrderDir == DataTablesOrderDir.Desc);
             return DataTablesExtensions.DataTablesJsonResult(
                 query.Draw,
@@ -53,6 +57,7 @@ namespace DJLNET.WebMvc.Controllers
         public PartialViewResult RolePermission(int roleId)
         {
             var role = _service.Get(roleId);
+            if (role.IsDeleted) throw new Exception("试图获取一个已删除角色的权限");
             var groups = _permissionService.GetAll().GroupBy(x => x.Category);
             List<SelectListItem> list = new List<SelectListItem>();
             foreach (var group in groups)
@@ -72,7 +77,7 @@ namespace DJLNET.WebMvc.Controllers
         [HttpPost]
         public ActionResult SetRolePermissions(int roleId, IEnumerable<int> permissionIds)
         {
-            _service.SetPermissions(roleId, permissionIds ?? new List<int>());
+            _service.SetPermissions(roleId, permissionIds ?? new List<int>(), WorkConext.CurrentUser.Name);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }

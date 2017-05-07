@@ -76,8 +76,9 @@ namespace DJLNET.WebMvc.App_Start
 
             container.RegisterInstance(mapper);
 
-            // Mvc 扩展注入
-            container.RegisterType<IAuthorizeProvider, AuthorizeProdiver>();
+            // Mvc 扩展注入s
+            container.RegisterType<IAuthenticateProvider, AuthenticateProdiver>(new PerRequestLifetimeManager());
+            container.RegisterType<IAuthorizeProvider, AuthorizeProvider>(new PerRequestLifetimeManager());
             container.RegisterInstance<IPermissionProvider>(new DefaultPermissionrovider());
         }
     }

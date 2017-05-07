@@ -22,12 +22,16 @@ namespace DJLNET.ApplicationService
             _permissionRepository = permissionRepository;
         }
 
-        public void SetPermissions(int roleId, IEnumerable<int> permissionIds)
+        public void SetPermissions(int roleId, IEnumerable<int> permissionIds, string name)
         {
             var role = _roleRepository.GetByKey(roleId);
+            if (role.IsDeleted)
+            {
+                throw new Exception("试图对一个删除的角色授权");
+            }
             role.Permissions.Clear();
             role.UpdatedTime = DateTime.Now;
-            role.UpdatedBy = "djlnet";
+            role.UpdatedBy = name;
             _permissionRepository.Table().Where(x => permissionIds.Contains(x.ID)).ToList().ForEach(x =>
             {
                 role.Permissions.Add(x);

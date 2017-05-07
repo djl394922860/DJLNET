@@ -9,9 +9,9 @@ namespace DJLNET.WebMvc.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly IAuthorizeProvider _authorizeProvider;
+        private readonly IAuthenticateProvider _authorizeProvider;
         private readonly IUserService _userService;
-        public HomeController(IAuthorizeProvider authorizaProvider, IUserService userService)
+        public HomeController(IAuthenticateProvider authorizaProvider, IUserService userService)
         {
             this._authorizeProvider = authorizaProvider;
             _userService = userService;
