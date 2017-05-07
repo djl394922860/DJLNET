@@ -12,6 +12,8 @@ using System.Reflection;
 using System.Linq;
 using AutoMapper;
 using DJLNET.ApplicationService;
+using DJLNET.WebCore.Mvc;
+using DJLNET.WebCore.Security;
 
 namespace DJLNET.WebMvc.App_Start
 {
@@ -73,6 +75,10 @@ namespace DJLNET.WebMvc.App_Start
             var mapper = mapperConfig.CreateMapper();
 
             container.RegisterInstance(mapper);
+
+            // Mvc À©Õ¹×¢Èë
+            container.RegisterType<IAuthorizeProvider, AuthorizeProdiver>();
+            container.RegisterInstance<IPermissionProvider>(new DefaultPermissionrovider());
         }
     }
 }

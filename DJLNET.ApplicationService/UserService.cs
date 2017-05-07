@@ -6,6 +6,7 @@ using DJLNET.Repository.Interfaces;
 using DJLNET.UnitOfWork;
 using System.Linq.Expressions;
 using DJLNET.Model.Entities;
+using DJLNET.Core.Helper;
 
 namespace DJLNET.ApplicationService
 {
@@ -20,9 +21,10 @@ namespace DJLNET.ApplicationService
             this._unitOfWork = unitOfWork;
         }
 
-        public bool Login(string name, string pwd)
+        public User Login(string name, string pwd)
         {
-            return _userRepository.Table().FirstOrDefault(x => x.Name == name && x.Password == pwd) == null ? false : true;
+            var dbPwd = MD5Helper.GetMD5(pwd);
+            return _userRepository.Table().FirstOrDefault(x => x.Name == name && x.Password == dbPwd);
         }
     }
 }

@@ -17,7 +17,6 @@ using System.Net;
 
 namespace DJLNET.WebMvc.Controllers
 {
-    [LoginAuthentication]
     public class RoleController : BaseController
     {
         private readonly IRoleService _service;

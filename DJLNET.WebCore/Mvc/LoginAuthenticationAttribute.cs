@@ -8,7 +8,7 @@ using System.Web.Mvc.Filters;
 namespace DJLNET.WebCore.Mvc
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-    public class LoginAuthenticationAttribute : System.Web.Mvc.ActionFilterAttribute, System.Web.Mvc.Filters.IAuthenticationFilter
+    public class LoginAuthenticationAttribute : System.Web.Mvc.ActionFilterAttribute, IAuthenticationFilter
     {
         public void OnAuthentication(AuthenticationContext filterContext)
         {

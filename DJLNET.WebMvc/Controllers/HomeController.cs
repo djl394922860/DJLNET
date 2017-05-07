@@ -7,48 +7,54 @@ using System.Web.Security;
 
 namespace DJLNET.WebMvc.Controllers
 {
-    public class HomeController : DJLNET.WebCore.Mvc.BaseController
+    public class HomeController : BaseController
     {
-        private IUserService _userService;
-        private IPermissionService _permissionService;
-        public HomeController(IUserService cityService, IPermissionService permissionService)
+        private readonly IAuthorizeProvider _authorizeProvider;
+        private readonly IUserService _userService;
+        public HomeController(IAuthorizeProvider authorizaProvider, IUserService userService)
         {
-            this._userService = cityService;
-            this._permissionService = permissionService;
+            this._authorizeProvider = authorizaProvider;
+            _userService = userService;
         }
 
         [HttpGet, AllowAnonymous]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             return View();
         }
 
         [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
-        public ActionResult Login(LoginModel model)
+        public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
                 return View(model);
-            if (!this._userService.Login(model.Name, MD5Helper.GetMD5(model.Password)))
+            var user = _userService.Login(model.Name, model.Password);
+            if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "账号或者密码错误");
                 return View(model);
             }
-            FormsAuthentication.SetAuthCookie(model.Name, model.RememberMe, FormsAuthentication.FormsCookiePath);
-            return RedirectToAction(nameof(Index));
+            _authorizeProvider.Login(user, model.RememberMe);
+            if (string.IsNullOrWhiteSpace(returnUrl))
+                return RedirectToAction(nameof(Index));
+            else
+                return Redirect(returnUrl);
         }
 
-        [LoginAuthentication]
+        /// <summary>
+        /// 后台主页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
 
-        [LoginAuthentication, HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult Logout()
         {
-            Session.Abandon();
-            Session.Clear();
-            FormsAuthentication.SignOut();
+            _authorizeProvider.LoginOut();
             return RedirectToAction(nameof(Login));
         }
     }

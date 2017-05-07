@@ -26,6 +26,7 @@
                                     </h4>
                                     <form action="@Url.Action("Login","Home")" method="post" novalidate>
                                         @Html.AntiForgeryToken()
+                                        @Html.Hidden("returnUrl",(string)ViewBag.ReturnUrl)
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">

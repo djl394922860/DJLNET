@@ -78,16 +78,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mvc\AuthorizeProdiver.cs" />
     <Compile Include="Mvc\BaseController.cs" />
     <Compile Include="Mvc\ExcelColumnAttribute.cs" />
     <Compile Include="Mvc\ExcelController.cs" />
     <Compile Include="Mvc\ExcelFileResult.cs" />
     <Compile Include="Mvc\ExcelIgnoreAttribute.cs" />
     <Compile Include="Mvc\ExcelSheetAttribute.cs" />
+    <Compile Include="Mvc\IAuthorizeProvider.cs" />
     <Compile Include="Mvc\JsonNetResult.cs" />
     <Compile Include="Mvc\LoginAuthenticationAttribute.cs" />
     <Compile Include="Mvc\ModelStateValidFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Mvc\ActionAuthorizationAttribute.cs" />
     <Compile Include="Security\DefaultPermissionrovider.cs" />
     <Compile Include="Security\IPermissionProvider.cs" />
     <Compile Include="WebApi\CustomDateConverter.cs" />
@@ -98,6 +101,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DJLNET.ApplicationService.Interfaces\DJLNET.ApplicationService.Interfaces.csproj">
+      <Project>{2667FFEB-D001-4678-96F9-89E4487F6926}</Project>
+      <Name>DJLNET.ApplicationService.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DJLNET.Core\DJLNET.Core.csproj">
       <Project>{96D3D88D-6B88-4C50-919D-1FEDE6E03735}</Project>
       <Name>DJLNET.Core</Name>
