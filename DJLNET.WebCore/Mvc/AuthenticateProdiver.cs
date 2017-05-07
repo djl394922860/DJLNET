@@ -24,7 +24,7 @@ namespace DJLNET.WebCore.Mvc
         public User GetAuthenticateUser()
         {
             var httpCnotext = HttpContext.Current;
-            if (httpCnotext == null || httpCnotext.Request == null || httpCnotext.Request.IsAuthenticated || httpCnotext.User == null)
+            if (httpCnotext == null || httpCnotext.Request == null || !httpCnotext.Request.IsAuthenticated || httpCnotext.User == null)
             {
                 return null;
             }
@@ -34,7 +34,7 @@ namespace DJLNET.WebCore.Mvc
                 return null;
             }
             var identity = user.Identity as FormsIdentity;
-            if (identity.IsAuthenticated) return null;
+            if (!identity.IsAuthenticated) return null;
             var userId = identity.Ticket.UserData.ToInt();
             var result = _service.Get(userId);
             return result;

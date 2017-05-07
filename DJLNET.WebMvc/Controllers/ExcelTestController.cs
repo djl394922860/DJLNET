@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace DJLNET.WebMvc.Controllers
 {
+    [AllowAnonymous]
     public class ExcelTestController : ExcelController
     {
         private IUserService _userService;
@@ -19,11 +20,11 @@ namespace DJLNET.WebMvc.Controllers
         }
 
 
-        [NonAction]
+        [ActionName("TestExportExcel")]
         public ActionResult Index()
         {
-            var cities = this._userService.GetAll();
-            var models = this._mapper.Map<IEnumerable<UserViewModel>>(cities);
+            var users = this._userService.GetAll();
+            var models = this._mapper.Map<IEnumerable<UserViewModel>>(users);
             return Excel(models);
         }
     }

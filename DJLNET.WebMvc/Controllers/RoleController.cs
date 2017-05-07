@@ -14,6 +14,8 @@ using System.Web.Mvc;
 using DJLNET.Core.Extension;
 using AutoMapper;
 using System.Net;
+using DJLNET.WebCore.Security;
+using LinqKit;
 
 namespace DJLNET.WebMvc.Controllers
 {
@@ -34,16 +36,17 @@ namespace DJLNET.WebMvc.Controllers
             return View();
         }
 
+        [ActionAuthorization("RoleIndex")]
         public JsonResult GetPagingData(RoleQuery query)
         {
             Expression<Func<Role, bool>> condition = x => !x.IsDeleted;
+            Expression<Func<Role, bool>> merge = null;
             if (!string.IsNullOrWhiteSpace(query.Name))
             {
-                Expression<Func<Role, bool>> exp = f => f.Name.Contains(query.Name);
-
-                condition = condition.AndAlso(exp).ToLambda<Func<Role, bool>>();
+                var name = query.Name;
+                merge = f => condition.Invoke(f) && f.Name.Contains(name);
             }
-            IPagedList<Role> data = _service.PagingQuery(condition, (query.Start / query.Length) + 1, query.Length, query.OrderBy, query.OrderDir == DataTablesOrderDir.Desc);
+            IPagedList<Role> data = _service.PagingQuery(merge == null ? condition : merge, (query.Start / query.Length) + 1, query.Length, query.OrderBy, query.OrderDir == DataTablesOrderDir.Desc);
             return DataTablesExtensions.DataTablesJsonResult(
                 query.Draw,
                 data.Total,
@@ -52,8 +55,39 @@ namespace DJLNET.WebMvc.Controllers
             );
         }
 
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
+        }
+
         [HttpPost]
-        [ActionName("GetRolePermissions")]
+        public ActionResult Add(RoleModel model)
+        {
+            return null;
+        }
+
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(RoleModel model)
+        {
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int roleId)
+        {
+            return null;
+        }
+
+        [HttpPost]
+        [ActionName("GetRolePermissions"), ActionAuthorization("RoleAuth")]
         public PartialViewResult RolePermission(int roleId)
         {
             var role = _service.Get(roleId);
@@ -74,7 +108,7 @@ namespace DJLNET.WebMvc.Controllers
             return PartialView("/Views/Role/_RolePermission.cshtml", list);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Auth")]
         public ActionResult SetRolePermissions(int roleId, IEnumerable<int> permissionIds)
         {
             _service.SetPermissions(roleId, permissionIds ?? new List<int>(), WorkConext.CurrentUser.Name);

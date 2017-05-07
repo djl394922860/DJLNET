@@ -30,6 +30,22 @@ namespace DJLNET.Core.Extension
             return Expression.Lambda<TDelegate>(body, parameters);
         }
 
+
+        public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> expr1, Expression<Func<T, bool>> expr2)
+        {
+            var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
+            return Expression.Lambda<Func<T, bool>>
+                  (Expression.Or(expr1.Body, invokedExpr), expr1.Parameters);
+        }
+
+        public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> expr1,
+                                                         Expression<Func<T, bool>> expr2)
+        {
+            var invokedExpr = Expression.Invoke(expr2, expr1.Parameters.Cast<Expression>());
+            return Expression.Lambda<Func<T, bool>>
+                  (Expression.And(expr1.Body, invokedExpr), expr1.Parameters);
+        }
+
         #region 示例代码
 
         //Expression<Func<Person, bool>> exp = p => p.Name.Contains("ldp") && p.Birthday.Value.Year > 1990;

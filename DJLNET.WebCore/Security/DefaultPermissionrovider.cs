@@ -13,6 +13,12 @@ namespace DJLNET.WebCore.Security
         {
             var permissions = new List<Permission>();
 
+            #region 主页权限
+
+            permissions.Add(new Permission { Category = "控制台", Name = "HomeIndex", Description = "主页" });
+
+            #endregion
+
             #region User
             permissions.Add(new Permission { Name = "UserIndex", Category = "用户管理", Description = "查询", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
 
@@ -22,7 +28,7 @@ namespace DJLNET.WebCore.Security
 
             permissions.Add(new Permission { Name = "UserDelete", Category = "用户管理", Description = "删除", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
 
-            permissions.Add(new Permission { Name = "UserAuth", Category = "用户管理", Description = "授权", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
+            permissions.Add(new Permission { Name = "UserAuth", Category = "用户管理", Description = "分配角色", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
             #endregion
 
 

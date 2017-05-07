@@ -192,13 +192,13 @@
                         confirmButtonText: "确定",
                         closeOnConfirm: false
                     }, function () {
-                        $.post('@Url.Action("SetRolePermissions","Role")', data, function () {
+                        $.post('@Url.Action("Auth", "Role")', data, function () {
                             $('#modal-table').modal('hide');
                             swal("设置成功！", "您已经重置该角色权限", "success");
                         });
                     });
                 } else {
-                    $.post('@Url.Action("SetRolePermissions","Role")', data, function () {
+                    $.post('@Url.Action("Auth", "Role")', data, function () {
                         //swal("设置成功！", "您已经修改该角色权限", "success");
                         $('#modal-table').modal('hide');
                         toastr.success('您已经修改该角色权限', '消息');

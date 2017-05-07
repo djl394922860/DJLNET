@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DJLNET.Core.Extension;
+using LinqKit;
 
 namespace DJLNET.Core.Paging
 {
@@ -25,7 +26,7 @@ namespace DJLNET.Core.Paging
                 throw new ArgumentNullException(nameof(orderByPropertyName));
             if (condition != null)
             {
-                data = data.Where(condition);
+                data = data.AsExpandable().Where(condition);
             }
             if (typeof(T).GetProperty(orderByPropertyName.FirstCharToUpper()) == null)
             {
