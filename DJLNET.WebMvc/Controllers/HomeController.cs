@@ -7,7 +7,7 @@ using System.Web.Security;
 
 namespace DJLNET.WebMvc.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         private readonly IAuthenticateProvider _authorizeProvider;
         private readonly IUserService _userService;
@@ -36,7 +36,7 @@ namespace DJLNET.WebMvc.Controllers
                 return View(model);
             }
             _authorizeProvider.Login(user, model.RememberMe);
-            if (string.IsNullOrWhiteSpace(returnUrl))
+            if (string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
                 return RedirectToAction(nameof(Index));
             else
                 return Redirect(returnUrl);

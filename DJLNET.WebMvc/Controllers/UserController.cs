@@ -1,4 +1,5 @@
-﻿using DJLNET.WebMvc.Models;
+﻿using DJLNET.WebCore.Mvc;
+using DJLNET.WebMvc.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace DJLNET.WebMvc.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         [HttpGet]
         public ActionResult Index()

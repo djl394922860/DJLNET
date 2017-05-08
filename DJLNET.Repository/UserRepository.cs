@@ -2,6 +2,8 @@
 using System.Linq;
 using DJLNET.EntityFramework;
 using DJLNET.Model.Entities;
+using System;
+using DJLNET.Core.Extension;
 
 namespace DJLNET.Repository
 {

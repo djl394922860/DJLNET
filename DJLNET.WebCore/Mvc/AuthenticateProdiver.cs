@@ -36,6 +36,7 @@ namespace DJLNET.WebCore.Mvc
             var identity = user.Identity as FormsIdentity;
             if (!identity.IsAuthenticated) return null;
             var userId = identity.Ticket.UserData.ToInt();
+            // TODO: 缓存处理
             var result = _service.Get(userId);
             return result;
         }

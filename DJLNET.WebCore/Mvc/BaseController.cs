@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DJLNET.WebCore.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace DJLNET.WebCore.Mvc
 {
+    [ActionAuthorization]
     public class BaseController : Controller
     {
         protected override JsonResult Json(object data, string contentType, Encoding contentEncoding)

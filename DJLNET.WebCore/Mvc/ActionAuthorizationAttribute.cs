@@ -56,10 +56,12 @@ namespace DJLNET.WebCore.Security
         {
             if (filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
-                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden, "HandleUnauthorized Error");
+                // 身份认证通过，授权失败，可能非法请求，可以日志记录攻击
+                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             else
             {
+                // 不用检查是否ajax了，因为加入了全局身份校验器已经做了
                 base.HandleUnauthorizedRequest(filterContext);
             }
         }

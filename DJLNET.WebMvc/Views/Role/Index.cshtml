@@ -190,7 +190,8 @@
                         showCancelButton: true,
                         confirmButtonColor: "#DD6B55",
                         confirmButtonText: "确定",
-                        closeOnConfirm: false
+                        closeOnConfirm: false,
+                        cancelButtonText: '取消'
                     }, function () {
                         $.post('@Url.Action("Auth", "Role")', data, function () {
                             $('#modal-table').modal('hide');
@@ -226,7 +227,7 @@
                         return '<a class="btn btn-sm btn-info" style="margin-right:10px;" href="javascript:;">查看<i class="fa fa-cogs"></i></a> ' +
                                '<a class="btn btn-sm btn-warning" style="margin-right:10px;" href="javascript:;">编辑<i class="fa fa-cogs"></i></a> ' +
                                '<a class="btn btn-sm btn-danger" style="margin-right:10px;" href="javascript:;">删除<i class="fa fa-cogs"></i></a> ' +
-                               '<a class="auth btn btn-sm btn-success" data-id="' + full.id + '" href="#modal-table" role="button" data-toggle="modal">授权<i class="fa fa-cogs"></i></a>';
+                               '<a class="auth btn btn-sm btn-success" data-id="' + full.id + '" name="auth" role="button">授权<i class="fa fa-cogs"></i></a>';
                     }
                 },
                 {
@@ -241,16 +242,40 @@
                 }],
                 "order": [[2, "asc"]],
                 autoFill: true
+            }).on('error.dt', function (e, settings, techNote, message) {
+                swal("服务器错误！", "请联系网络管理员，错误消息如下: "+message, "error");
+            }).on('init.dt', function () {
+                bindAuthBtnEvent();
             });
+
+            function bindAuthBtnEvent() {
+                    $('#role-table a[name="auth"]').on('click', function () {
+                    var button = $(this) // Button that triggered the modal
+                    var roleId = button.data('id') // Extract info from data-* attributes
+                    $('#hiddenRoleId').val(roleId);
+                    // ajax load role permissions html
+                    $.post('@Url.Action("GetRolePermissions", "Role")', { roleId: roleId }, function (html) {
+                        $('#role-permission').empty();
+                        $('#role-permission').html(html);
+                        //show dialog
+                        $('#modal-table').modal('show');
+                    }).fail(function (response) {
+                        // TODO: AJAX全局处理
+                        alert('暂时处理后期设置$.ajaxSetup()即可, Error: ' + response.responseText);
+                    });
+                });
+            }
 
             $('#name').keypress(function (e) {
                 if (e.which == 13) {
                     roleTable.ajax.reload();
+                    bindAuthBtnEvent();
                 }
             });
 
             $("#search").click(function () {
                 roleTable.ajax.reload();
+                bindAuthBtnEvent();
             });
 
             $('table th input:checkbox').on('click', function () {
@@ -259,17 +284,6 @@
                 .each(function () {
                     this.checked = that.checked;
                     $(this).closest('tr').toggleClass('selected');
-                });
-            });
-
-            $('#modal-table').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var roleId = button.data('id') // Extract info from data-* attributes
-                $('#hiddenRoleId').val(roleId);
-                // ajax load role permissions html
-                $.post('@Url.Action("GetRolePermissions", "Role")', { roleId: roleId }, function (html) {
-                    $('#role-permission').empty();
-                    $('#role-permission').html(html);
                 });
             });
         })
