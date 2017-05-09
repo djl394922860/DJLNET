@@ -12,5 +12,17 @@ namespace DJLNET.Repository
         public UserRepository(IDbContext context) : base(context)
         {
         }
+
+        public User GetAuthenticateUser(int id)
+        {
+            var user = _context.Set<User>().Find(id);
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+            user.Roles.Where(x => !x.IsDeleted).ToList().ForEach(x =>
+            {
+                this._context.Entry<Role>(x).Collection(z => z.Permissions).Load();
+            });
+            return user;
+        }
     }
 }

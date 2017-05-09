@@ -26,5 +26,10 @@ namespace DJLNET.ApplicationService
             var dbPwd = MD5Helper.GetMD5(pwd);
             return _userRepository.Table().FirstOrDefault(x => x.Name == name && x.Password == dbPwd);
         }
+
+        public User GetAuthenticateUser(int id)
+        {
+            return _userRepository.GetAuthenticateUser(id);
+        }
     }
 }
