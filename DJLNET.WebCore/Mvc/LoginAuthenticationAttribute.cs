@@ -27,7 +27,8 @@ namespace DJLNET.WebCore.Mvc
 
             if (filterContext.HttpContext.User == null || filterContext.HttpContext.User.Identity == null || !filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
-                if (filterContext.HttpContext.Request.IsAjaxRequest() || filterContext.HttpContext.Request.Headers["X-Requested-With"].Equals("XMLHttpRequest", StringComparison.CurrentCultureIgnoreCase))
+                var xmlHttpRequest = filterContext.HttpContext.Request.Headers["X-Requested-With"];
+                if (filterContext.HttpContext.Request.IsAjaxRequest() || (xmlHttpRequest != null && xmlHttpRequest.Equals("XMLHttpRequest", StringComparison.CurrentCultureIgnoreCase)))
                 {
                     filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
                 }

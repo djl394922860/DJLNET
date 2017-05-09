@@ -44,7 +44,10 @@ namespace DJLNET.Core.Cache
         private byte[] Serialize(object value)
         {
             if (value == null) return new byte[] { };
-            var str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            var str = Newtonsoft.Json.JsonConvert.SerializeObject(value, Newtonsoft.Json.Formatting.Indented, new Newtonsoft.Json.JsonSerializerSettings()
+            {
+                DateFormatString = "yyyy-MM-dd HH:mm:ss"
+            });
             var bytes = Encoding.UTF8.GetBytes(str);
             return bytes;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace DJLNET.Model.Entities
         public string Name { get; set; }
         public bool IsActive { get; set; } = true;
 
+        [JsonIgnore]
         public virtual ICollection<User> Users { get; set; } = new List<User>();
         public virtual ICollection<Permission> Permissions { get; set; } = new List<Permission>();
     }
