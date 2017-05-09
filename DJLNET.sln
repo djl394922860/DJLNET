@@ -43,6 +43,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DJLNET.WebCore", "DJLNET.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DJLNET.Core", "DJLNET.Core\DJLNET.Core.csproj", "{96D3D88D-6B88-4C50-919D-1FEDE6E03735}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "8-Redis", "8-Redis", "{B2CB2E45-126F-477B-A229-BAAE5FB13670}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Redis-x64-3.2.100", "Redis-x64-3.2.100", "{A155B01A-AF9C-45C4-8AF7-35E5E41FE3FB}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\WorkDocs\redis-6380\dump.rdb = ..\..\WorkDocs\redis-6380\dump.rdb
+		..\..\WorkDocs\redis-6380\EventLog.dll = ..\..\WorkDocs\redis-6380\EventLog.dll
+		..\..\WorkDocs\redis-6380\Redis on Windows Release Notes.docx = ..\..\WorkDocs\redis-6380\Redis on Windows Release Notes.docx
+		..\..\WorkDocs\redis-6380\Redis on Windows.docx = ..\..\WorkDocs\redis-6380\Redis on Windows.docx
+		..\..\WorkDocs\redis-6380\redis-benchmark.exe = ..\..\WorkDocs\redis-6380\redis-benchmark.exe
+		..\..\WorkDocs\redis-6380\redis-benchmark.pdb = ..\..\WorkDocs\redis-6380\redis-benchmark.pdb
+		..\..\WorkDocs\redis-6380\redis-check-aof.exe = ..\..\WorkDocs\redis-6380\redis-check-aof.exe
+		..\..\WorkDocs\redis-6380\redis-check-aof.pdb = ..\..\WorkDocs\redis-6380\redis-check-aof.pdb
+		..\..\WorkDocs\redis-6380\redis-cli.exe = ..\..\WorkDocs\redis-6380\redis-cli.exe
+		..\..\WorkDocs\redis-6380\redis-cli.pdb = ..\..\WorkDocs\redis-6380\redis-cli.pdb
+		..\..\WorkDocs\redis-6380\redis-server.exe = ..\..\WorkDocs\redis-6380\redis-server.exe
+		..\..\WorkDocs\redis-6380\redis-server.pdb = ..\..\WorkDocs\redis-6380\redis-server.pdb
+		..\..\WorkDocs\redis-6380\redis.windows-service.conf = ..\..\WorkDocs\redis-6380\redis.windows-service.conf
+		..\..\WorkDocs\redis-6380\redis.windows.conf = ..\..\WorkDocs\redis-6380\redis.windows.conf
+		..\..\WorkDocs\redis-6380\Windows Service Documentation.docx = ..\..\WorkDocs\redis-6380\Windows Service Documentation.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,5 +135,6 @@ Global
 		{ECA7BBF5-7804-42B8-9547-540059935952} = {15944F5A-837D-4F1B-B3E3-E242D1D644DA}
 		{75823E16-6AB5-44D2-B84B-4E6986EFA670} = {6841F908-FA4A-42C6-95E6-1F166D3FB325}
 		{96D3D88D-6B88-4C50-919D-1FEDE6E03735} = {285E412D-7CE1-4FDB-884F-ACE71ABF3F1B}
+		{A155B01A-AF9C-45C4-8AF7-35E5E41FE3FB} = {B2CB2E45-126F-477B-A229-BAAE5FB13670}
 	EndGlobalSection
 EndGlobal

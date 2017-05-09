@@ -14,6 +14,9 @@ using AutoMapper;
 using DJLNET.ApplicationService;
 using DJLNET.WebCore.Mvc;
 using DJLNET.WebCore.Security;
+using DJLNET.Core.Cache;
+using System.Configuration;
+using DJLNET.Core.Extension;
 
 namespace DJLNET.WebMvc.App_Start
 {
@@ -80,6 +83,12 @@ namespace DJLNET.WebMvc.App_Start
             container.RegisterType<IAuthenticateProvider, AuthenticateProdiver>(new PerRequestLifetimeManager());
             container.RegisterType<IAuthorizeProvider, AuthorizeProvider>(new PerRequestLifetimeManager());
             container.RegisterInstance<IPermissionProvider>(new DefaultPermissionrovider());
+
+            // »ù´¡¼þ×¢Èë
+            var redisConnnection = ConfigurationManager.AppSettings["RedisConnection"];
+            if (redisConnnection.IsNullOrEmpty())
+                throw new ArgumentNullException(nameof(redisConnnection));
+            container.RegisterType<ICacheManager, RedisCacheManager>(new InjectionConstructor(redisConnnection));
         }
     }
 }
