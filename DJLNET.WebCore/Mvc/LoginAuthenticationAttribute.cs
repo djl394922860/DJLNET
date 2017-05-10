@@ -25,23 +25,24 @@ namespace DJLNET.WebCore.Mvc
             if (loginSkip)
                 return;
 
-            if (filterContext.HttpContext.User == null || filterContext.HttpContext.User.Identity == null || !filterContext.HttpContext.User.Identity.IsAuthenticated)
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated) return;
+
+
+            var xmlHttpRequest = filterContext.HttpContext.Request.Headers["X-Requested-With"];
+            if (filterContext.HttpContext.Request.IsAjaxRequest() || (xmlHttpRequest != null && xmlHttpRequest.Equals("XMLHttpRequest", StringComparison.CurrentCultureIgnoreCase)))
             {
-                var xmlHttpRequest = filterContext.HttpContext.Request.Headers["X-Requested-With"];
-                if (filterContext.HttpContext.Request.IsAjaxRequest() || (xmlHttpRequest != null && xmlHttpRequest.Equals("XMLHttpRequest", StringComparison.CurrentCultureIgnoreCase)))
-                {
-                    filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
-                }
-                else
-                {
-                    filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new
-                    {
-                        controller = "Home",
-                        action = "Login",
-                        returnUrl = filterContext.HttpContext.Request.RawUrl
-                    }));
-                }
+                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
+            else
+            {
+                filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary(new
+                {
+                    controller = "Home",
+                    action = "Login",
+                    returnUrl = filterContext.HttpContext.Request.RawUrl
+                }));
+            }
+
         }
 
         public void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)

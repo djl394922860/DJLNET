@@ -36,7 +36,7 @@ namespace DJLNET.WebMvc.Controllers
                 return View(model);
             }
             _authorizeProvider.Login(user, model.RememberMe);
-            if (string.IsNullOrWhiteSpace(returnUrl) && Url.IsLocalUrl(returnUrl))
+            if (string.IsNullOrWhiteSpace(returnUrl) || !Url.IsLocalUrl(returnUrl))
                 return RedirectToAction(nameof(Index));
             else
                 return Redirect(returnUrl);

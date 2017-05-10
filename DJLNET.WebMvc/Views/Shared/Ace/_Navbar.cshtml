@@ -124,7 +124,7 @@
                         <img class="nav-user-photo" src="~/Content/Ace/assets/avatars/user.jpg" alt="Jason's Photo" />
                         <span class="user-info">
                             <small>欢迎光临,</small>
-                            杜江龙
+                            @HttpContext.Current.User.Identity.Name
                         </span>
 
                         <i class="icon-caret-down"></i>

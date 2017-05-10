@@ -31,6 +31,8 @@
         <script src="@Url.Content("~/Content/Ace/assets/js/respond.min.js")"></script>
     <![endif]-->
 
+    <link href="~/DJLContent/sweetalert.css" rel="stylesheet" />
+
     @RenderSection(name: "header", required: false)
 </head>
 <body>
@@ -144,6 +146,8 @@
     </script>
 
     @Scripts.Render("~/bundles/acejs")
+
+    <script src="~/DJLContent/sweetalert.min.js"></script>
 
     <script src="~/Content/Ace/aceinit.js"></script>
 

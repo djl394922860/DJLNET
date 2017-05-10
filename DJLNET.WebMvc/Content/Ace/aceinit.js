@@ -1,6 +1,13 @@
 ﻿'use strict';
 
 jQuery(function ($) {
+
+    // 设置全局 ajax ajaxError event handler
+    $(document).ajaxError(function (event, jqxhr, settings, thrownError) {
+        // request.responseText
+        swal('请求错误!', "状态码:" + jqxhr.status + ',请求路径:' + settings.url + ",错误内容如下:" + thrownError, 'error');
+    });
+
     $('.easy-pie-chart.percentage').each(function () {
         var $box = $(this).closest('.infobox');
         var barColor = $(this).data('color') || (!$box.hasClass('infobox-dark') ? $box.css('color') : 'rgbas(255,255,255,0.95)');
