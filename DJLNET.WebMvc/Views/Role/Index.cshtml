@@ -205,13 +205,8 @@
                     });
                 }
             });
-            $.fn.dataTable.ext.errMode = 'throw';// 默认出错抛出js异常
-            var roleTable = $('#role-table')
-            .on('error.dt', function (e, settings, techNote, message) {
-                swal("服务器错误！", "请联系网络管理员，错误消息如下: " + message, "error");
-            })
-            .on('init.dt', function () {
-                //bindAuthBtnEvent();
+
+            function bindAuthBtnEvent() {
                 $('#role-table a[name="auth"]').click(function () {
                     var button = $(this) // Button that triggered the modal
                     var roleId = button.data('id') // Extract info from data-* attributes
@@ -224,10 +219,21 @@
                         $('#modal-table').modal('show');
                     });
                 });
+            }
+
+            $.fn.dataTable.ext.errMode = 'throw';// 默认出错抛出js异常
+            var roleTable = $('#role-table')
+            .on('draw.dt', function () {
+                bindAuthBtnEvent();
+            })
+            .on('error.dt', function (e, settings, techNote, message) {
+                swal("服务器错误！", "请联系网络管理员，错误消息如下: " + message, "error");
+            })
+            .on('init.dt', function () {
+                //bindAuthBtnEvent();
             })
             .on('xhr.dt', function (e, settings, json, xhr) {
                 //bindAuthBtnEvent();
-
             })
             .DataTable({
                 "ajax": {
