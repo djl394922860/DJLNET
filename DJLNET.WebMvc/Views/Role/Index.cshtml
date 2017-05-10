@@ -202,7 +202,8 @@
                     $.post('@Url.Action("Auth", "Role")', data, function () {
                         //swal("设置成功！", "您已经修改该角色权限", "success");
                         $('#modal-table').modal('hide');
-                        toastr.success('您已经修改该角色权限', '消息');
+                        //toastr.success('您已经修改该角色权限', '消息');
+                        swal('设置成功!', '您已经修改该角色权限,30秒之后生效', 'success');
                     });
                 }
             });
