@@ -14,6 +14,7 @@ Web应用开发框架整合
 5、后台UI将会目前采用Ace模板用做学习，不涉及商业用途，其实 AdminTLE Metronic 都挺好看
 
 【更新 2017年5月13日01:33:43】
+
 1、实现基本的登录身份认证，角色授权，权限过滤控制，其实身份认证已然延续使用了FormsAuthentication基于cookie会话支持，授权重写authorization自定义授权控制，详情可见基于角色的授权Model实体表设计
 
 2、实现Controller+Action对应系统权限表功能点对应关系授权检查
