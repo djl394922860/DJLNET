@@ -2806,7 +2806,7 @@
     <Content Include="Views\Shared\Ace\_Menubar.cshtml" />
     <Content Include="Views\Role\_RolePermission.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Shared\Ace\_BtnSarchBar.cshtml" />
+    <Content Include="Views\Shared\Ace\_BtnBar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

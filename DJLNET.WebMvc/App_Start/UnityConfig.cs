@@ -88,7 +88,9 @@ namespace DJLNET.WebMvc.App_Start
             var redisConnnection = ConfigurationManager.AppSettings["RedisConnection"];
             if (redisConnnection.IsNullOrEmpty())
                 throw new ArgumentNullException(nameof(redisConnnection));
-            container.RegisterType<ICacheManager, RedisCacheManager>(new InjectionConstructor(redisConnnection));
+            // 使用缓存单例模式防止并发缓存服务器
+            container.RegisterInstance<ICacheManager>(new RedisCacheManager(redisConnnection));
+            //container.RegisterType<ICacheManager, RedisCacheManager>(new InjectionConstructor(redisConnnection));
         }
     }
 }

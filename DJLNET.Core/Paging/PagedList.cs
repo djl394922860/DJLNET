@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DJLNET.Core.Paging
 {
-    public class PagedList<T, TKey> : IPagedList<T> where T : class, new() where TKey : struct
+    public class PagedList<T, TKey> : IPagedList<T> where T : class, new()
     {
         private int _total;
         private IReadOnlyList<T> _list;

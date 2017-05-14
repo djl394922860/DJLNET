@@ -87,12 +87,12 @@ namespace DJLNET.ApplicationService
             return await Task.Run(() => _baseReadOnlyRepository.TableNoTrack().Where(predicate).ToList() ?? new List<TEntity>());
         }
 
-        public virtual IPagedList<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        public virtual IPagedList<TEntity> PagingQuery<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc)
         {
             return new PagedList<TEntity, TOrder>(_baseReadOnlyRepository.TableNoTrack(), condition, orderby, pageNum, pageSize, isDesc);
         }
 
-        public virtual async Task<IPagedList<TEntity>> PagingQueryAsync<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc) where TOrder : struct
+        public virtual async Task<IPagedList<TEntity>> PagingQueryAsync<TOrder>(Expression<Func<TEntity, bool>> condition, int pageNum, int pageSize, Expression<Func<TEntity, TOrder>> orderby, bool isDesc)
         {
             return await Task.Run(() => new PagedList<TEntity, TOrder>(_baseReadOnlyRepository.TableNoTrack(), condition, orderby, pageNum, pageSize, isDesc));
         }

@@ -12,6 +12,7 @@ using DJLNET.Model.Entities;
 using System;
 using System.Linq;
 using System.Reflection;
+using DJLNET.Core.Cache;
 
 namespace DJLNET.Test
 {
@@ -37,6 +38,8 @@ namespace DJLNET.Test
             container.RegisterType<IRoleService, RoleService>();
             container.RegisterType<IPermissionService, PermissionService>();
             container.RegisterType<IEntityPermissionService, EntityPermissionService>();
+            var redisConnnect = System.Configuration.ConfigurationManager.AppSettings["RedisConnection"];
+            container.RegisterInstance<ICacheManager>(new RedisCacheManager(redisConnnect));
             _userService = container.Resolve<IUserService>();
             _roleService = container.Resolve<IRoleService>();
         }
@@ -84,6 +87,18 @@ namespace DJLNET.Test
             && x.Attributes == (MethodAttributes.NewSlot | MethodAttributes.Final | MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.Virtual));
 
             Console.WriteLine();
+        }
+
+        [Fact]
+        public void TestAddUsers()
+        {
+            var list = new List<User>();
+            for (int i = 0; i < 100; i++)
+            {
+                list.Add(new User() { Name = i + "_userName", IsActive = true, Password = "E10ADC3949BA59ABBE56E057F20F883E" });
+            }
+            _userService.AddRang(list);
+            Console.WriteLine("ok");
         }
     }
 }

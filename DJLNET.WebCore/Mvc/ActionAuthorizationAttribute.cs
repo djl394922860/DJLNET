@@ -13,6 +13,9 @@ namespace DJLNET.WebCore.Security
     [AttributeUsage(validOn: AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class ActionAuthorizationAttribute : AuthorizeAttribute
     {
+        private static readonly string AuthorizationSatatusDescription = "Request terminated, Authorization failed";
+
+
         private readonly IAuthorizeProvider auth;
 
         public string[] PermissionNames { get; private set; }
@@ -57,7 +60,9 @@ namespace DJLNET.WebCore.Security
             if (filterContext.HttpContext.User.Identity.IsAuthenticated)
             {
                 // 身份认证通过，授权失败，可能非法请求，可以日志记录攻击
-                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden,
+                   AuthorizationSatatusDescription
+                    );
             }
             else
             {

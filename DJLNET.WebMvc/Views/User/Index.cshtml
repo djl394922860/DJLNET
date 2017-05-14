@@ -6,6 +6,11 @@
 
 @section header{
     <link href="http://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.css" rel="stylesheet">
+    <style type="text/css">
+        #user_table .caret{
+            margin-top:0;
+        }
+    </style>
 }
 
 <div class="page-header">
@@ -18,33 +23,173 @@
     </h1>
 </div>
 
-@{ Html.RenderPartial("~/Views/Shared/Ace/_BtnSarchBar.cshtml"); }
-
 <div class="page-body">
-    <table data-toggle="table">
-        <thead>
-            <tr>
-                <th>Item ID</th>
-                <th>Item Name</th>
-                <th>Item Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Item 1</td>
-                <td>$1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Item 2</td>
-                <td>$2</td>
-            </tr>
-        </tbody>
-    </table>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">查询条件</div>
+        <div class="panel-body">
+            <div id="formSearch" class="form-horizontal">
+                <div class="form-group" style="margin-top:15px">
+                    <label class="control-label col-sm-1" for="txt_search_username">用户名</label>
+                    <div class="col-sm-3" style="margin-top: 5px;">
+                        <input type="text" class="form-control" id="txt_search_username">
+                    </div>
+                    <div class="col-sm-4" style="text-align:left;">
+                        <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @{ Html.RenderPartial("~/Views/Shared/Ace/_BtnBar.cshtml"); }
+       
+    <table id="user_table"></table>
+
 </div>
+
+<div id="user_dialog" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">分配角色</h4>
+            </div>
+            <div class="modal-body">
+                xxxxxx
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary">保存</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 @section footer{
     <script src="http://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //1.初始化Table
+            var oTable = new TableInit();
+            oTable.Init();
+
+            //2.初始化Button的点击事件
+            var oButtonInit = new ButtonInit();
+            oButtonInit.Init();
+        });
+
+        var TableInit = function () {
+            var oTableInit = new Object();
+            //初始化Table
+            oTableInit.Init = function () {
+                $('#user_table').bootstrapTable({
+                    url: '/User/GetUserPagerData',         //请求后台的URL（*）
+                    method: 'post',                      //请求方式（*）
+                    toolbar: '#toolbar',                //工具按钮用哪个容器
+                    striped: true,                      //是否显示行间隔色
+                    cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                    pagination: true,                   //是否显示分页（*）
+                    sortable: false,                     //是否启用排序
+                    sortOrder: "asc",                   //排序方式
+                    queryParams: oTableInit.queryParams,//传递参数（*）
+                    sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                    pageNumber: 1,                       //初始化加载第一页，默认第一页
+                    pageSize: 10,                       //每页的记录行数（*）
+                    pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                    search: false,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                    strictSearch: true,
+                    showColumns: true,                  //是否显示所有的列
+                    showRefresh: true,                  //是否显示刷新按钮
+                    minimumCountColumns: 2,             //最少允许的列数
+                    clickToSelect: true,                //是否启用点击选中行
+                    //height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                    uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+                    showToggle: true,                    //是否显示详细视图和列表视图的切换按钮
+                    cardView: false,                    //是否显示详细视图
+                    detailView: false,                   //是否显示父子表
+                    columns: [{
+                        checkbox: true
+                    }, {
+                        field: 'name',
+                        title: '管理员名称'
+                    }, {
+                        field: 'password',
+                        title: '密码'
+                    }, {
+                        field: 'createdTime',
+                        title: '创建时间'
+                    }, {
+                        field: 'isActive',
+                        title: '启用'
+                    }, {
+                        field: 'createdBy',
+                        title: '创建人'
+                    }, {
+                        field: 'updatedTime',
+                        title: '修改时间'
+                    }],
+                    buttonsClass: 'primary'
+                }).on('load-error.bs.table', function (status, res) {
+                    // 这里已经做了 ajax globel  error filter
+                    swal("错误！", "错误码:" + status, "error");
+                }).on('post-body.bs.table', function (data) {
+                    $('.pagination-detail .caret').css({
+                        'margin-top': '0px'
+                    });
+                });
+            };
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit,   //页面大小
+                    offset: params.offset,  //页码
+                    username: $("#txt_search_username").val()
+                };
+                return temp;
+            };
+            return oTableInit;
+        };
+
+        var ButtonInit = function () {
+            var oInit = new Object();
+            oInit.Init = function () {
+                // 重置ace样式
+                $('.bootstrap-table button[name="toggle"]').css({
+                    'margin-right': '2px'
+                });
+                $('.bootstrap-table .caret').first().css({
+                    'margin-top': '0px'
+                });
+                //初始化页面上面的按钮事件
+                $('#btn_query').click(function () {
+                    $('#user_table').bootstrapTable('refresh');
+                });
+                $('#txt_search_username').keypress(function (e) {
+                    if (e.which == 13) {
+                        $('#user_table').bootstrapTable('refresh');
+                    }
+                });
+                // btn_auth 授权
+                $('#btn_auth').click(function () {
+                    var selects = $('#user_table').bootstrapTable('getSelections');
+                    if (selects.length == 0) {
+                        swal("提示", '请选择您要设置的用户', 'info');
+                        return;
+                    }
+                    if (selects.length > 1) {
+                        swal("提示", '请选择一个进行设置', 'info');
+                        return;
+                    }
+                    var userId = selects[0].id;
+                    alert(userId);
+                    $('#user_dialog').modal('show');
+                });
+            };
+            return oInit;
+        };
+
+    </script>
 }

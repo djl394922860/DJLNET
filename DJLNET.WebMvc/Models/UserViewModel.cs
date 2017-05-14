@@ -11,6 +11,11 @@ namespace DJLNET.WebMvc.Models
 {
     public class UserViewModel
     {
+        public int ID { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedTime { get; set; }
+        public DateTime UpdatedTime { get; set; }
+        public string CreatedBy { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
     }

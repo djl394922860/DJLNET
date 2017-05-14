@@ -12,6 +12,8 @@ namespace DJLNET.WebCore.Mvc
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
     public class LoginAuthenticationAttribute : System.Web.Mvc.ActionFilterAttribute, IAuthenticationFilter
     {
+        private static readonly string AuthenticationSatatusDescription = "Request terminated, authentication failed";
+
         public void OnAuthentication(AuthenticationContext filterContext)
         {
             if (filterContext == null)
@@ -31,7 +33,7 @@ namespace DJLNET.WebCore.Mvc
             var xmlHttpRequest = filterContext.HttpContext.Request.Headers["X-Requested-With"];
             if (filterContext.HttpContext.Request.IsAjaxRequest() || (xmlHttpRequest != null && xmlHttpRequest.Equals("XMLHttpRequest", StringComparison.CurrentCultureIgnoreCase)))
             {
-                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+                filterContext.Result = new HttpStatusCodeResult(HttpStatusCode.Forbidden, AuthenticationSatatusDescription);
             }
             else
             {

@@ -1,10 +1,14 @@
-﻿select * from [User]
+﻿select COUNT(*) from [User]
 
 select * from UserRole
 
 select * from [Role]
 
-select * from RolePermission  where RoleID in (201,202)
+select * from RolePermission  where RoleID in (201)
+
+delete dbo.RolePermission where RoleID=201 and PermissionID=3
+
+insert into dbo.RolePermission(RoleID,PermissionID)values(201,3)
 
 select * from Permission
 
