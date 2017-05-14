@@ -34,15 +34,15 @@ namespace DJLNET.WebMvc.Controllers
         }
 
         [HttpPost, ActionAuthorization("UserIndex")]
-        public ActionResult GetUserPagerData(int limit, int offset, string username)
+        public ActionResult GetUserPagerData(int limit, int offset, string username, string sort, string order)
         {
             Expression<Func<User, bool>> condition = null;
             if (!username.IsNullOrWhiteSpace())
                 condition = x => x.Name.Contains(username);
-            Expression<Func<User, string>> orderby = x => x.Name;
+            //Expression<Func<User, string>> orderby = x => x.Name;
             int pagenum = offset / limit + 1;
             if (pagenum == 0) pagenum = 1;
-            var data = _service.PagingQuery(condition, pagenum, limit, orderby, false);
+            var data = _service.PagingQuery(condition, pagenum, limit, sort, order == "desc" ? true : false);
             return Json(new { total = data.Total, rows = _mapper.Map<IEnumerable<UserViewModel>>(data.Rows) });
         }
 

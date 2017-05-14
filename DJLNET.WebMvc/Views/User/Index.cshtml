@@ -93,7 +93,8 @@
                     cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
                     pagination: true,                   //是否显示分页（*）
                     sortable: false,                     //是否启用排序
-                    sortOrder: "asc",                   //排序方式
+                    sortOrder: "desc",                   //排序方式
+                    sortName : 'updatedTime',
                     queryParams: oTableInit.queryParams,//传递参数（*）
                     sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
                     pageNumber: 1,                       //初始化加载第一页，默认第一页
@@ -147,7 +148,9 @@
                 var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
                     limit: params.limit,   //页面大小
                     offset: params.offset,  //页码
-                    username: $("#txt_search_username").val()
+                    username: $("#txt_search_username").val(),
+                    sort: params.sort,
+                    order: params.order
                 };
                 return temp;
             };
@@ -217,6 +220,7 @@
                         }, function () {
                             $.post('@Url.Action("Auth", "User")', data, function () {
                                 $('#user_dialog').modal('hide');
+                                $('#user_table').bootstrapTable('refresh');
                                 swal("设置成功！", "您已经重置该用户角色", "success");
                             });
                         });
@@ -225,6 +229,7 @@
                             //swal("设置成功！", "您已经修改该角色权限", "success");
                             $('#user_dialog').modal('hide');
                             //toastr.success('您已经修改该角色权限', '消息');
+                            $('#user_table').bootstrapTable('refresh');
                             swal('设置成功!', '您已经修改该管理员角色,将会在30秒之后生效', 'success');
                         });
                     }
