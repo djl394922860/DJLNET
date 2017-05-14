@@ -1,0 +1,77 @@
+﻿
+@model List<SelectListItem>
+
+<table id="user_role_table" cellspacing="0" cellpadding="0" class="table table-hover table-bordered table-striped">
+    <thead>
+        <tr>
+            <th class="center">
+                <input type="checkbox" style="height:25px;width:25px;" />
+            </th>
+            <th>
+                角色名
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{ 
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td class="center">
+                        @if (item.Selected)
+                        {
+                            <input type="checkbox" style="height:25px;width:25px;"  value="@item.Value" checked />
+                        }
+                        else
+                        {
+                            <input type="checkbox" style="height:25px;width:25px;"  value="@item.Value" />
+                        }
+                    </td>
+                    <td>
+                        @item.Text
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(function () {
+        $('#user_role_table tbody tr').click(function () {
+            var check = $(this).find('input[type="checkbox"]');
+            if (check.is(':checked')) {
+                check.prop('checked', false);
+            } else {
+                check.prop('checked', true);
+            }
+            var allCheck = true;
+            $('#user_role_table tbody input[type="checkbox"]').each(function () {
+                if (!$(this).is(':checked')) {
+                    allCheck = false;
+                    return;
+                }
+            });
+            var allCheckBox=$('#user_role_table thead input[type="checkbox"]');
+            if (allCheck)
+                allCheckBox.prop('checked', true);
+            else {
+                allCheckBox.prop('checked', false);
+            }
+        });
+
+        $('#user_role_table thead tr input[type="checkbox"]').on('change', (function () {
+            var $this = $(this);
+            if ($this.is(':checked')) {
+                $('#user_role_table tbody input[type="checkbox"]').each(function () {
+                    $(this).prop('checked', true);
+                });
+            } else {
+                $('#user_role_table tbody input[type="checkbox"]').each(function () {
+                    $(this).prop('checked', false);
+                });
+            }
+        }));
+    });
+</script>

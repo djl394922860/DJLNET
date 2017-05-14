@@ -55,8 +55,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">分配角色</h4>
             </div>
-            <div class="modal-body">
-                xxxxxx
+            <div id="user_modal_body" style="height:600px;overflow-y:auto;" class="modal-body">
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -184,8 +184,11 @@
                         return;
                     }
                     var userId = selects[0].id;
-                    alert(userId);
-                    $('#user_dialog').modal('show');
+                    $.post('@Url.Action("GetUserRoleList","User")', { userId: userId }, function (html) {
+                        $('#user_modal_body').empty();
+                        $('#user_modal_body').html(html);
+                        $('#user_dialog').modal('show');
+                    });
                 });
             };
             return oInit;

@@ -18,10 +18,12 @@ namespace DJLNET.WebMvc.Controllers
     {
         private readonly IUserService _service;
         private readonly IMapper _mapper;
-        public UserController(IUserService service, IMapper mapper)
+        private readonly IRoleService _roleService;
+        public UserController(IUserService service, IMapper mapper, IRoleService roleService)
         {
             _service = service;
             _mapper = mapper;
+            _roleService = roleService;
         }
 
         [HttpGet]
@@ -77,6 +79,26 @@ namespace DJLNET.WebMvc.Controllers
         public ActionResult SetRoles(int userId, IEnumerable<int> roleIds)
         {
             return null;
+        }
+
+        [HttpPost, ActionAuthorization("UserAuth")]
+        public ActionResult GetUserRoleList(int userId)
+        {
+            var user = _service.Get(userId);
+            user.Roles = user.Roles.ToList();
+            List<SelectListItem> list = new List<SelectListItem>();
+            var allRoles = _roleService.Find(x => x.IsActive && !x.IsDeleted);
+            foreach (var x in allRoles)
+            {
+                SelectListItem item = new SelectListItem()
+                {
+                    Text = x.Name,
+                    Value = x.ID.ToString(),
+                    Selected = user.Roles.Any(z => z.ID == x.ID)
+                };
+                list.Add(item);
+            }
+            return PartialView("/Views/User/_UserRole.cshtml", list);
         }
     }
 }
