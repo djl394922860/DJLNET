@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using DJLNET.Core.Extension;
 using AutoMapper;
+using System.Net;
 
 namespace DJLNET.WebMvc.Controllers
 {
@@ -76,9 +77,10 @@ namespace DJLNET.WebMvc.Controllers
         }
 
         [HttpPost, ActionName("Auth")]
-        public ActionResult SetRoles(int userId, IEnumerable<int> roleIds)
+        public ActionResult SetUserRoles(int userId, IEnumerable<int> roleIds)
         {
-            return null;
+            _service.SetRoleList(userId, roleIds ?? new List<int>(), WorkConext.CurrentUser.Name);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpPost, ActionAuthorization("UserAuth")]

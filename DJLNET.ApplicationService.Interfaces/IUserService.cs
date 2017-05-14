@@ -1,4 +1,5 @@
-﻿using DJLNET.Model.Entities;
+﻿using System.Collections.Generic;
+using DJLNET.Model.Entities;
 
 namespace DJLNET.ApplicationService.Interfaces
 {
@@ -7,5 +8,6 @@ namespace DJLNET.ApplicationService.Interfaces
         User Login(string name, string pwd);
 
         User GetAuthenticateUser(int id);
+        void SetRoleList(int userId, IEnumerable<int> enumerable, string name);
     }
 }

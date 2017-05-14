@@ -16,6 +16,8 @@ select * from EntityPermission
 
 print '设置djlnet role 1, demotest role2准备测试'
 
+select * from dbo.UserRole where UserID=1
+
 insert into dbo.UserRole([UserID],RoleID) values(1,201)
 insert into dbo.UserRole([UserID],RoleID) values(2,202)
 

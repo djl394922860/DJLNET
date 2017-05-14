@@ -5,7 +5,14 @@
     <thead>
         <tr>
             <th class="center">
-                <input type="checkbox" style="height:25px;width:25px;" />
+                @if (Model.All(x => x.Selected))
+                {
+                    <input type="checkbox" checked style="height:25px;width:25px;" />
+                }
+                else
+                {
+                    <input type="checkbox" style="height:25px;width:25px;" />
+                }
             </th>
             <th>
                 角色名

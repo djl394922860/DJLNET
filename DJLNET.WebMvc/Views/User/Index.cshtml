@@ -51,17 +51,18 @@
 <div id="user_dialog" class="modal fade" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">分配角色</h4>
-            </div>
-            <div id="user_modal_body" style="height:600px;overflow-y:auto;" class="modal-body">
-                
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">保存</button>
-            </div>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">分配角色</h4>
+                </div>
+                <div id="user_modal_body" style="height:600px;overflow-y:auto;" class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" id="user_save_role" class="btn btn-primary">保存</button>
+                    <input type="hidden" id="user_id" />
+                </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -184,11 +185,49 @@
                         return;
                     }
                     var userId = selects[0].id;
+                    $('#user_id').val(userId);
                     $.post('@Url.Action("GetUserRoleList","User")', { userId: userId }, function (html) {
                         $('#user_modal_body').empty();
                         $('#user_modal_body').html(html);
                         $('#user_dialog').modal('show');
                     });
+                });
+                // 保存角色
+                $('#user_save_role').click(function () {
+                    var id = $('#user_id').val();
+                    var data = {
+                        userId: id,
+                        roleIds: []
+                    }
+                    $('#user_modal_body tbody input[type="checkbox"]').each(function () {
+                        if ($(this).is(':checked')) {
+                            data.roleIds.push($(this).val());
+                        }
+                    });
+                    if (data.roleIds.length == 0) {
+                        swal({
+                            title: "警告",
+                            text: "您确定要清空该用户角色吗？",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "确定",
+                            closeOnConfirm: false,
+                            cancelButtonText: '取消'
+                        }, function () {
+                            $.post('@Url.Action("Auth", "User")', data, function () {
+                                $('#user_dialog').modal('hide');
+                                swal("设置成功！", "您已经重置该用户角色", "success");
+                            });
+                        });
+                    } else {
+                        $.post('@Url.Action("Auth", "User")', data, function () {
+                            //swal("设置成功！", "您已经修改该角色权限", "success");
+                            $('#user_dialog').modal('hide');
+                            //toastr.success('您已经修改该角色权限', '消息');
+                            swal('设置成功!', '您已经修改该管理员角色,将会在30秒之后生效', 'success');
+                        });
+                    }
                 });
             };
             return oInit;
