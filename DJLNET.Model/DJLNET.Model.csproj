@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Entities\EntityPermission.cs" />
+    <Compile Include="Entities\Navigate.cs" />
     <Compile Include="Entities\Permission.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />

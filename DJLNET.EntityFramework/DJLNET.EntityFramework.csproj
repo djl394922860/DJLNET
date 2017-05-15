@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="DJLNETDBContext.cs" />
     <Compile Include="IDbContext.cs" />
+    <Compile Include="Mappings\NavigateMapping.cs" />
     <Compile Include="Mappings\PermissionMapping.cs" />
     <Compile Include="Mappings\RoleMapping.cs" />
     <Compile Include="Mappings\EntityPermissionMapping.cs" />
