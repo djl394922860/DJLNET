@@ -43,7 +43,7 @@ namespace DJLNET.WebMvc.Controllers
         }
 
         /// <summary>
-        /// 后台主页
+        /// 后台主页(身份认证控制即可)
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NavigateService.cs" />
     <Compile Include="RoleService.cs" />
     <Compile Include="EntityPermissionService.cs" />
     <Compile Include="PermissionService.cs" />

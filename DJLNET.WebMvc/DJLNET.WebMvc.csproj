@@ -2621,6 +2621,7 @@
     <Compile Include="AutoMapper\BasicProfile.cs" />
     <Compile Include="Controllers\ExcelTestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NavigateController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\DataTablesExtensions.cs" />
@@ -2630,6 +2631,7 @@
     <Compile Include="Models\DataTablesParameters.cs" />
     <Compile Include="Models\DataTablesResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\NavigateModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\RoleQuery.cs" />
@@ -2819,6 +2821,7 @@
     <Folder Include="Content\AdminTLE\" />
     <Folder Include="Content\Metronic\" />
     <Folder Include="Views\ExcelTest\" />
+    <Folder Include="Views\Navigate\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DJLNET.ApplicationService.Interfaces\DJLNET.ApplicationService.Interfaces.csproj">

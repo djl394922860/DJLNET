@@ -61,6 +61,8 @@ namespace DJLNET.WebMvc.App_Start
             container.RegisterType<IRoleRepository, RoleRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IPermissionRepository, PermissionRepository>(new PerRequestLifetimeManager());
             container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>(new PerRequestLifetimeManager());
+            container.RegisterType<INavigateRepository, NavigateRepository>(new PerRequestLifetimeManager());
+
 
             container.RegisterType<IUnitOfWork, EfUnitOfWork>(new PerRequestLifetimeManager());
 
@@ -68,6 +70,7 @@ namespace DJLNET.WebMvc.App_Start
             container.RegisterType<IRoleService, RoleService>(new PerRequestLifetimeManager());
             container.RegisterType<IPermissionService, PermissionService>(new PerRequestLifetimeManager());
             container.RegisterType<IEntityPermissionService, EntityPermissionService>(new PerRequestLifetimeManager());
+            container.RegisterType<INavigateService, NavigateService>(new PerRequestLifetimeManager());
             // automapper ×¢Èë
             var profiles = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsClass && t.IsSubclassOf(typeof(Profile)));
 

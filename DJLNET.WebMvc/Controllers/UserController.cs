@@ -51,7 +51,7 @@ namespace DJLNET.WebMvc.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ActionAuthorization("UserAdd")]
         public ActionResult Add(UserModel model)
         {
             return null;
@@ -63,7 +63,7 @@ namespace DJLNET.WebMvc.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ActionAuthorization("UserEdit")]
         public ActionResult Edit(UserModel model)
         {
             return null;

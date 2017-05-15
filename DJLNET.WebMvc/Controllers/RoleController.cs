@@ -62,7 +62,7 @@ namespace DJLNET.WebMvc.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost,ActionAuthorization("RoleAdd")]
         public ActionResult Add(RoleModel model)
         {
             return null;
@@ -74,7 +74,7 @@ namespace DJLNET.WebMvc.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost,ActionAuthorization("RoleEdit")]
         public ActionResult Edit(RoleModel model)
         {
             return null;
