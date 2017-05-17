@@ -4,6 +4,8 @@ select * from UserRole
 
 select * from [Role]
 
+select * from dbo.[User]
+
 select * from RolePermission  where RoleID in (201)
 
 delete dbo.RolePermission where RoleID=201 and PermissionID=3

@@ -1,0 +1,238 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Ace/_Layout.cshtml";
+}
+
+@section header{
+
+    <link href="http://cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css" rel="stylesheet">
+
+}
+
+<div class="page-header">
+    <h1>
+        导航菜单
+        <small>
+            <i class="icon-double-angle-right"></i>
+            预览
+        </small>
+    </h1>
+</div>
+
+<div class="page-body">
+
+    <div id="toolbar" class="btn-group">
+        <button id="btn_expandAll" type="button" class="btn btn-primary">
+            <span class="icon-arrow-right icon-on-right" style="margin-right:3px;" aria-hidden="true"></span>展开
+        </button>
+        <button id="btn_add" type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+        </button>
+        <button id="btn_info" type="button" class="btn btn-info">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>查看
+        </button>
+        <button id="btn_edit" type="button" class="btn btn-warning">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+        </button>
+        <button id="btn_delete" type="button" class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+        </button>
+    </div>
+
+    <!--Navigate Tree-->
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-12">
+            <table id="navigate_tree" class="table tree-2 table-bordered table-hover table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th class="center">
+                            <input type="checkbox" style="height:20px;width:20px;" />
+                        </th>
+                        <th>
+                            导航菜单名
+                        </th>
+                        <th>
+                            控制器
+                        </th>
+                        <th>
+                            行为名称
+                        </th>
+                        <th>
+                            图标样式
+                        </th>
+                        <th>
+                            启用
+                        </th>
+                        <th>
+                            顺序
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="treegrid-1">
+                        <td class="center">
+                            <input type="checkbox" style="height:20px;width:20px;" />
+                        </td>
+                        <td>系统管理</td>
+                        <td>#</td>
+                        <td>#</td>
+                        <td>icon-home</td>
+                        <td>true</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="treegrid-2 treegrid-parent-1">
+                        <td class="center">
+                            <input type="checkbox" style="height:20px;width:20px;" />
+                        </td>
+                        <td>后台用户管理</td>
+                        <td>User</td>
+                        <td>Index</td>
+                        <td>icon-user</td>
+                        <td>true</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="treegrid-3 treegrid-parent-1">
+                        <td class="center">
+                            <input type="checkbox" style="height:20px;width:20px;" />
+                        </td>
+                        <td>角色管理</td>
+                        <td>Role</td>
+                        <td>Index</td>
+                        <td>icon-user</td>
+                        <td>true</td>
+                        <td>1</td>
+                    </tr>
+                    <tr class="treegrid-4 treegrid-parent-1">
+                        <td class="center">
+                            <input type="checkbox" style="height:20px;width:20px;" />
+                        </td>
+                        <td>导航管理</td>
+                        <td>Navigate</td>
+                        <td>Index</td>
+                        <td>icon-cog</td>
+                        <td>true</td>
+                        <td>2</td>
+                    </tr>
+                    <tr class="treegrid-5">
+                        <td class="center">
+                            <input type="checkbox" style="height:20px;width:20px;" />
+                        </td>
+                        <td>测试</td>
+                        <td>#</td>
+                        <td>#</td>
+                        <td>icon-test</td>
+                        <td>true</td>
+                        <td>0</td>
+                    </tr>
+                    <tr class="treegrid-6 treegrid-parent-5">
+                        <td class="center">
+                            <input type="checkbox" style="height:20px;width:20px;" />
+                        </td>
+                        <td>测试列表</td>
+                        <td>Test</td>
+                        <td>Index</td>
+                        <td>icon-test</td>
+                        <td>true</td>
+                        <td>0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section footer{
+    <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
+    <script src="http://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.bootstrap3.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#navigate_tree').treegrid({
+                expanderExpandedClass: 'glyphicon glyphicon-minus',
+                expanderCollapsedClass: 'glyphicon glyphicon-plus',
+                saveState: true,
+                saveStateMethod: 'cookie',
+                initialState: 'expanded',
+                expanderTemplate: '<span style="float:left;" class="treegrid-expander"></span>'
+            });
+
+            initEvent();
+        });
+
+        function initEvent() {
+            $('#btn_expandAll').click(function () {
+                $('#navigate_tree').treegrid('expandAll');
+            });
+            $('#navigate_tree tbody tr').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var check = $(this).find('input[type="checkbox"]').first();
+                var children = $(this).treegrid('getChildNodes');
+                if (children.length > 0)
+                    children.treegrid('expand');
+                var parent = $(this).treegrid('getParentNode');
+                if (check.is(':checked')) {
+                    check.prop('checked', false);
+                    if (children.length > 0) {
+                        children.each(function () {
+                            $(this).find('input[type="checkbox"]').first().prop('checked', false);
+                        });
+                    }
+                    if (parent != null) {
+                        parent.find('input[type="checkbox"]').first().prop('checked', false);
+                    }
+                } else {
+                    check.prop('checked', true);
+                    if (children.length > 0) {
+                        children.each(function () {
+                            $(this).find('input[type="checkbox"]').first().prop('checked', true);
+                        });
+                    }
+                    if (parent != null) {
+                        var parentChecked = true;
+                        check.siblings().find('input[type="checkbox"]').each(function () {
+                            if (!$(this).is(':checked')) {
+                                parentChecked = false; return;
+                            }
+                        });
+                        if (parentChecked) {
+                            parent.find('input[type="checkbox"]').first().prop('checked', true);
+                        } else {
+                            parent.find('input[type="checkbox"]').first().prop('checked', false);
+                        }
+                    }
+                }
+
+                var allChecked = true;
+                $('#navigate_tree tbody input[type="checkbox"]').each(function () {
+                    if (!$(this).is(':checked')) {
+                        allChecked = false; return;
+                    }
+                });
+                var all = $('#navigate_tree thead input[type="checkbox"]').first();
+                if (allChecked) {
+                    all.prop('checked', true);
+                } else {
+                    all.prop('checked', false);
+                }
+            });
+            $('#navigate_tree thead input[type="checkbox"]').on('change', function () {
+                var $this = $(this);
+                if ($this.is(':checked')) {
+                    $('#navigate_tree tbody input[type="checkbox"]').each(function () {
+                        $(this).prop('checked', true);
+                    });
+                } else {
+                    $('#navigate_tree tbody input[type="checkbox"]').each(function () {
+                        $(this).prop('checked', false);
+                    });
+                }
+            });
+            $('#navigate_tree tbody .treegrid-expander.glyphicon').click(function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        }
+    </script>
+}

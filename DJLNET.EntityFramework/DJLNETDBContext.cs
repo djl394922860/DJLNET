@@ -14,7 +14,7 @@ namespace DJLNET.EntityFramework
 
         static DJLNETDBContext()
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<DJLNETDBContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<DJLNETDBContext>());
         }
 
         public DJLNETDBContext() : base($"name={_conn}")
