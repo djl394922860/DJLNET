@@ -10,6 +10,8 @@ namespace DJLNET.WebMvc.AutoMapper
         {
             this.CreateMap<User, UserViewModel>();
             this.CreateMap<Role, RoleViewModel>();
+            this.CreateMap<Navigate, NavigateViewModel>();
+
         }
     }
 }

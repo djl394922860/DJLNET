@@ -16,14 +16,15 @@ select * from Permission
 
 select * from EntityPermission
 
+select * from dbo.Navigate
+
 print '设置djlnet role 1, demotest role2准备测试'
 
 select * from dbo.UserRole where UserID=1
 
-insert into dbo.UserRole([UserID],RoleID) values(1,201)
+insert into dbo.UserRole([UserID],RoleID) values(1,1)
 insert into dbo.UserRole([UserID],RoleID) values(2,202)
 
 insert into dbo.RolePermission
-select 201,a.ID
+select 1,a.ID
 from dbo.Permission as a
-where a.ID in (11)

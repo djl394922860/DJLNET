@@ -1,4 +1,6 @@
 ﻿
+@model IEnumerable<NavigateViewModel>
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/Ace/_Layout.cshtml";
@@ -70,72 +72,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="treegrid-1">
-                        <td class="center">
-                            <input type="checkbox" style="height:20px;width:20px;" />
-                        </td>
-                        <td>系统管理</td>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>icon-home</td>
-                        <td>true</td>
-                        <td>0</td>
-                    </tr>
-                    <tr class="treegrid-2 treegrid-parent-1">
-                        <td class="center">
-                            <input type="checkbox" style="height:20px;width:20px;" />
-                        </td>
-                        <td>后台用户管理</td>
-                        <td>User</td>
-                        <td>Index</td>
-                        <td>icon-user</td>
-                        <td>true</td>
-                        <td>0</td>
-                    </tr>
-                    <tr class="treegrid-3 treegrid-parent-1">
-                        <td class="center">
-                            <input type="checkbox" style="height:20px;width:20px;" />
-                        </td>
-                        <td>角色管理</td>
-                        <td>Role</td>
-                        <td>Index</td>
-                        <td>icon-user</td>
-                        <td>true</td>
-                        <td>1</td>
-                    </tr>
-                    <tr class="treegrid-4 treegrid-parent-1">
-                        <td class="center">
-                            <input type="checkbox" style="height:20px;width:20px;" />
-                        </td>
-                        <td>导航管理</td>
-                        <td>Navigate</td>
-                        <td>Index</td>
-                        <td>icon-cog</td>
-                        <td>true</td>
-                        <td>2</td>
-                    </tr>
-                    <tr class="treegrid-5">
-                        <td class="center">
-                            <input type="checkbox" style="height:20px;width:20px;" />
-                        </td>
-                        <td>测试</td>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>icon-test</td>
-                        <td>true</td>
-                        <td>0</td>
-                    </tr>
-                    <tr class="treegrid-6 treegrid-parent-5">
-                        <td class="center">
-                            <input type="checkbox" style="height:20px;width:20px;" />
-                        </td>
-                        <td>测试列表</td>
-                        <td>Test</td>
-                        <td>Index</td>
-                        <td>icon-test</td>
-                        <td>true</td>
-                        <td>0</td>
-                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="treegrid-@item.ID @(item.ParentID.HasValue?"treegrid-parent-"+item.ParentID:null)">
+                            <td class="center">
+                                <input type="checkbox" style="height:20px;width:20px;" />
+                            </td>
+                            <td>@item.Name</td>
+                            <td>@(item.ControllerName ?? "#")</td>
+                            <td>@(item.ActionName ?? "#")</td>
+                            <td>@item.IconClassCode</td>
+                            <td>@item.Active</td>
+                            <td>@item.SortOrder</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>

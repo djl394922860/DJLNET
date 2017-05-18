@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DJLNET.Model.Entities;
+using DJLNET.Core.Extension;
+using AutoMapper;
 
 namespace DJLNET.WebMvc.Controllers
 {
@@ -16,15 +19,18 @@ namespace DJLNET.WebMvc.Controllers
     public class NavigateController : BaseController
     {
         private readonly INavigateService _service;
-        public NavigateController(INavigateService service)
+        private readonly IMapper _mapper;
+        public NavigateController(INavigateService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var navigateViewModels = _mapper.Map<IEnumerable<NavigateViewModel>>(_service.GetAll());
+            return View(navigateViewModels);
         }
 
         [HttpGet]

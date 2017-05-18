@@ -2625,6 +2625,7 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\DataTablesExtensions.cs" />
+    <Compile Include="Extensions\HtmlHeplerExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2632,6 +2633,7 @@
     <Compile Include="Models\DataTablesResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\NavigateModel.cs" />
+    <Compile Include="Models\NavigateViewModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\RoleQuery.cs" />

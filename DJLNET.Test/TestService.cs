@@ -13,6 +13,8 @@ using System;
 using System.Linq;
 using System.Reflection;
 using DJLNET.Core.Cache;
+using DJLNET.Core.Extension;
+using AutoMapper;
 
 namespace DJLNET.Test
 {
@@ -24,6 +26,8 @@ namespace DJLNET.Test
 
         private IRoleService _roleService;
 
+        private readonly INavigateService _navService;
+
         public TestService()
         {
             container = new UnityContainer();
@@ -31,23 +35,32 @@ namespace DJLNET.Test
             container.RegisterType(typeof(IBaseReadOnlyRepository<,>), typeof(BaseReadOnlyRepository<,>));
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<IRoleRepository, RoleRepository>();
+            container.RegisterType<INavigateRepository, NavigateRepository>();
             container.RegisterType<IPermissionRepository, PermissionRepository>();
             container.RegisterType<IEntityPermissionRepository, EntityPermissionRepository>();
             container.RegisterType<IUnitOfWork, EfUnitOfWork>();
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<IRoleService, RoleService>();
+            container.RegisterType<INavigateService, NavigateService>();
             container.RegisterType<IPermissionService, PermissionService>();
             container.RegisterType<IEntityPermissionService, EntityPermissionService>();
             var redisConnnect = System.Configuration.ConfigurationManager.AppSettings["RedisConnection"];
             container.RegisterInstance<ICacheManager>(new RedisCacheManager(redisConnnect));
             _userService = container.Resolve<IUserService>();
             _roleService = container.Resolve<IRoleService>();
+            _navService = container.Resolve<INavigateService>();
         }
 
         [Fact]
         public void TestAddUser()
         {
-            _userService.Add(new User() { Name = "djlnet11", Password = MD5Helper.GetMD5("123456") });
+            _userService.Add(new User() { Name = "djlnet", Password = MD5Helper.GetMD5("123456") });
+        }
+
+        [Fact]
+        public void TestAddAdministrator()
+        {
+            _roleService.Add(new Role() { Name = "administrator" });
         }
 
         [Fact]
@@ -100,5 +113,7 @@ namespace DJLNET.Test
             _userService.AddRang(list);
             Console.WriteLine("ok");
         }
+
+
     }
 }
