@@ -52,6 +52,12 @@
                             <input type="checkbox" style="height:20px;width:20px;" />
                         </th>
                         <th>
+                            主键
+                        </th>
+                        <th>
+                            父ID
+                        </th>
+                        <th>
                             导航菜单名
                         </th>
                         <th>
@@ -78,6 +84,8 @@
                             <td class="center">
                                 <input type="checkbox" style="height:20px;width:20px;" />
                             </td>
+                            <td>@item.ID</td>
+                            <td>@(item.ParentID.HasValue ? item.ParentID.Value : -1)</td>
                             <td>@item.Name</td>
                             <td>@(item.ControllerName ?? "#")</td>
                             <td>@(item.ActionName ?? "#")</td>
@@ -103,8 +111,7 @@
                 expanderCollapsedClass: 'glyphicon glyphicon-plus',
                 saveState: true,
                 saveStateMethod: 'cookie',
-                initialState: 'expanded',
-                expanderTemplate: '<span style="float:left;" class="treegrid-expander"></span>'
+                initialState: 'expanded'
             });
 
             initEvent();

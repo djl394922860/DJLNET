@@ -15,7 +15,7 @@ namespace DJLNET.Model.Entities
         public int? ParentID { get; set; }
         public virtual Navigate Parent { get; set; }
         public bool Active { get; set; }
-        public int? SortOrder { get; set; }
+        public int SortOrder { get; set; }
         public virtual ICollection<Navigate> Children { get; set; } = new List<Navigate>();
     }
 }

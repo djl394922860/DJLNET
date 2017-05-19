@@ -17,7 +17,7 @@ namespace DJLNET.EntityFramework.Mappings
             this.Property(x => x.Name).HasMaxLength(32).IsRequired();
             this.Property(x => x.IconClassCode).HasMaxLength(32).IsRequired();
             this.Property(x => x.Active).IsRequired();
-            this.Property(x => x.SortOrder).IsOptional();
+            this.Property(x => x.SortOrder).IsRequired();
             this.HasOptional(x => x.Parent).WithMany(x => x.Children).HasForeignKey(x => x.ParentID);
         }
     }

@@ -30,7 +30,35 @@ namespace DJLNET.WebMvc.Controllers
         public ActionResult Index()
         {
             var navigateViewModels = _mapper.Map<IEnumerable<NavigateViewModel>>(_service.GetAll());
-            return View(navigateViewModels);
+            var sortedNavigates = SortNavigate(navigateViewModels);
+            return View(sortedNavigates);
+        }
+
+        private IEnumerable<NavigateViewModel> SortNavigate(IEnumerable<NavigateViewModel> source)
+        {
+            var result = new List<NavigateViewModel>();
+            var orders = source.OrderBy(x => x.SortOrder);
+            var roots = orders.Where(x => x.ActionName.IsNullOrEmpty() && x.ControllerName.IsNullOrEmpty() && !x.ParentID.HasValue);
+            foreach (var root in roots)
+            {
+                result.Add(root);
+                if (source.Any(x => x.ParentID.HasValue && x.ParentID.Value == root.ID))
+                    LoadChildren(result, root, orders);
+            }
+            return result;
+        }
+
+        private void LoadChildren(List<NavigateViewModel> result, NavigateViewModel item, IEnumerable<NavigateViewModel> orders)
+        {
+            var childs = orders.Where(x => x.ParentID.HasValue && x.ParentID.Value == item.ID);
+            if (childs.Any())
+            {
+                foreach (var child in childs)
+                {
+                    result.Add(child);
+                    LoadChildren(result, child, orders);
+                }
+            }
         }
 
         [HttpGet]

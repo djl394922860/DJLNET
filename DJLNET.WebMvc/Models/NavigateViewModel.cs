@@ -14,6 +14,6 @@ namespace DJLNET.WebMvc.Models
         public string IconClassCode { get; set; }
         public int? ParentID { get; set; }
         public bool Active { get; set; }
-        public int? SortOrder { get; set; }
+        public int SortOrder { get; set; }
     }
 }
