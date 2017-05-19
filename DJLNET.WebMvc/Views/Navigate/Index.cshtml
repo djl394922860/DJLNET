@@ -130,6 +130,7 @@
                     children.treegrid('expand');
                 var parent = $(this).treegrid('getParentNode');
                 if (check.is(':checked')) {
+                    // 需要支持递归取消 孩子+父亲
                     check.prop('checked', false);
                     if (children.length > 0) {
                         children.each(function () {
@@ -140,6 +141,7 @@
                         parent.find('input[type="checkbox"]').first().prop('checked', false);
                     }
                 } else {
+                    // 需要支持递归选中 孩子+父亲
                     check.prop('checked', true);
                     if (children.length > 0) {
                         children.each(function () {
@@ -161,6 +163,7 @@
                     }
                 }
 
+                // 判断是否全部选中
                 var allChecked = true;
                 $('#navigate_tree tbody input[type="checkbox"]').each(function () {
                     if (!$(this).is(':checked')) {
