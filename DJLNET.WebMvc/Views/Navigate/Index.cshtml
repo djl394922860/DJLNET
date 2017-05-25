@@ -124,43 +124,16 @@
             $('#navigate_tree tbody tr').on('click', function (e) {
                 e.preventDefault();
                 e.stopPropagation();
+                var $this = $(this);
                 var check = $(this).find('input[type="checkbox"]').first();
-                var children = $(this).treegrid('getChildNodes');
-                if (children.length > 0)
-                    children.treegrid('expand');
-                var parent = $(this).treegrid('getParentNode');
                 if (check.is(':checked')) {
-                    // 需要支持递归取消 孩子+父亲
                     check.prop('checked', false);
-                    if (children.length > 0) {
-                        children.each(function () {
-                            $(this).find('input[type="checkbox"]').first().prop('checked', false);
-                        });
-                    }
-                    if (parent != null) {
-                        parent.find('input[type="checkbox"]').first().prop('checked', false);
-                    }
+                    RecursiveUnSelectChildren($this);
+                    RecursiveUnSelectParent($this);
                 } else {
-                    // 需要支持递归选中 孩子+父亲
                     check.prop('checked', true);
-                    if (children.length > 0) {
-                        children.each(function () {
-                            $(this).find('input[type="checkbox"]').first().prop('checked', true);
-                        });
-                    }
-                    if (parent != null) {
-                        var parentChecked = true;
-                        check.siblings().find('input[type="checkbox"]').each(function () {
-                            if (!$(this).is(':checked')) {
-                                parentChecked = false; return;
-                            }
-                        });
-                        if (parentChecked) {
-                            parent.find('input[type="checkbox"]').first().prop('checked', true);
-                        } else {
-                            parent.find('input[type="checkbox"]').first().prop('checked', false);
-                        }
-                    }
+                    RecursiveSelectChildren($this);
+                    RecursiveSelectParent($this);
                 }
 
                 // 判断是否全部选中
@@ -193,6 +166,52 @@
                 event.preventDefault();
                 event.stopPropagation();
             });
+        }
+
+        function RecursiveUnSelectChildren(currentNode) {
+            var childs = $(currentNode).treegrid('getChildNodes');
+            if (childs.length > 0) {
+                for (var i = 0; i < childs.length; i++) {
+                    $(childs[i]).find('input[type="checkbox"]').prop('checked', false);
+                    RecursiveUnSelectChildren(childs[i]);
+                }
+            }
+        }
+
+        function RecursiveUnSelectParent(currentNode) {
+            var parent = $(currentNode).treegrid('getParentNode');
+            if (parent != null) {
+                var isCancelParent = true;
+                var childs = parent.treegrid('getChildNodes');
+                for (var i = 0; i < childs.length; i++) {
+                    var box = $(childs[i]).find('input[type="checkbox"]');
+                    if (box.is(':checked')) {
+                        isCancelParent = false;
+                        break;
+                    }
+                }
+                if (isCancelParent)
+                    parent.find('input[type="checkbox"]').prop('checked', false);
+                RecursiveUnSelectParent(parent);
+            }
+        }
+
+        function RecursiveSelectChildren(currentNode) {
+            var childs = $(currentNode).treegrid('getChildNodes');
+            if (childs.length > 0) {
+                for (var i = 0; i < childs.length; i++) {
+                    $(childs[i]).find('input[type="checkbox"]').prop('checked', true);
+                    RecursiveSelectChildren(childs[i]);
+                }
+            }
+        }
+
+        function RecursiveSelectParent(currentNode) {
+            var parent = $(currentNode).treegrid('getParentNode');
+            if (parent != null) {
+                parent.find('input[type="checkbox"]').prop('checked', true);
+                RecursiveSelectParent(parent);
+            }
         }
     </script>
 }
