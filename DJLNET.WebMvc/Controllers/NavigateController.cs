@@ -62,9 +62,9 @@ namespace DJLNET.WebMvc.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public PartialViewResult Add()
         {
-            return View();
+            return PartialView("~/Views/Navigate/_AddEditPage.cshtml");
         }
 
         [HttpPost, ActionAuthorization("NavigateAdd")]

@@ -2813,6 +2813,7 @@
     <Content Include="Views\Shared\Ace\_BtnBar.cshtml" />
     <Content Include="Views\User\_UserRole.cshtml" />
     <Content Include="Views\Navigate\Index.cshtml" />
+    <Content Include="Views\Navigate\_AddEditPage.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
