@@ -20,7 +20,7 @@ namespace DJLNET.WebMvc.Controllers
         }
 
 
-        [ActionName("TestExportExcel")]
+        [ActionName("TestExportExcel"), HttpGet]
         public ActionResult Index()
         {
             var users = this._userService.GetAll();

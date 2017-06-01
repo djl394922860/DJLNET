@@ -268,6 +268,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="DJLContent\select2tree.js" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -2626,12 +2627,14 @@
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extensions\DataTablesExtensions.cs" />
     <Compile Include="Extensions\HtmlHeplerExtensions.cs" />
+    <Compile Include="Extensions\MenuNavigateAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataTablesParameters.cs" />
     <Compile Include="Models\DataTablesResult.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\NavigateAddViewModel.cs" />
     <Compile Include="Models\NavigateModel.cs" />
     <Compile Include="Models\NavigateViewModel.cs" />
     <Compile Include="Models\RoleModel.cs" />
@@ -2814,6 +2817,7 @@
     <Content Include="Views\User\_UserRole.cshtml" />
     <Content Include="Views\Navigate\Index.cshtml" />
     <Content Include="Views\Navigate\_AddEditPage.cshtml" />
+    <Content Include="Views\Navigate\_AddActionSelect.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

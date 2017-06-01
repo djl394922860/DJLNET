@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using DJLNET.Core.Extension;
 using AutoMapper;
 using System.Net;
+using DJLNET.WebMvc.Extensions;
 
 namespace DJLNET.WebMvc.Controllers
 {
@@ -28,6 +29,7 @@ namespace DJLNET.WebMvc.Controllers
         }
 
         [HttpGet]
+        [MenuNavigate]
         public ActionResult Index()
         {
             return View();

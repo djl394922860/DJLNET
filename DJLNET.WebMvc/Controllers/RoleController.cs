@@ -31,6 +31,8 @@ namespace DJLNET.WebMvc.Controllers
             _permissionService = permissionService;
         }
 
+        [HttpGet]
+        [MenuNavigate]
         public ActionResult Index()
         {
             return View();

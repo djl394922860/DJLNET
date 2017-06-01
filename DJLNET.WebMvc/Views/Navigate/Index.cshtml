@@ -9,7 +9,9 @@
 @section header{
 
     <link href="http://cdn.bootcss.com/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css" rel="stylesheet">
-
+    <link href="http://cdn.bootcss.com/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/select2-bootstrap-css/1.4.6/select2-bootstrap.min.css" rel="stylesheet">
 }
 
 <div class="page-header">
@@ -109,11 +111,11 @@
                 <h4 class="modal-title">添加导航</h4>
             </div>
             <div id="div_navigate_body" class="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary">保存</button>
+                <button type="button" id="add_navigate" class="btn btn-primary">保存</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -123,6 +125,13 @@
     <script src="http://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="http://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.min.js"></script>
     <script src="http://cdn.bootcss.com/jquery-treegrid/0.2.0/js/jquery.treegrid.bootstrap3.min.js"></script>
+
+    @*<script src="http://cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN.js"></script>*@
+    <script src="http://cdn.bootcss.com/select2/4.0.3/js/select2.min.js"></script>
+    <script src="http://cdn.bootcss.com/select2/4.0.3/js/i18n/zh-CN.js"></script>
+    <script src="~/DJLContent/select2tree.js"></script>
+
+
     <script type="text/javascript">
         $(function () {
             $('#navigate_tree').treegrid({
@@ -189,8 +198,46 @@
                 $.get('/Navigate/Add', {}, function (body) {
                     $('#div_navigate_body').empty();
                     $('#div_navigate_body').html(body);
+                    BindEvents();
                     $('#div_navigate').modal('show');
                 });
+            });
+            $('#add_navigate').click(function () {
+                var fk = $('#form').serialize();
+                console.log(fk);
+            });
+        }
+
+        function BindEvents() {
+            $("#tree_select").select2tree({
+                minimumResultsForSearch: -1
+            });
+            $('#select_action').select2({
+                minimumResultsForSearch: -1
+            });
+            var initControlName = $('#select_controller').find('option').first().text();
+            $.post('/Navigate/GetActionByController', { controllerName: initControlName }, function (html) {
+                $('#select_action').empty();
+                $('#select_action').html(html);
+            });
+            $('#select_controller').select2({
+                minimumResultsForSearch: -1
+            }).on('change', function (e) {
+                var controllerName = e.target.value;
+                $.post('/Navigate/GetActionByController', { controllerName: controllerName }, function (html) {
+                    $('#select_action').empty();
+                    $('#select_action').html(html);
+                });
+            });
+
+            $('#form input[type="checkbox"]').on('change', function () {
+                var $this = $(this);
+                var hide = $('#IsActive');
+                if ($this.is(':checked')) {
+                    hide.val('true');
+                } else {
+                    hide.val('false');
+                }
             });
         }
 

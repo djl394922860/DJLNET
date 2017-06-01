@@ -39,6 +39,16 @@ namespace DJLNET.WebCore.Security
 
             #endregion
 
+            #region 导航菜单
+
+            permissions.Add(new Permission { Name = "NavigateIndex", Category = "导航管理", Description = "查询", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
+
+            permissions.Add(new Permission { Name = "NavigateAdd", Category = "导航管理", Description = "增加", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
+            permissions.Add(new Permission { Name = "NavigateEdit", Category = "导航管理", Description = "修改", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
+
+            permissions.Add(new Permission { Name = "NavigateDelete", Category = "导航管理", Description = "删除", CreatedTime = DateTime.Now, CreatedBy = "system", UpdatedTime = DateTime.Now, UpdatedBy = "system", IsDeleted = false });
+
+            #endregion
 
             return permissions;
         }

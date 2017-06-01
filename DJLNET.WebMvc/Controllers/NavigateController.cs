@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using DJLNET.Model.Entities;
 using DJLNET.Core.Extension;
 using AutoMapper;
+using System.Reflection;
+using DJLNET.WebMvc.Extensions;
 
 namespace DJLNET.WebMvc.Controllers
 {
@@ -27,6 +29,7 @@ namespace DJLNET.WebMvc.Controllers
         }
 
         [HttpGet]
+        [MenuNavigate]
         public ActionResult Index()
         {
             var navigateViewModels = _mapper.Map<IEnumerable<NavigateViewModel>>(_service.GetAll());
@@ -64,7 +67,28 @@ namespace DJLNET.WebMvc.Controllers
         [HttpGet]
         public PartialViewResult Add()
         {
-            return PartialView("~/Views/Navigate/_AddEditPage.cshtml");
+            var navigateViewModels = _mapper.Map<IEnumerable<NavigateViewModel>>(_service.GetAll());
+            NavigateAddViewModel temp = new NavigateAddViewModel();
+            temp.NavigateViewModels = SortNavigate(navigateViewModels);
+            temp.Controllers = GetAllController();
+            return PartialView("~/Views/Navigate/_AddEditPage.cshtml", temp);
+        }
+
+        private static IEnumerable<string> GetAllController()
+        {
+            var types = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(BaseController)))
+                .Where(x => x.GetMethods(BindingFlags.Public | BindingFlags.Instance).Any(z => z.IsDefined(typeof(HttpGetAttribute), true) && z.IsDefined(typeof(MenuNavigateAttribute), true)));
+            var result = types.Select(x => x.Name.TrimEnd("Controller"));
+            return result;
+        }
+
+        [HttpPost, ActionAuthorization("NavigateAdd")]
+        public ActionResult GetActionByController(string controllerName)
+        {
+            var controlType = Assembly.GetExecutingAssembly().GetTypes().Where(x => x.IsSubclassOf(typeof(BaseController))).Single(x => x.Name.StartsWith(controllerName));
+            var actions = controlType.GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(x => x.IsDefined(typeof(HttpGetAttribute), true) && x.IsDefined(typeof(MenuNavigateAttribute), true));
+            var result = actions.Select(x => x.Name);
+            return PartialView("~/Views/Navigate/_AddActionSelect.cshtml", result);
         }
 
         [HttpPost, ActionAuthorization("NavigateAdd")]
